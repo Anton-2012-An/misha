@@ -1,0 +1,2328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Misha. Поддержка</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0c0c0e;
+            --bg-secondary: #16161a;
+            --bg-card: #1e1e24;
+            --bg-card-hover: #28282f;
+            --text-primary: #f0edea;
+            --text-secondary: #a8a4a0;
+            --text-muted: #6b6865;
+            --gold: #d4a84b;
+            --gold-dim: rgba(212, 168, 75, 0.15);
+            --gold-glow: rgba(212, 168, 75, 0.25);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.6);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --dot-size: 3px;
+            --dot-gap: 32px;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .dot-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                radial-gradient(circle, rgba(212, 168, 75, 0.12) var(--dot-size), transparent var(--dot-size));
+            background-size: var(--dot-gap) var(--dot-gap);
+            background-position: 0 0;
+            opacity: 0.6;
+            animation: driftDots 120s linear infinite alternate;
+        }
+
+        @keyframes driftDots {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 80px 80px;
+            }
+        }
+
+        .dot-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(212, 168, 75, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(212, 168, 75, 0.02) 0%, transparent 50%);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .text-gold {
+            color: var(--gold);
+        }
+
+        .text-muted {
+            color: var(--text-muted);
+        }
+
+        .text-sm {
+            font-size: 0.85rem;
+        }
+
+        .text-xs {
+            font-size: 0.75rem;
+        }
+
+        .gap-2 {
+            gap: 8px;
+        }
+        .gap-3 {
+            gap: 12px;
+        }
+        .gap-4 {
+            gap: 16px;
+        }
+        .gap-6 {
+            gap: 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: var(--font);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #0c0c0e;
+            border-color: var(--gold);
+        }
+
+        .btn-gold:hover {
+            background: #e0b85a;
+            border-color: #e0b85a;
+            color: #0c0c0e;
+        }
+
+        .btn-outline-gold {
+            background: transparent;
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .btn-outline-gold:hover {
+            background: var(--gold-dim);
+            border-color: var(--gold);
+        }
+
+        .btn-danger {
+            background: #b33a3a;
+            border-color: #b33a3a;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: #d14444;
+            border-color: #d14444;
+        }
+
+        .btn-sm {
+            padding: 8px 18px;
+            font-size: 0.85rem;
+        }
+
+        .btn-xs {
+            padding: 4px 12px;
+            font-size: 0.75rem;
+        }
+
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(4px);
+            transition: var(--transition);
+            box-shadow: var(--shadow-card);
+        }
+
+        .card:hover {
+            border-color: rgba(212, 168, 75, 0.15);
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 100%;
+        }
+
+        .input-group label {
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.02em;
+        }
+
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            font-family: var(--font);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            transition: var(--transition);
+            outline: none;
+            width: 100%;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-dim);
+        }
+
+        .input-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .input-group select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--gold);
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .auth-card {
+            max-width: 480px;
+            width: 100%;
+            padding: 40px 36px;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-card);
+        }
+
+        .auth-card .logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .auth-card .logo h1 {
+            font-weight: 700;
+            font-size: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .auth-card .logo h1 span {
+            color: var(--gold);
+        }
+
+        .auth-card .logo p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .auth-card .toggle-auth {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .auth-card .toggle-auth a {
+            color: var(--gold);
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .auth-card .toggle-auth a:hover {
+            text-decoration: underline;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .app-header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(12, 12, 14, 0.85);
+            backdrop-filter: blur(12px);
+        }
+
+        .app-header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .app-header .brand {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.02em;
+        }
+
+        .app-header .brand span {
+            color: var(--gold);
+        }
+
+        .app-header .user-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .app-header .user-info .badge {
+            background: var(--gold-dim);
+            color: var(--gold);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            padding: 40px 0 60px;
+        }
+
+        .main-grid .section-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            padding: 32px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .main-grid .section-btn:hover {
+            transform: translateY(-6px);
+            border-color: var(--gold);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            background: var(--bg-card-hover);
+        }
+
+        .main-grid .section-btn img {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--border-subtle);
+            transition: var(--transition);
+        }
+
+        .main-grid .section-btn:hover img {
+            border-color: var(--gold);
+            transform: scale(1.05);
+        }
+
+        .main-grid .section-btn h3 {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .main-grid .section-btn p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .section-page {
+            padding: 32px 0 60px;
+        }
+
+        .section-page .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            margin-bottom: 24px;
+            background: none;
+            border: none;
+            font-family: var(--font);
+        }
+
+        .section-page .back-btn:hover {
+            color: var(--gold);
+        }
+
+        .section-page .page-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .section-page .page-title span {
+            color: var(--gold);
+        }
+
+        .section-page .page-sub {
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 18px 22px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(212, 168, 75, 0.2);
+        }
+
+        .faq-item .faq-q {
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-item .faq-q .icon {
+            color: var(--gold);
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .faq-item .faq-a {
+            color: var(--text-secondary);
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-subtle);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-item.open .faq-a {
+            display: block;
+        }
+
+        .faq-item.open .faq-q .icon {
+            transform: rotate(180deg);
+        }
+
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .chat-messages {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            max-height: 380px;
+            overflow-y: auto;
+            min-height: 200px;
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .chat-messages .msg {
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            max-width: 85%;
+            word-break: break-word;
+            line-height: 1.5;
+            font-size: 0.92rem;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .chat-messages .msg.user {
+            background: var(--bg-card);
+            align-self: flex-end;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .chat-messages .msg.admin {
+            background: var(--gold-dim);
+            border: 1px solid rgba(212, 168, 75, 0.2);
+            align-self: flex-start;
+            color: var(--text-primary);
+        }
+
+        .chat-messages .msg .meta {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .chat-messages .msg .meta .admin-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: #0c0c0e;
+            font-weight: 700;
+            font-size: 0.6rem;
+            padding: 1px 8px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .chat-messages .msg .meta .admin-id {
+            display: none;
+            font-size: 0.6rem;
+            color: var(--text-muted);
+        }
+
+        .chat-messages .msg .meta .admin-id.show {
+            display: inline;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-input-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .chat-input-row .input-group {
+            flex: 1;
+        }
+
+        .chat-input-row .input-group textarea {
+            min-height: 52px;
+            max-height: 120px;
+        }
+
+        .about-content {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 32px 36px;
+            border: 1px solid var(--border-subtle);
+            line-height: 1.8;
+            font-size: 0.98rem;
+            color: var(--text-secondary);
+        }
+
+        .about-content strong {
+            color: var(--text-primary);
+        }
+
+        .about-content .rules-list {
+            margin-top: 16px;
+            padding-left: 20px;
+        }
+
+        .about-content .rules-list li {
+            margin-bottom: 8px;
+        }
+
+        .admin-panel {
+            padding: 24px 0 60px;
+        }
+
+        .admin-panel .admin-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 16px;
+        }
+
+        .admin-panel .admin-tabs .tab {
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-secondary);
+        }
+
+        .admin-panel .admin-tabs .tab:hover {
+            color: var(--text-primary);
+            background: var(--bg-card);
+        }
+
+        .admin-panel .admin-tabs .tab.active {
+            background: var(--gold);
+            color: #0c0c0e;
+            border-color: var(--gold);
+        }
+
+        .admin-panel .admin-content {
+            display: none;
+        }
+
+        .admin-panel .admin-content.active {
+            display: block;
+        }
+
+        .user-list-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            margin-bottom: 8px;
+            border: 1px solid var(--border-subtle);
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .user-list-item .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .user-list-item .user-info .id-badge {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        .user-list-item .user-actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .user-list-item .warn-badge {
+            font-size: 0.7rem;
+            padding: 2px 10px;
+            border-radius: 10px;
+            background: rgba(212, 168, 75, 0.15);
+            color: var(--gold);
+        }
+
+        .user-list-item .banned-badge {
+            font-size: 0.7rem;
+            padding: 2px 10px;
+            border-radius: 10px;
+            background: rgba(179, 58, 58, 0.2);
+            color: #d14444;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal-overlay .modal {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 32px 36px;
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid var(--border-subtle);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay .modal h3 {
+            margin-bottom: 16px;
+            font-size: 1.2rem;
+        }
+
+        .modal-overlay .modal .close-modal {
+            float: right;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-overlay .modal .close-modal:hover {
+            color: var(--text-primary);
+        }
+
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .news-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 20px 24px;
+            transition: var(--transition);
+            border-left: 3px solid var(--gold);
+        }
+
+        .news-item:hover {
+            border-color: rgba(212, 168, 75, 0.3);
+        }
+
+        .news-item .news-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+
+        .news-item .news-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .news-item .news-content {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .news-item .news-actions {
+            margin-top: 12px;
+            display: flex;
+            gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .auth-card {
+                padding: 28px 20px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .app-header .brand {
+                font-size: 1.1rem;
+            }
+            .app-header .user-info {
+                font-size: 0.8rem;
+                gap: 8px;
+            }
+            .main-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+                padding: 24px 0 40px;
+            }
+            .main-grid .section-btn {
+                padding: 20px 12px;
+            }
+            .main-grid .section-btn img {
+                width: 48px;
+                height: 48px;
+            }
+            .card {
+                padding: 20px 16px;
+            }
+            .section-page .page-title {
+                font-size: 1.4rem;
+            }
+            .about-content {
+                padding: 20px 16px;
+            }
+            .admin-panel .admin-tabs .tab {
+                font-size: 0.75rem;
+                padding: 6px 14px;
+            }
+            .user-list-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .user-list-item .user-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .chat-input-row {
+                flex-direction: column;
+            }
+            .chat-input-row .btn {
+                width: 100%;
+            }
+            .modal-overlay .modal {
+                padding: 24px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .main-grid .section-btn h3 {
+                font-size: 0.9rem;
+            }
+            .main-grid .section-btn p {
+                font-size: 0.75rem;
+            }
+            .app-header .container {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .app-header .user-info {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dot-bg"></div>
+
+    <div id="app">
+
+        <div id="authPage" class="auth-page">
+            <div class="auth-card">
+                <div class="logo">
+                    <h1>Misha.<span>Поддержка</span></h1>
+                    <p>Премиум-сервис для ваших вопросов</p>
+                </div>
+
+                <div id="loginForm">
+                    <div class="input-group">
+                        <label>ФИО</label>
+                        <input type="text" id="loginFullName" placeholder="Иванов Иван Иванович" />
+                    </div>
+                    <div class="input-group" style="margin-top:12px;">
+                        <label>Пароль</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••" />
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="rememberMe" />
+                        <label for="rememberMe">Запомнить меня</label>
+                    </div>
+                    <button class="btn btn-gold btn-block" style="margin-top:16px;" onclick="handleLogin()">Войти</button>
+                    <div class="toggle-auth">
+                        Нет аккаунта? <a onclick="showRegister()">Зарегистрироваться</a>
+                    </div>
+                </div>
+
+                <div id="registerForm" class="hidden">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>ФИО</label>
+                            <input type="text" id="regFullName" placeholder="Иванов Иван Иванович" />
+                        </div>
+                        <div class="input-group">
+                            <label>Email</label>
+                            <input type="email" id="regEmail" placeholder="mail@example.com" />
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-top:8px;">
+                        <div class="input-group">
+                            <label>Ник</label>
+                            <input type="text" id="regNick" placeholder="Ваш ник" />
+                        </div>
+                        <div class="input-group">
+                            <label>Telegram (юз)</label>
+                            <input type="text" id="regTelegram" placeholder="@username" />
+                        </div>
+                    </div>
+                    <div class="input-group" style="margin-top:8px;">
+                        <label>Пароль</label>
+                        <input type="password" id="regPassword" placeholder="••••••••" />
+                    </div>
+                    <button class="btn btn-gold btn-block" style="margin-top:16px;" onclick="handleRegister()">Создать аккаунт</button>
+                    <div class="toggle-auth">
+                        Уже есть аккаунт? <a onclick="showLogin()">Войти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="mainApp" class="hidden">
+
+            <header class="app-header">
+                <div class="container">
+                    <div class="brand">Misha.<span>Поддержка</span></div>
+                    <div class="user-info">
+                        <span id="headerUserName">Пользователь</span>
+                        <span class="badge" id="headerUserBadge">Пользователь</span>
+                        <button class="btn btn-sm btn-outline-gold" onclick="handleLogout()">Выйти</button>
+                        <button class="btn btn-sm btn-gold hidden" id="adminPanelBtn" onclick="showAdminPanel()">Админка</button>
+                    </div>
+                </div>
+            </header>
+
+            <div id="mainContent" class="container">
+
+                <div id="mainGrid">
+                    <div class="main-grid">
+                        <div class="section-btn" onclick="navigateTo('news')">
+                            <img src="https://img.icons8.com/fluency/96/000000/news.png" alt="Новости" />
+                            <h3>Новости</h3>
+                            <p>Последние обновления</p>
+                        </div>
+                        <div class="section-btn" onclick="navigateTo('faq')">
+                            <img src="https://img.icons8.com/fluency/96/000000/faq.png" alt="FAQ" />
+                            <h3>Часто задаваемые вопросы</h3>
+                            <p>Ответы на популярные вопросы</p>
+                        </div>
+                        <div class="section-btn" onclick="navigateTo('complaint')">
+                            <img src="https://img.icons8.com/fluency/96/000000/complaint.png" alt="Жалоба" />
+                            <h3>Жалоба</h3>
+                            <p>Оставить жалобу админу</p>
+                        </div>
+                        <div class="section-btn" onclick="navigateTo('question')">
+                            <img src="https://img.icons8.com/fluency/96/000000/ask-question.png" alt="Вопрос" />
+                            <h3>Вопрос</h3>
+                            <p>Задать вопрос поддержке</p>
+                        </div>
+                        <div class="section-btn" onclick="navigateTo('about')">
+                            <img src="https://img.icons8.com/fluency/96/000000/info.png" alt="О сайте" />
+                            <h3>О сайте</h3>
+                            <p>Информация о проекте</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sectionNews" class="section-page hidden">
+                    <button class="back-btn" onclick="goBack()">← Назад</button>
+                    <h2 class="page-title"><span>Новости</span></h2>
+                    <p class="page-sub">Последние обновления и анонсы</p>
+                    <div id="newsContainer" class="news-list"></div>
+                </div>
+
+                <div id="sectionFaq" class="section-page hidden">
+                    <button class="back-btn" onclick="goBack()">← Назад</button>
+                    <h2 class="page-title">Часто <span>задаваемые</span> вопросы</h2>
+                    <p class="page-sub">Ответы на самые популярные вопросы</p>
+                    <div class="faq-list">
+                        <div class="faq-item" onclick="this.classList.toggle('open')">
+                            <div class="faq-q">Когда будет игра в кальмара? <span class="icon">▼</span></div>
+                            <div class="faq-a">Пока не планируется, так как принято решение приостановить её разработку по решению подписчиков канала.</div>
+                        </div>
+                        <div class="faq-item" onclick="this.classList.toggle('open')">
+                            <div class="faq-q">Кто являются админами канала? <span class="icon">▼</span></div>
+                            <div class="faq-a">Создатель канала — Миша, а админ не хочет раскрывать свою личность.</div>
+                        </div>
+                        <div class="faq-item" onclick="this.classList.toggle('open')">
+                            <div class="faq-q">Кто создаёт сайты? <span class="icon">▼</span></div>
+                            <div class="faq-a">Создатели сайта — админ канала и Миша, но основной разработчик — админ. Остальная информация в разделе "О сайте".</div>
+                        </div>
+                        <div class="faq-item" onclick="this.classList.toggle('open')">
+                            <div class="faq-q">Почему правила канала жёсткие? <span class="icon">▼</span></div>
+                            <div class="faq-a">Правила канала составлял админ и если есть вопросы по правилам, то пишите в раздел с жалобами. А правила такие жёсткие потому, что если их будут нарушать, то хоть было весомое наказание.</div>
+                        </div>
+                        <div class="faq-item" onclick="this.classList.toggle('open')">
+                            <div class="faq-q">Когда админ снимется в видео? <span class="icon">▼</span></div>
+                            <div class="faq-a">Админ снимался на канале не один раз и не хочет показывать лицо, так как хочет сохранить конфиденциальность.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sectionComplaint" class="section-page hidden">
+                    <button class="back-btn" onclick="goBack()">← Назад</button>
+                    <h2 class="page-title"><span>Жалоба</span></h2>
+                    <p class="page-sub">Напишите жалобу, и админ ответит вам в этом чате</p>
+                    <div class="card">
+                        <div class="chat-container">
+                            <div class="chat-messages" id="complaintMessages"></div>
+                            <div class="chat-input-row">
+                                <div class="input-group">
+                                    <textarea id="complaintInput" placeholder="Напишите вашу жалобу..." rows="2"></textarea>
+                                </div>
+                                <button class="btn btn-gold" onclick="sendComplaint()">Отправить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sectionQuestion" class="section-page hidden">
+                    <button class="back-btn" onclick="goBack()">← Назад</button>
+                    <h2 class="page-title"><span>Вопрос</span></h2>
+                    <p class="page-sub">Задайте вопрос поддержке</p>
+                    <div class="card">
+                        <div class="chat-container">
+                            <div class="chat-messages" id="questionMessages"></div>
+                            <div class="chat-input-row">
+                                <div class="input-group">
+                                    <textarea id="questionInput" placeholder="Напишите ваш вопрос..." rows="2"></textarea>
+                                </div>
+                                <button class="btn btn-gold" onclick="sendQuestion()">Отправить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sectionAbout" class="section-page hidden">
+                    <button class="back-btn" onclick="goBack()">← Назад</button>
+                    <h2 class="page-title">О <span>сайте</span></h2>
+                    <p class="page-sub">Информация о проекте и правила</p>
+                    <div class="about-content">
+                        <p><strong>Разработчиком</strong> данного проекта считается админ канала, а Миша занимался дизайном. Админ через нейросеть создал данный сайт и выполнил действия для загрузки в интернет.</p>
+                        <br />
+                        <p><strong>Правила:</strong></p>
+                        <ul class="rules-list">
+                            <li><strong>1.</strong> Запрещается писать чушь в поддержку. За это предусмотрен бан чата на время, которое напишет админ, затем выдаётся варн.</li>
+                            <li><strong>2.</strong> Запрещается использовать нецензурную лексику, за это выдаётся варн.</li>
+                            <li><strong>3.</strong> Запрещается оскорблять кого-либо и окливитать. За это предусмотрен варн.</li>
+                            <li>Остальные нарушения будут загружены позже.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="adminPanel" class="admin-panel hidden">
+                    <button class="back-btn" onclick="closeAdminPanel()">← Назад</button>
+                    <h2 class="page-title">Панель <span>администратора</span></h2>
+                    <p class="page-sub">Управление пользователями, чатами и наказаниями</p>
+
+                    <div class="admin-tabs">
+                        <button class="tab active" data-tab="users" onclick="switchAdminTab('users')">Пользователи</button>
+                        <button class="tab" data-tab="chats" onclick="switchAdminTab('chats')">Чаты</button>
+                        <button class="tab" data-tab="bans" onclick="switchAdminTab('bans')">Баны и варны</button>
+                        <button class="tab" data-tab="news" onclick="switchAdminTab('news')">Новости</button>
+                        <button class="tab" data-tab="settings" onclick="switchAdminTab('settings')">Настройки</button>
+                    </div>
+
+                    <div id="adminUsers" class="admin-content active">
+                        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
+                            <span style="color:var(--text-secondary);">Все пользователи</span>
+                            <button class="btn btn-sm btn-outline-gold" onclick="refreshUsers()">Обновить</button>
+                        </div>
+                        <div id="userList"></div>
+                    </div>
+
+                    <div id="adminChats" class="admin-content">
+                        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
+                            <button class="btn btn-sm btn-outline-gold" onclick="viewAdminChat('complaint')">Жалобы</button>
+                            <button class="btn btn-sm btn-outline-gold" onclick="viewAdminChat('question')">Вопросы</button>
+                        </div>
+                        <div id="adminChatView">
+                            <p style="color:var(--text-muted);">Выберите чат для просмотра</p>
+                        </div>
+                    </div>
+
+                    <div id="adminBans" class="admin-content">
+                        <h4 style="margin-bottom:12px;font-weight:500;">Активные наказания</h4>
+                        <div id="bansList"></div>
+                        <hr style="border-color:var(--border-subtle);margin:20px 0;" />
+                        <h4 style="margin-bottom:12px;font-weight:500;">Выдать наказание</h4>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                            <div class="input-group">
+                                <label>ID пользователя</label>
+                                <input type="text" id="punishUserId" placeholder="Введите ID" />
+                            </div>
+                            <div class="input-group">
+                                <label>Тип</label>
+                                <select id="punishType">
+                                    <option value="ban">Бан</option>
+                                    <option value="warn">Варн</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Количество / срок</label>
+                                <input type="text" id="punishValue" placeholder="Напр. 7 или 3" />
+                            </div>
+                            <div class="input-group">
+                                <label>Единица</label>
+                                <select id="punishUnit">
+                                    <option value="minutes">Минуты</option>
+                                    <option value="hours">Часы</option>
+                                    <option value="days">Дни</option>
+                                    <option value="months">Месяцы</option>
+                                    <option value="years">Годы</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-group" style="margin-top:8px;">
+                            <label>Причина</label>
+                            <input type="text" id="punishReason" placeholder="Причина наказания" />
+                        </div>
+                        <button class="btn btn-danger" style="margin-top:12px;" onclick="applyPunishment()">Применить наказание</button>
+                    </div>
+
+                    <div id="adminNews" class="admin-content">
+                        <h4 style="margin-bottom:12px;font-weight:500;">Добавить новость</h4>
+                        <div class="input-group">
+                            <label>Заголовок</label>
+                            <input type="text" id="newsTitle" placeholder="Заголовок новости" />
+                        </div>
+                        <div class="input-group" style="margin-top:8px;">
+                            <label>Содержание</label>
+                            <textarea id="newsContent" placeholder="Текст новости..." rows="4"></textarea>
+                        </div>
+                        <button class="btn btn-gold" style="margin-top:12px;" onclick="addNews()">Опубликовать</button>
+                        <hr style="border-color:var(--border-subtle);margin:24px 0;" />
+                        <h4 style="margin-bottom:12px;font-weight:500;">Все новости</h4>
+                        <div id="adminNewsList"></div>
+                    </div>
+
+                    <div id="adminSettings" class="admin-content">
+                        <h4 style="margin-bottom:12px;font-weight:500;">Назначить помощника</h4>
+                        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                            <div class="input-group" style="flex:1;min-width:180px;">
+                                <label>ID пользователя</label>
+                                <input type="text" id="assistantUserId" placeholder="Введите ID" />
+                            </div>
+                            <button class="btn btn-gold" style="align-self:flex-end;" onclick="assignAssistant()">Назначить</button>
+                        </div>
+                        <hr style="border-color:var(--border-subtle);margin:24px 0;" />
+                        <h4 style="margin-bottom:12px;font-weight:500;">Текущие помощники</h4>
+                        <div id="assistantsList"></div>
+                        <hr style="border-color:var(--border-subtle);margin:24px 0;" />
+                        <h4 style="margin-bottom:12px;font-weight:500;">Загрузить доказательства</h4>
+                        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                            <div class="input-group" style="flex:1;min-width:160px;">
+                                <label>ID пользователя</label>
+                                <input type="text" id="evidenceUserId" placeholder="ID" />
+                            </div>
+                            <div class="input-group" style="flex:1;min-width:160px;">
+                                <label>Фото (URL)</label>
+                                <input type="text" id="evidenceUrl" placeholder="https://example.com/image.jpg" />
+                            </div>
+                            <button class="btn btn-outline-gold" style="align-self:flex-end;" onclick="addEvidence()">Добавить</button>
+                        </div>
+                        <div id="evidenceList" style="margin-top:12px;"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay hidden" onclick="if(event.target===this)closeModal()">
+        <div class="modal" id="modalContent">
+            <button class="close-modal" onclick="closeModal()">✕</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        //  CONFIG - ВАШИ ДАННЫЕ JSONBIN
+        // ============================================================
+        const BIN_CONFIG = {
+            users: '6a746f3bf5f4af5e29f27af9',
+            complaints: '6a74702cf5f4af5e29f27e75',
+            questions: '6a747087f5f4af5e29f27ff6',
+            bans: '6a7470c4f5f4af5e29f28112',
+            warnings: '6a747233da38895dfec11298',
+            evidences: '6a74715af5f4af5e29f2834e',
+            assistants: '6a74718ff5f4af5e29f28409',
+            nextId: '6a747275f5f4af5e29f28779',
+            news: '6a747448da38895dfec119f5'
+        };
+        const JSONBIN_API_KEY = '$2a$10$/lKNp2cCj9lOUJxhWQ0uI./vRHpINQt.MWizWPJOnRinj62u0JIgO';
+
+        // ============================================================
+        //  STATE
+        // ============================================================
+        let currentUser = null;
+        let appData = null;
+        let currentSection = 'main';
+        let adminChatType = null;
+
+        // ============================================================
+        //  DATA HELPERS
+        // ============================================================
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+        }
+
+        function getDefaultData() {
+            return {
+                users: [],
+                complaints: [],
+                questions: [],
+                bans: [],
+                warnings: [],
+                evidences: [],
+                assistants: [],
+                nextId: 1,
+                news: []
+            };
+        }
+
+        // ============================================================
+        //  JSONBIN API
+        // ============================================================
+        async function loadBin(binId) {
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${binId}`, {
+                    headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                });
+                if (!res.ok) throw new Error(`Failed to load bin ${binId}`);
+                const json = await res.json();
+                return json.record;
+            } catch (e) {
+                console.warn(`Failed to load bin ${binId}:`, e);
+                return null;
+            }
+        }
+
+        async function saveBin(binId, data) {
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${binId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_API_KEY
+                    },
+                    body: JSON.stringify(data)
+                });
+                if (!res.ok) throw new Error(`Failed to save bin ${binId}`);
+                return true;
+            } catch (e) {
+                console.warn(`Failed to save bin ${binId}:`, e);
+                return false;
+            }
+        }
+
+        async function loadAllData() {
+            try {
+                const [users, complaints, questions, bans, warnings, evidences, assistants, nextId, news] = await Promise.all([
+                    loadBin(BIN_CONFIG.users),
+                    loadBin(BIN_CONFIG.complaints),
+                    loadBin(BIN_CONFIG.questions),
+                    loadBin(BIN_CONFIG.bans),
+                    loadBin(BIN_CONFIG.warnings),
+                    loadBin(BIN_CONFIG.evidences),
+                    loadBin(BIN_CONFIG.assistants),
+                    loadBin(BIN_CONFIG.nextId),
+                    loadBin(BIN_CONFIG.news)
+                ]);
+
+                appData = {
+                    users: users || [],
+                    complaints: complaints || [],
+                    questions: questions || [],
+                    bans: bans || [],
+                    warnings: warnings || [],
+                    evidences: evidences || [],
+                    assistants: assistants || [],
+                    nextId: nextId || 1,
+                    news: news || []
+                };
+
+                // Инициализация warnings если пустой
+                if (appData.warnings.length === 0) {
+                    appData.warnings = [{ userId: '0', count: 0, history: [] }];
+                }
+
+                // Инициализация новостей если пустые
+                if (appData.news.length === 0) {
+                    appData.news = [{
+                        id: 'n1',
+                        title: 'Добро пожаловать!',
+                        content: 'Это первая новость на нашем сайте поддержки. Здесь будут публиковаться важные обновления.',
+                        timestamp: Date.now(),
+                        author: 'Админ'
+                    }];
+                    await saveBin(BIN_CONFIG.news, appData.news);
+                }
+
+                return true;
+            } catch (e) {
+                console.error('Failed to load data:', e);
+                appData = getDefaultData();
+                return false;
+            }
+        }
+
+        async function saveAllData() {
+            try {
+                await Promise.all([
+                    saveBin(BIN_CONFIG.users, appData.users),
+                    saveBin(BIN_CONFIG.complaints, appData.complaints),
+                    saveBin(BIN_CONFIG.questions, appData.questions),
+                    saveBin(BIN_CONFIG.bans, appData.bans),
+                    saveBin(BIN_CONFIG.warnings, appData.warnings),
+                    saveBin(BIN_CONFIG.evidences, appData.evidences),
+                    saveBin(BIN_CONFIG.assistants, appData.assistants),
+                    saveBin(BIN_CONFIG.nextId, appData.nextId),
+                    saveBin(BIN_CONFIG.news, appData.news)
+                ]);
+                return true;
+            } catch (e) {
+                console.error('Failed to save data:', e);
+                return false;
+            }
+        }
+
+        // ============================================================
+        //  AUTH
+        // ============================================================
+        function showRegister() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.remove('hidden');
+        }
+
+        function showLogin() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+        }
+
+        async function handleRegister() {
+            const fullName = document.getElementById('regFullName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const nick = document.getElementById('regNick').value.trim();
+            const telegram = document.getElementById('regTelegram').value.trim();
+            const password = document.getElementById('regPassword').value.trim();
+
+            if (!fullName || !email || !nick || !telegram || !password) {
+                alert('Заполните все поля!');
+                return;
+            }
+
+            if (appData.users.find(u => u.fullName === fullName)) {
+                alert('Пользователь с таким ФИО уже существует!');
+                return;
+            }
+
+            const newUser = {
+                id: String(appData.nextId++),
+                fullName,
+                email,
+                nick,
+                telegram,
+                password,
+                isAdmin: false,
+                isAssistant: false,
+                warnings: [],
+                banned: false,
+                banExpiry: null,
+                banReason: ''
+            };
+
+            if (appData.users.length === 0) {
+                newUser.isAdmin = true;
+            }
+
+            appData.users.push(newUser);
+            await saveAllData();
+            alert('Регистрация успешна! Теперь войдите.');
+            showLogin();
+            document.getElementById('regFullName').value = '';
+            document.getElementById('regEmail').value = '';
+            document.getElementById('regNick').value = '';
+            document.getElementById('regTelegram').value = '';
+            document.getElementById('regPassword').value = '';
+        }
+
+        async function handleLogin() {
+            const fullName = document.getElementById('loginFullName').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+
+            if (!fullName || !password) {
+                alert('Введите ФИО и пароль!');
+                return;
+            }
+
+            // Админ хардкод
+            if (fullName === 'Анурин Антон Максимович' && password === '31441537a') {
+                let admin = appData.users.find(u => u.fullName === fullName);
+                if (!admin) {
+                    admin = {
+                        id: String(appData.nextId++),
+                        fullName: fullName,
+                        email: 'admin@support.com',
+                        nick: 'Admin',
+                        telegram: '@admin',
+                        password: '31441537a',
+                        isAdmin: true,
+                        isAssistant: false,
+                        warnings: [],
+                        banned: false,
+                        banExpiry: null,
+                        banReason: ''
+                    };
+                    appData.users.push(admin);
+                    await saveAllData();
+                } else {
+                    admin.isAdmin = true;
+                    await saveAllData();
+                }
+                currentUser = admin;
+                
+                // Запомнить меня
+                if (document.getElementById('rememberMe').checked) {
+                    localStorage.setItem('rememberedUser', JSON.stringify({ fullName, password }));
+                }
+                
+                enterApp();
+                return;
+            }
+
+            const user = appData.users.find(u => u.fullName === fullName && u.password === password);
+            if (!user) {
+                alert('Неверное ФИО или пароль!');
+                return;
+            }
+
+            if (user.banned) {
+                const expiry = user.banExpiry ? new Date(user.banExpiry) : null;
+                if (expiry && expiry > new Date()) {
+                    alert(`Вы забанены до ${expiry.toLocaleString()}. Причина: ${user.banReason || 'Не указана'}`);
+                    return;
+                } else if (expiry && expiry <= new Date()) {
+                    user.banned = false;
+                    user.banExpiry = null;
+                    user.banReason = '';
+                    await saveAllData();
+                } else {
+                    alert('Вы забанены навсегда.');
+                    return;
+                }
+            }
+
+            currentUser = user;
+            
+            // Запомнить меня
+            if (document.getElementById('rememberMe').checked) {
+                localStorage.setItem('rememberedUser', JSON.stringify({ fullName, password }));
+            }
+            
+            enterApp();
+        }
+
+        function enterApp() {
+            document.getElementById('authPage').classList.add('hidden');
+            document.getElementById('mainApp').classList.remove('hidden');
+            document.getElementById('headerUserName').textContent = currentUser.fullName;
+            const badge = document.getElementById('headerUserBadge');
+            if (currentUser.isAdmin) {
+                badge.textContent = 'Админ';
+                badge.style.background = 'rgba(212,168,75,0.25)';
+                document.getElementById('adminPanelBtn').classList.remove('hidden');
+            } else if (currentUser.isAssistant) {
+                badge.textContent = 'Помощник';
+                badge.style.background = 'rgba(212,168,75,0.15)';
+                document.getElementById('adminPanelBtn').classList.remove('hidden');
+            } else {
+                badge.textContent = 'Пользователь';
+                badge.style.background = 'var(--gold-dim)';
+                document.getElementById('adminPanelBtn').classList.add('hidden');
+            }
+            showMainGrid();
+            renderAll();
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            localStorage.removeItem('rememberedUser');
+            document.getElementById('mainApp').classList.add('hidden');
+            document.getElementById('authPage').classList.remove('hidden');
+            document.getElementById('loginFullName').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('rememberMe').checked = false;
+            showLogin();
+        }
+
+        // ============================================================
+        //  NAVIGATION
+        // ============================================================
+        function showMainGrid() {
+            document.getElementById('mainGrid').classList.remove('hidden');
+            document.querySelectorAll('.section-page').forEach(el => el.classList.add('hidden'));
+            document.getElementById('adminPanel').classList.add('hidden');
+            currentSection = 'main';
+        }
+
+        function navigateTo(section) {
+            document.getElementById('mainGrid').classList.add('hidden');
+            document.querySelectorAll('.section-page').forEach(el => el.classList.add('hidden'));
+            document.getElementById('adminPanel').classList.add('hidden');
+            const sectionMap = {
+                'news': 'sectionNews',
+                'faq': 'sectionFaq',
+                'complaint': 'sectionComplaint',
+                'question': 'sectionQuestion',
+                'about': 'sectionAbout'
+            };
+            document.getElementById(sectionMap[section]).classList.remove('hidden');
+            currentSection = section;
+            if (section === 'news') renderNews();
+            if (section === 'complaint' || section === 'question') renderChat(section);
+        }
+
+        function goBack() {
+            if (document.getElementById('adminPanel').classList.contains('hidden') === false) {
+                closeAdminPanel();
+                return;
+            }
+            showMainGrid();
+        }
+
+        // ============================================================
+        //  NEWS
+        // ============================================================
+        function renderNews() {
+            const container = document.getElementById('newsContainer');
+            if (!container) return;
+            const news = appData.news || [];
+            if (news.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px 0;">Новостей пока нет</p>';
+                return;
+            }
+            let html = '';
+            news.slice().reverse().forEach(item => {
+                html += `
+                <div class="news-item">
+                    <div class="news-title">${item.title}</div>
+                    <div class="news-meta">${new Date(item.timestamp).toLocaleString()} • ${item.author || 'Админ'}</div>
+                    <div class="news-content">${item.content}</div>
+                </div>
+            `;
+            });
+            container.innerHTML = html;
+        }
+
+        async function addNews() {
+            const title = document.getElementById('newsTitle').value.trim();
+            const content = document.getElementById('newsContent').value.trim();
+            
+            if (!title || !content) {
+                alert('Заполните заголовок и содержание новости!');
+                return;
+            }
+            
+            if (!appData.news) appData.news = [];
+            appData.news.push({
+                id: generateId(),
+                title,
+                content,
+                timestamp: Date.now(),
+                author: currentUser.fullName
+            });
+            
+            await saveAllData();
+            document.getElementById('newsTitle').value = '';
+            document.getElementById('newsContent').value = '';
+            renderNews();
+            renderAdminNews();
+            alert('Новость опубликована!');
+        }
+
+        function renderAdminNews() {
+            const container = document.getElementById('adminNewsList');
+            if (!container) return;
+            const news = appData.news || [];
+            if (news.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-muted);">Новостей нет</p>';
+                return;
+            }
+            let html = '';
+            news.slice().reverse().forEach(item => {
+                html += `
+                <div class="news-item" style="border-left-color: var(--gold);">
+                    <div class="news-title">${item.title}</div>
+                    <div class="news-meta">${new Date(item.timestamp).toLocaleString()} • ${item.author || 'Админ'}</div>
+                    <div class="news-content">${item.content}</div>
+                    <div class="news-actions">
+                        <button class="btn btn-sm btn-danger" onclick="deleteNews('${item.id}')">Удалить</button>
+                    </div>
+                </div>
+            `;
+            });
+            container.innerHTML = html;
+        }
+
+        async function deleteNews(id) {
+            if (!confirm('Удалить эту новость?')) return;
+            appData.news = appData.news.filter(n => n.id !== id);
+            await saveAllData();
+            renderNews();
+            renderAdminNews();
+        }
+
+        // ============================================================
+        //  RENDER CHATS
+        // ============================================================
+        function renderChat(type) {
+            const container = document.getElementById(type + 'Messages');
+            if (!container) return;
+            const messages = type === 'complaint' ? appData.complaints : appData.questions;
+            let filtered;
+            if (currentUser.isAdmin || currentUser.isAssistant) {
+                filtered = messages;
+            } else {
+                filtered = messages.filter(m => m.userId === currentUser.id);
+            }
+            container.innerHTML = '';
+            if (filtered.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px 0;">Сообщений пока нет</p>';
+                return;
+            }
+            filtered.forEach(msg => {
+                const div = document.createElement('div');
+                div.className = 'msg ' + (msg.isAdmin ? 'admin' : 'user');
+                const isAdminMsg = msg.isAdmin || msg.adminId;
+                const senderName = isAdminMsg ? 'Админ' : (msg.userName || 'Пользователь');
+                div.innerHTML = `
+              <div>${msg.message}</div>
+              <div class="meta">
+                <span>${new Date(msg.timestamp).toLocaleString()}</span>
+                <span>•</span>
+                <span>${senderName}</span>
+                ${isAdminMsg ? `<span class="admin-badge" onclick="showAdminId('${msg.adminId || '11111'}')">A</span>` : ''}
+                <span class="admin-id" id="adminId_${msg.id}">ID: ${msg.adminId || '11111'}</span>
+              </div>
+            `;
+                container.appendChild(div);
+            });
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function showAdminId(id) {
+            const el = document.querySelector(`.admin-id[id*="adminId_"]`);
+            if (el) {
+                el.classList.toggle('show');
+            }
+        }
+
+        async function sendComplaint() {
+            const input = document.getElementById('complaintInput');
+            const text = input.value.trim();
+            if (!text) return;
+            const msg = {
+                id: generateId(),
+                userId: currentUser.id,
+                userName: currentUser.fullName,
+                message: text,
+                timestamp: Date.now(),
+                isAdmin: false,
+                adminId: null
+            };
+            appData.complaints.push(msg);
+            await saveAllData();
+            input.value = '';
+            renderChat('complaint');
+        }
+
+        async function sendQuestion() {
+            const input = document.getElementById('questionInput');
+            const text = input.value.trim();
+            if (!text) return;
+            const msg = {
+                id: generateId(),
+                userId: currentUser.id,
+                userName: currentUser.fullName,
+                message: text,
+                timestamp: Date.now(),
+                isAdmin: false,
+                adminId: null
+            };
+            appData.questions.push(msg);
+            await saveAllData();
+            input.value = '';
+            renderChat('question');
+        }
+
+        // ============================================================
+        //  ADMIN PANEL
+        // ============================================================
+        function showAdminPanel() {
+            if (!currentUser.isAdmin && !currentUser.isAssistant) {
+                alert('У вас нет прав администратора.');
+                return;
+            }
+            document.getElementById('mainGrid').classList.add('hidden');
+            document.querySelectorAll('.section-page').forEach(el => el.classList.add('hidden'));
+            document.getElementById('adminPanel').classList.remove('hidden');
+            currentSection = 'admin';
+            refreshUsers();
+            renderBansList();
+            renderAssistants();
+            renderEvidence();
+            renderAdminNews();
+            switchAdminTab('users');
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('adminPanel').classList.add('hidden');
+            showMainGrid();
+        }
+
+        function switchAdminTab(tab) {
+            document.querySelectorAll('.admin-tabs .tab').forEach(el => el.classList.remove('active'));
+            document.querySelector(`.admin-tabs .tab[data-tab="${tab}"]`).classList.add('active');
+            document.querySelectorAll('.admin-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('admin' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
+        }
+
+        function refreshUsers() {
+            const list = document.getElementById('userList');
+            if (!list) return;
+            list.innerHTML = '';
+            if (appData.users.length === 0) {
+                list.innerHTML = '<p style="color:var(--text-muted);">Нет пользователей</p>';
+                return;
+            }
+            const sorted = [...appData.users].sort((a, b) => {
+                if (a.isAdmin) return -1;
+                if (b.isAdmin) return 1;
+                if (a.isAssistant) return -1;
+                if (b.isAssistant) return 1;
+                return 0;
+            });
+            sorted.forEach(user => {
+                const div = document.createElement('div');
+                div.className = 'user-list-item';
+                const warnCount = user.warnings ? user.warnings.length : 0;
+                const isBanned = user.banned;
+                const isAdmin = user.isAdmin;
+                const isAssistant = user.isAssistant;
+
+                div.innerHTML = `
+              <div class="user-info">
+                <span><strong>${user.fullName}</strong></span>
+                <span class="id-badge">ID: ${user.id}</span>
+                <span style="color:var(--text-muted);font-size:0.8rem;">${user.nick || ''}</span>
+                ${isAdmin ? '<span class="badge" style="background:var(--gold);color:#0c0c0e;">Админ</span>' : ''}
+                ${isAssistant ? '<span class="badge" style="background:rgba(212,168,75,0.2);color:var(--gold);">Помощник</span>' : ''}
+                ${warnCount > 0 ? `<span class="warn-badge">⚠ ${warnCount} варн</span>` : ''}
+                ${isBanned ? '<span class="banned-badge">🚫 Забанен</span>' : ''}
+              </div>
+              <div class="user-actions">
+                ${!isAdmin && currentUser.isAdmin ? `
+                  <button class="btn btn-sm btn-outline-gold" onclick="userAction('warn','${user.id}')">Варн</button>
+                  <button class="btn btn-sm btn-danger" onclick="userAction('ban','${user.id}')">Бан</button>
+                  <button class="btn btn-sm btn-outline-gold" onclick="userAction('unban','${user.id}')">Разбан</button>
+                  <button class="btn btn-sm btn-outline-gold" onclick="userAction('clearwarn','${user.id}')">Снять варны</button>
+                ` : ''}
+                ${currentUser.isAdmin && !isAdmin && !isAssistant ? `<button class="btn btn-sm btn-outline-gold" onclick="makeAssistant('${user.id}')">Назначить помощником</button>` : ''}
+                ${currentUser.isAdmin && isAssistant ? `<button class="btn btn-sm btn-outline-gold" onclick="removeAssistant('${user.id}')">Убрать помощника</button>` : ''}
+              </div>
+            `;
+                list.appendChild(div);
+            });
+        }
+
+        function userAction(action, userId) {
+            const user = appData.users.find(u => u.id === userId);
+            if (!user) return;
+            if (action === 'warn') {
+                showPunishModal('warn', userId);
+            } else if (action === 'ban') {
+                showPunishModal('ban', userId);
+            } else if (action === 'unban') {
+                user.banned = false;
+                user.banExpiry = null;
+                user.banReason = '';
+                saveAllData().then(() => refreshUsers());
+            } else if (action === 'clearwarn') {
+                user.warnings = [];
+                saveAllData().then(() => refreshUsers());
+            }
+        }
+
+        function showPunishModal(type, userId) {
+            const body = document.getElementById('modalBody');
+            body.innerHTML = `
+            <h3>${type === 'warn' ? 'Выдать варн' : 'Забанить'}</h3>
+            <div class="input-group" style="margin-top:12px;">
+              <label>Количество / срок</label>
+              <input type="text" id="modalPunishValue" placeholder="Напр. 7 или 3" />
+            </div>
+            <div class="input-group" style="margin-top:8px;">
+              <label>Единица</label>
+              <select id="modalPunishUnit">
+                <option value="minutes">Минуты</option>
+                <option value="hours">Часы</option>
+                <option value="days">Дни</option>
+                <option value="months">Месяцы</option>
+                <option value="years">Годы</option>
+              </select>
+            </div>
+            <div class="input-group" style="margin-top:8px;">
+              <label>Причина</label>
+              <input type="text" id="modalPunishReason" placeholder="Причина" />
+            </div>
+            <button class="btn btn-danger btn-block" style="margin-top:16px;" onclick="executePunish('${type}','${userId}')">Подтвердить</button>
+          `;
+            document.getElementById('modalOverlay').classList.remove('hidden');
+        }
+
+        function executePunish(type, userId) {
+            const value = document.getElementById('modalPunishValue').value.trim();
+            const unit = document.getElementById('modalPunishUnit').value;
+            const reason = document.getElementById('modalPunishReason').value.trim() || 'Не указана';
+            if (!value || isNaN(value)) {
+                alert('Введите корректное число!');
+                return;
+            }
+            const num = parseInt(value);
+            const user = appData.users.find(u => u.id === userId);
+            if (!user) return;
+
+            if (type === 'warn') {
+                if (!user.warnings) user.warnings = [];
+                user.warnings.push({ time: Date.now(), reason, unit, value: num });
+                if (user.warnings.length >= 3) {
+                    const body = document.getElementById('modalBody');
+                    body.innerHTML = `
+                <h3>⚠️ У пользователя ${user.fullName} 3 варна!</h3>
+                <p style="color:var(--text-secondary);margin:12px 0;">Выберите наказание:</p>
+                <div class="input-group">
+                  <label>Срок бана</label>
+                  <input type="text" id="autoBanValue" placeholder="Напр. 7" />
+                </div>
+                <div class="input-group" style="margin-top:8px;">
+                  <label>Единица</label>
+                  <select id="autoBanUnit">
+                    <option value="minutes">Минуты</option>
+                    <option value="hours">Часы</option>
+                    <option value="days">Дни</option>
+                    <option value="months">Месяцы</option>
+                    <option value="years">Годы</option>
+                  </select>
+                </div>
+                <div class="input-group" style="margin-top:8px;">
+                  <label>Причина</label>
+                  <input type="text" id="autoBanReason" placeholder="Причина" value="3 варна" />
+                </div>
+                <button class="btn btn-danger btn-block" style="margin-top:16px;" onclick="autoBanUser('${userId}')">Забанить</button>
+                <button class="btn btn-outline-gold btn-block" style="margin-top:8px;" onclick="closeModal()">Пропустить</button>
+              `;
+                    document.getElementById('modalOverlay').classList.remove('hidden');
+                }
+                saveAllData().then(() => { refreshUsers();
+                    closeModal(); });
+            } else if (type === 'ban') {
+                const expiry = new Date(Date.now() + getMsFromUnit(num, unit));
+                user.banned = true;
+                user.banExpiry = expiry.toISOString();
+                user.banReason = reason;
+                saveAllData().then(() => { refreshUsers();
+                    closeModal(); });
+            }
+            closeModal();
+        }
+
+        function autoBanUser(userId) {
+            const value = document.getElementById('autoBanValue').value.trim();
+            const unit = document.getElementById('autoBanUnit').value;
+            const reason = document.getElementById('autoBanReason').value.trim() || '3 варна';
+            if (!value || isNaN(value)) {
+                alert('Введите срок бана!');
+                return;
+            }
+            const num = parseInt(value);
+            const user = appData.users.find(u => u.id === userId);
+            if (!user) return;
+            const expiry = new Date(Date.now() + getMsFromUnit(num, unit));
+            user.banned = true;
+            user.banExpiry = expiry.toISOString();
+            user.banReason = reason;
+            saveAllData().then(() => { refreshUsers();
+                closeModal(); });
+        }
+
+        function getMsFromUnit(value, unit) {
+            const map = {
+                minutes: 60 * 1000,
+                hours: 60 * 60 * 1000,
+                days: 24 * 60 * 60 * 1000,
+                months: 30 * 24 * 60 * 60 * 1000,
+                years: 365 * 24 * 60 * 60 * 1000
+            };
+            return value * (map[unit] || 60 * 1000);
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.add('hidden');
+        }
+
+        // ============================================================
+        //  ADMIN CHAT VIEW
+        // ============================================================
+        function viewAdminChat(type) {
+            adminChatType = type;
+            const container = document.getElementById('adminChatView');
+            const messages = type === 'complaint' ? appData.complaints : appData.questions;
+            if (messages.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-muted);">Сообщений нет</p>';
+                return;
+            }
+            let html = `<div style="display:flex;flex-direction:column;gap:8px;max-height:400px;overflow-y:auto;">`;
+            messages.forEach(msg => {
+                const isAdmin = msg.isAdmin || msg.adminId;
+                html += `
+              <div style="background:var(--bg-secondary);padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid ${isAdmin ? 'var(--gold)' : 'var(--border-subtle)'};">
+                <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text-muted);">
+                  <span>${msg.userName || 'Пользователь'} (ID: ${msg.userId})</span>
+                  <span>${new Date(msg.timestamp).toLocaleString()}</span>
+                </div>
+                <div style="margin-top:4px;">${msg.message}</div>
+                ${isAdmin ? `<div style="font-size:0.7rem;color:var(--gold);margin-top:4px;">✉ Ответ админа</div>` : ''}
+                ${!isAdmin && (currentUser.isAdmin || currentUser.isAssistant) ? `
+                  <div style="margin-top:6px;">
+                    <input type="text" id="adminReply_${msg.id}" placeholder="Ответить..." style="background:var(--bg-primary);border:1px solid var(--border-subtle);border-radius:6px;padding:6px 10px;color:var(--text-primary);width:70%;font-size:0.85rem;" />
+                    <button class="btn btn-xs btn-gold" onclick="adminReply('${type}','${msg.id}')">Ответить</button>
+                  </div>
+                ` : ''}
+              </div>
+            `;
+            });
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        async function adminReply(type, msgId) {
+            const input = document.getElementById(`adminReply_${msgId}`);
+            const text = input.value.trim();
+            if (!text) return;
+            const messages = type === 'complaint' ? appData.complaints : appData.questions;
+            const msg = messages.find(m => m.id === msgId);
+            if (!msg) return;
+            const reply = {
+                id: generateId(),
+                userId: currentUser.id,
+                userName: currentUser.fullName,
+                message: text,
+                timestamp: Date.now(),
+                isAdmin: true,
+                adminId: currentUser.id
+            };
+            messages.push(reply);
+            await saveAllData();
+            viewAdminChat(type);
+            if (type === 'complaint') renderChat('complaint');
+            else renderChat('question');
+        }
+
+        // ============================================================
+        //  BANS LIST
+        // ============================================================
+        function renderBansList() {
+            const container = document.getElementById('bansList');
+            if (!container) return;
+            const banned = appData.users.filter(u => u.banned);
+            if (banned.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-muted);">Нет забаненных пользователей</p>';
+                return;
+            }
+            let html = '';
+            banned.forEach(u => {
+                const expiry = u.banExpiry ? new Date(u.banExpiry) : null;
+                html += `
+              <div class="user-list-item">
+                <div class="user-info">
+                  <span><strong>${u.fullName}</strong></span>
+                  <span class="id-badge">ID: ${u.id}</span>
+                  ${expiry ? `<span style="color:var(--text-muted);font-size:0.8rem;">до ${expiry.toLocaleString()}</span>` : '<span style="color:var(--text-muted);font-size:0.8rem;">Навсегда</span>'}
+                  <span style="color:var(--text-muted);font-size:0.8rem;">Причина: ${u.banReason || 'Не указана'}</span>
+                </div>
+                <div class="user-actions">
+                  <button class="btn btn-sm btn-outline-gold" onclick="userAction('unban','${u.id}')">Разбанить</button>
+                </div>
+              </div>
+            `;
+            });
+            container.innerHTML = html;
+        }
+
+        // ============================================================
+        //  ASSISTANTS
+        // ============================================================
+        async function makeAssistant(userId) {
+            const user = appData.users.find(u => u.id === userId);
+            if (!user) return;
+            if (user.isAdmin) { alert('Админ не может быть помощником.'); return; }
+            user.isAssistant = true;
+            if (!appData.assistants) appData.assistants = [];
+            if (!appData.assistants.includes(userId)) {
+                appData.assistants.push(userId);
+            }
+            await saveAllData();
+            refreshUsers();
+            renderAssistants();
+        }
+
+        async function removeAssistant(userId) {
+            const user = appData.users.find(u => u.id === userId);
+            if (!user) return;
+            user.isAssistant = false;
+            if (appData.assistants) {
+                appData.assistants = appData.assistants.filter(id => id !== userId);
+            }
+            await saveAllData();
+            refreshUsers();
+            renderAssistants();
+        }
+
+        function renderAssistants() {
+            const container = document.getElementById('assistantsList');
+            if (!container) return;
+            const assistants = appData.users.filter(u => u.isAssistant);
+            if (assistants.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-muted);">Нет назначенных помощников</p>';
+                return;
+            }
+            let html = '';
+            assistants.forEach(a => {
+                html += `
+              <div class="user-list-item">
+                <div class="user-info">
+                  <span><strong>${a.fullName}</strong></span>
+                  <span class="id-badge">ID: ${a.id}</span>
+                </div>
+                <div class="user-actions">
+                  <button class="btn btn-sm btn-outline-gold" onclick="removeAssistant('${a.id}')">Убрать</button>
+                </div>
+              </div>
+            `;
+            });
+            container.innerHTML = html;
+        }
+
+        // ============================================================
+        //  EVIDENCE
+        // ============================================================
+        async function addEvidence() {
+            const userId = document.getElementById('evidenceUserId').value.trim();
+            const url = document.getElementById('evidenceUrl').value.trim();
+            if (!userId || !url) {
+                alert('Введите ID пользователя и URL фото!');
+                return;
+            }
+            if (!appData.evidences) appData.evidences = [];
+            appData.evidences.push({
+                id: generateId(),
+                userId,
+                url,
+                timestamp: Date.now(),
+                adminId: currentUser.id
+            });
+            await saveAllData();
+            renderEvidence();
+            document.getElementById('evidenceUserId').value = '';
+            document.getElementById('evidenceUrl').value = '';
+        }
+
+        function renderEvidence() {
+            const container = document.getElementById('evidenceList');
+            if (!container) return;
+            if (!appData.evidences || appData.evidences.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-muted);">Нет загруженных доказательств</p>';
+                return;
+            }
+            let html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">';
+            appData.evidences.slice().reverse().forEach(e => {
+                html += `
+              <div style="background:var(--bg-secondary);border-radius:var(--radius-sm);padding:12px;border:1px solid var(--border-subtle);">
+                <div style="font-size:0.8rem;color:var(--text-muted);">ID пользователя: ${e.userId}</div>
+                <img src="${e.url}" alt="Evidence" style="max-width:100%;max-height:120px;object-fit:cover;border-radius:6px;margin-top:6px;" onerror="this.style.display='none'" />
+                <div style="font-size:0.7rem;color:var(--text-muted);margin-top:4px;">${new Date(e.timestamp).toLocaleString()}</div>
+              </div>
+            `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // ============================================================
+        //  PUNISHMENT FROM ADMIN TAB
+        // ============================================================
+        async function applyPunishment() {
+            const userId = document.getElementById('punishUserId').value.trim();
+            const type = document.getElementById('punishType').value;
+            const value = document.getElementById('punishValue').value.trim();
+            const unit = document.getElementById('punishUnit').value;
+            const reason = document.getElementById('punishReason').value.trim() || 'Не указана';
+
+            if (!userId || !value || isNaN(value)) {
+                alert('Заполните все поля корректно!');
+                return;
+            }
+            const user = appData.users.find(u => u.id === userId);
+            if (!user) {
+                alert('Пользователь не найден!');
+                return;
+            }
+            const num = parseInt(value);
+
+            if (type === 'warn') {
+                if (!user.warnings) user.warnings = [];
+                user.warnings.push({ time: Date.now(), reason, unit, value: num });
+                if (user.warnings.length >= 3) {
+                    alert(`⚠️ У пользователя ${user.fullName} 3 варна! Используйте раздел "Баны и варны" для выдачи бана.`);
+                }
+            } else if (type === 'ban') {
+                const expiry = new Date(Date.now() + getMsFromUnit(num, unit));
+                user.banned = true;
+                user.banExpiry = expiry.toISOString();
+                user.banReason = reason;
+            }
+            await saveAllData();
+            refreshUsers();
+            renderBansList();
+            alert('Наказание применено!');
+            document.getElementById('punishUserId').value = '';
+            document.getElementById('punishValue').value = '';
+            document.getElementById('punishReason').value = '';
+        }
+
+        // ============================================================
+        //  ASSIGN ASSISTANT FROM SETTINGS
+        // ============================================================
+        async function assignAssistant() {
+            const userId = document.getElementById('assistantUserId').value.trim();
+            if (!userId) {
+                alert('Введите ID пользователя!');
+                return;
+            }
+            const user = appData.users.find(u => u.id === userId);
+            if (!user) {
+                alert('Пользователь не найден!');
+                return;
+            }
+            if (user.isAdmin) {
+                alert('Админ не может быть помощником.');
+                return;
+            }
+            user.isAssistant = true;
+            if (!appData.assistants) appData.assistants = [];
+            if (!appData.assistants.includes(userId)) {
+                appData.assistants.push(userId);
+            }
+            await saveAllData();
+            refreshUsers();
+            renderAssistants();
+            document.getElementById('assistantUserId').value = '';
+            alert('Помощник назначен!');
+        }
+
+        // ============================================================
+        //  RENDER ALL
+        // ============================================================
+        function renderAll() {
+            if (currentSection === 'news') renderNews();
+            if (currentSection === 'complaint') renderChat('complaint');
+            if (currentSection === 'question') renderChat('question');
+            if (currentSection === 'admin') {
+                refreshUsers();
+                renderBansList();
+                renderAssistants();
+                renderEvidence();
+                renderAdminNews();
+            }
+        }
+
+        // ============================================================
+        //  INIT
+        // ============================================================
+        (async function init() {
+            await loadAllData();
+            
+            // Проверка на "запомнить меня"
+            const remembered = localStorage.getItem('rememberedUser');
+            if (remembered) {
+                try {
+                    const data = JSON.parse(remembered);
+                    document.getElementById('loginFullName').value = data.fullName;
+                    document.getElementById('loginPassword').value = data.password;
+                    document.getElementById('rememberMe').checked = true;
+                    // Автоматический вход
+                    await handleLogin();
+                } catch (e) {
+                    console.warn('Failed to auto-login:', e);
+                }
+            }
+            
+            document.getElementById('authPage').classList.remove('hidden');
+            document.getElementById('mainApp').classList.add('hidden');
+        })();
+
+        // ============================================================
+        //  GLOBAL EXPOSURE
+        // ============================================================
+        window.showRegister = showRegister;
+        window.showLogin = showLogin;
+        window.handleRegister = handleRegister;
+        window.handleLogin = handleLogin;
+        window.handleLogout = handleLogout;
+        window.navigateTo = navigateTo;
+        window.goBack = goBack;
+        window.sendComplaint = sendComplaint;
+        window.sendQuestion = sendQuestion;
+        window.showAdminPanel = showAdminPanel;
+        window.closeAdminPanel = closeAdminPanel;
+        window.switchAdminTab = switchAdminTab;
+        window.refreshUsers = refreshUsers;
+        window.userAction = userAction;
+        window.viewAdminChat = viewAdminChat;
+        window.adminReply = adminReply;
+        window.makeAssistant = makeAssistant;
+        window.removeAssistant = removeAssistant;
+        window.addEvidence = addEvidence;
+        window.applyPunishment = applyPunishment;
+        window.assignAssistant = assignAssistant;
+        window.closeModal = closeModal;
+        window.executePunish = executePunish;
+        window.autoBanUser = autoBanUser;
+        window.showAdminId = showAdminId;
+        window.renderChat = renderChat;
+        window.addNews = addNews;
+        window.deleteNews = deleteNews;
+        window.renderNews = renderNews;
+        window.renderAdminNews = renderAdminNews;
+    </script>
+
+</body>
+</html>
