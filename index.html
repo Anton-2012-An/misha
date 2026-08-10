@@ -31,10 +31,10 @@
             inset: 0;
             z-index: 0;
             background: 
-                repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(180, 180, 190, 0.15) 40px, rgba(180, 180, 190, 0.15) 41px),
-                repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(180, 180, 190, 0.15) 40px, rgba(180, 180, 190, 0.15) 41px),
-                repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(180, 180, 190, 0.08) 60px, rgba(180, 180, 190, 0.08) 61px),
-                repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(180, 180, 190, 0.08) 60px, rgba(180, 180, 190, 0.08) 61px);
+                repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(80, 80, 100, 0.12) 40px, rgba(80, 80, 100, 0.12) 41px),
+                repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(80, 80, 100, 0.12) 40px, rgba(80, 80, 100, 0.12) 41px),
+                repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(80, 80, 100, 0.06) 60px, rgba(80, 80, 100, 0.06) 61px),
+                repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(80, 80, 100, 0.06) 60px, rgba(80, 80, 100, 0.06) 61px);
             background-size: 100% 100%;
             pointer-events: none;
         }
@@ -42,7 +42,7 @@
         .app {
             max-width: 1400px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(20px);
             border-radius: 40px;
             padding: 40px 48px;
@@ -53,7 +53,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Дополнительный слой пунктира внутри */
         .dotted-overlay {
             position: absolute;
             inset: 0;
@@ -61,20 +60,14 @@
             z-index: 0;
             border-radius: 40px;
             background: 
-                repeating-linear-gradient(0deg, transparent, transparent 35px, rgba(200, 200, 210, 0.1) 35px, rgba(200, 200, 210, 0.1) 36px),
-                repeating-linear-gradient(90deg, transparent, transparent 35px, rgba(200, 200, 210, 0.1) 35px, rgba(200, 200, 210, 0.1) 36px);
+                repeating-linear-gradient(0deg, transparent, transparent 35px, rgba(150, 150, 170, 0.08) 35px, rgba(150, 150, 170, 0.08) 36px),
+                repeating-linear-gradient(90deg, transparent, transparent 35px, rgba(150, 150, 170, 0.08) 35px, rgba(150, 150, 170, 0.08) 36px);
             opacity: 0.5;
         }
 
         .content {
             position: relative;
             z-index: 2;
-        }
-
-        h1, h2, h3, h4 {
-            font-weight: 500;
-            letter-spacing: -0.02em;
-            color: #1a1a1e;
         }
 
         .premium-title {
@@ -106,7 +99,7 @@
 
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 16px;
             margin: 30px 0;
         }
@@ -115,7 +108,7 @@
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(8px);
             border-radius: 24px;
-            padding: 28px 16px 24px;
+            padding: 28px 12px 24px;
             text-align: center;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
             border: 1px solid rgba(200, 200, 210, 0.3);
@@ -124,7 +117,8 @@
             text-decoration: none;
             color: #1a1a1e;
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            user-select: none;
         }
         .big-btn:hover {
             transform: translateY(-6px);
@@ -132,13 +126,10 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02);
             background: rgba(255, 255, 255, 0.9);
         }
-        .big-btn img {
-            width: 44px;
-            height: 44px;
-            object-fit: contain;
-            margin-bottom: 12px;
-            opacity: 0.6;
-            filter: grayscale(0.2);
+        .big-btn .icon {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 10px;
         }
         .big-btn.active {
             border-color: #2c2c30;
@@ -179,6 +170,15 @@
         .btn-danger:hover {
             background: #c82333;
             border-color: #c82333;
+        }
+        .btn-warning {
+            background: #ffc107;
+            border-color: #ffc107;
+            color: #1a1a1e;
+        }
+        .btn-warning:hover {
+            background: #e0a800;
+            border-color: #e0a800;
         }
         .btn-success {
             background: #28a745;
@@ -240,6 +240,7 @@
             align-items: center;
             gap: 10px;
             backdrop-filter: blur(4px);
+            flex-wrap: wrap;
         }
         .msg-admin {
             background: rgba(26, 26, 30, 0.05);
@@ -302,7 +303,7 @@
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 16px;
             margin: 16px 0;
         }
@@ -313,6 +314,18 @@
             border-radius: 20px;
             padding: 16px 20px;
             border: 1px solid rgba(200, 200, 210, 0.15);
+        }
+
+        .stat-card h4 {
+            font-size: 0.85rem;
+            color: #6e6e73;
+            font-weight: 400;
+            margin-bottom: 4px;
+        }
+        .stat-card div {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1a1a1e;
         }
 
         footer {
@@ -345,14 +358,17 @@
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
+        .modal h3 {
+            margin-bottom: 16px;
+        }
 
         @media (max-width: 640px) {
             .app { padding: 20px; }
             .premium-title { font-size: 1.8rem; }
             .modal { padding: 24px; }
+            .card-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
         }
 
-        /* Стили для скролла */
         .chat-box::-webkit-scrollbar {
             width: 4px;
         }
@@ -362,6 +378,27 @@
         .chat-box::-webkit-scrollbar-thumb {
             background: #c0c0c8;
             border-radius: 10px;
+        }
+
+        .faq-item {
+            margin: 12px 0;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            border: 1px solid rgba(200, 200, 210, 0.1);
+            transition: 0.2s;
+        }
+        .faq-item:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+        .faq-item b {
+            display: block;
+            margin-bottom: 4px;
+            color: #1a1a1e;
+        }
+        .faq-item span {
+            color: #4a4a50;
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -409,22 +446,22 @@
             <!-- Навигационные кнопки -->
             <div class="card-grid">
                 <div class="big-btn" data-section="faq">
-                    <img src="https://cdn-icons-png.flaticon.com/512/545/545682.png" alt="faq"><br>FAQ
+                    <span class="icon">❓</span>FAQ
                 </div>
                 <div class="big-btn" data-section="complaint">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3891/3891136.png" alt="complaint"><br>Жалоба
+                    <span class="icon">📩</span>Жалоба
                 </div>
                 <div class="big-btn" data-section="question">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2983/2983770.png" alt="question"><br>Вопрос
+                    <span class="icon">❔</span>Вопрос
                 </div>
                 <div class="big-btn" data-section="about">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2917/2917995.png" alt="about"><br>О сайте
+                    <span class="icon">ℹ️</span>О сайте
                 </div>
                 <div class="big-btn" data-section="news">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055666.png" alt="news"><br>Новости
+                    <span class="icon">📰</span>Новости
                 </div>
                 <div class="big-btn" data-section="profile" id="profileBtn">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="profile"><br>Профиль
+                    <span class="icon">👤</span>Профиль
                 </div>
             </div>
 
@@ -433,25 +470,25 @@
                 <!-- FAQ -->
                 <div id="faqContent" class="section-content">
                     <h3 style="margin-bottom: 16px;">Часто задаваемые вопросы</h3>
-                    <div style="margin: 12px 0; padding: 16px 20px; background: rgba(255,255,255,0.4); border-radius: 20px; border: 1px solid rgba(200,200,210,0.1);">
-                        <b>Когда выйдет игра «Кальмар»?</b><br>
-                        <span style="color: #4a4a50;">Ответ: пока не планируется, так как принято решение приостановить ее разработку по решению подписчиков канала.</span>
+                    <div class="faq-item">
+                        <b>Когда выйдет игра «Кальмар»?</b>
+                        <span>Ответ: пока не планируется, так как принято решение приостановить ее разработку по решению подписчиков канала.</span>
                     </div>
-                    <div style="margin: 12px 0; padding: 16px 20px; background: rgba(255,255,255,0.4); border-radius: 20px; border: 1px solid rgba(200,200,210,0.1);">
-                        <b>Кто является администраторами канала?</b><br>
-                        <span style="color: #4a4a50;">Создатель канала — Миша, а админ не хочет раскрывать свою личность.</span>
+                    <div class="faq-item">
+                        <b>Кто является администраторами канала?</b>
+                        <span>Создатель канала — Миша, а админ не хочет раскрывать свою личность.</span>
                     </div>
-                    <div style="margin: 12px 0; padding: 16px 20px; background: rgba(255,255,255,0.4); border-radius: 20px; border: 1px solid rgba(200,200,210,0.1);">
-                        <b>Кто создаёт сайты?</b><br>
-                        <span style="color: #4a4a50;">Создатели сайта — админ канала и Миша, но основной разработчик — админ. Остальная информация в разделе «О сайте».</span>
+                    <div class="faq-item">
+                        <b>Кто создаёт сайты?</b>
+                        <span>Создатели сайта — админ канала и Миша, но основной разработчик — админ. Остальная информация в разделе «О сайте».</span>
                     </div>
-                    <div style="margin: 12px 0; padding: 16px 20px; background: rgba(255,255,255,0.4); border-radius: 20px; border: 1px solid rgba(200,200,210,0.1);">
-                        <b>Почему правила канала такие жёсткие?</b><br>
-                        <span style="color: #4a4a50;">Правила канала составлял админ, и если у вас есть вопросы по правилам, пишите в раздел с жалобами. А правила такие жёсткие потому, что за их нарушение предусмотрено весомое наказание.</span>
+                    <div class="faq-item">
+                        <b>Почему правила канала такие жёсткие?</b>
+                        <span>Правила канала составлял админ, и если у вас есть вопросы по правилам, пишите в раздел с жалобами. А правила такие жёсткие потому, что за их нарушение предусмотрено весомое наказание.</span>
                     </div>
-                    <div style="margin: 12px 0; padding: 16px 20px; background: rgba(255,255,255,0.4); border-radius: 20px; border: 1px solid rgba(200,200,210,0.1);">
-                        <b>Когда админ снимется в видео?</b><br>
-                        <span style="color: #4a4a50;">Админ уже не раз снимался на канале и не хочет показывать лицо, чтобы сохранить конфиденциальность.</span>
+                    <div class="faq-item">
+                        <b>Когда админ снимется в видео?</b>
+                        <span>Админ уже не раз снимался на канале и не хочет показывать лицо, чтобы сохранить конфиденциальность.</span>
                     </div>
                 </div>
 
@@ -507,6 +544,8 @@
                         <p><strong>Ник:</strong> <span id="profileNick">—</span></p>
                         <p><strong>Telegram:</strong> <span id="profileTg">—</span></p>
                         <p><strong>Роль:</strong> <span id="profileRole">Пользователь</span></p>
+                        <p><strong>Предупреждений:</strong> <span id="profileWarns">0</span></p>
+                        <p><strong>Статус:</strong> <span id="profileStatus">Активен</span></p>
                     </div>
                 </div>
             </div>
@@ -517,7 +556,7 @@
                 
                 <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
                     <button class="btn btn-danger" id="adminBanBtn">🔨 Бан</button>
-                    <button class="btn btn-warning" id="adminWarnBtn" style="background: #ffc107; border-color: #ffc107;">⚠️ Варн</button>
+                    <button class="btn btn-warning" id="adminWarnBtn">⚠️ Варн</button>
                     <button class="btn btn-success" id="adminUnbanBtn">✅ Снять наказание</button>
                     <button class="btn" id="adminAssignHelperBtn">👥 Назначить помощника</button>
                     <button class="btn" id="adminClearChatBtn">🗑️ Очистить чаты</button>
@@ -601,7 +640,6 @@
     const ADMIN_ID = '11111';
 
     let modalCallback = null;
-    let modalType = '';
 
     // ===== DOM =====
     const authSection = document.getElementById('authSection');
@@ -694,7 +732,6 @@
         }
         complaintChat.innerHTML = complaints.map(c => {
             const isAdminMsg = c.fromAdmin || c.fromHelper;
-            const sender = c.fromAdmin ? 'Админ' : (c.fromHelper ? 'Помощник' : 'Пользователь');
             const user = getUserById(c.userId);
             const name = user ? user.nick || user.fio : 'Неизвестный';
             return `<div class="msg ${isAdminMsg ? 'msg-admin' : 'msg-user'}">
@@ -713,7 +750,6 @@
         }
         questionChat.innerHTML = questions.map(q => {
             const isAdminMsg = q.fromAdmin || q.fromHelper;
-            const sender = q.fromAdmin ? 'Админ' : (q.fromHelper ? 'Помощник' : 'Пользователь');
             const user = getUserById(q.userId);
             const name = user ? user.nick || user.fio : 'Неизвестный';
             return `<div class="msg ${isAdminMsg ? 'msg-admin' : 'msg-user'}">
@@ -745,7 +781,7 @@
             `<div class="user-card">
                 <span>ID: ${p.userId}</span>
                 <span style="font-size:0.8rem;color:#888;">${p.date || ''}</span>
-                <span class="badge">📎 загружено</span>
+                <span class="badge">📎 ${p.fileName || 'фото'}</span>
             </div>`
         ).join('');
     }
@@ -787,6 +823,9 @@
         document.getElementById('profileTg').textContent = currentUser.tg || '—';
         const role = isAdmin() ? 'Администратор' : (isHelper() ? 'Помощник' : 'Пользователь');
         document.getElementById('profileRole').textContent = role;
+        document.getElementById('profileWarns').textContent = getUserWarns(currentUser.id).length;
+        document.getElementById('profileStatus').textContent = isUserBanned(currentUser.id) ? '🔒 Забанен' : '✅ Активен';
+        document.getElementById('profileStatus').style.color = isUserBanned(currentUser.id) ? '#dc3545' : '#28a745';
     }
 
     function updateUI() {
@@ -802,7 +841,6 @@
         userDisplay.textContent = `${displayName} (ID: ${currentUser.id || '—'})`;
         
         const isAdminUser = isAdmin();
-        const isHelperUser = isHelper();
         
         if (isAdminUser) {
             adminPanel.classList.remove('hidden');
@@ -821,7 +859,6 @@
     }
 
     // ===== ОБРАБОТЧИКИ =====
-    // Авторизация
     function login(fio, pass) {
         const user = users.find(u => u.fio === fio && u.password === pass);
         if (user) {
@@ -936,7 +973,7 @@
             fromAdmin: isAdmin(), 
             fromHelper: isHelper(), 
             userId: currentUser.id,
-            date: new Date().toISOString()
+            date: new Date().toLocaleString()
         });
         saveAll();
         renderComplaints();
@@ -956,7 +993,7 @@
             fromAdmin: isAdmin(), 
             fromHelper: isHelper(), 
             userId: currentUser.id,
-            date: new Date().toISOString()
+            date: new Date().toLocaleString()
         });
         saveAll();
         renderQuestions();
@@ -977,7 +1014,6 @@
     // ===== АДМИН-ФУНКЦИИ =====
     window.adminAction = function(type, userId) {
         if (!isAdmin()) return;
-        modalType = type;
         modalTitle.textContent = type === 'warn' ? '⚠️ Выдача предупреждения' : '🔨 Бан пользователя';
         modalUserId.value = userId || '';
         modalDuration.value = '';
@@ -999,14 +1035,13 @@
                 return;
             }
             if (type === 'warn') {
-                warns.push({ userId: targetId, reason, duration, unit, date: new Date().toISOString() });
-                // Проверка на 3 предупреждения
+                warns.push({ userId: targetId, reason, duration, unit, date: new Date().toLocaleString() });
                 const userWarns = getUserWarns(targetId);
                 if (userWarns.length >= 3) {
                     alert(`⚠️ У пользователя ${targetUser.fio} накопилось 3 предупреждения! Рекомендуется бан.`);
                 }
             } else if (type === 'ban') {
-                bans.push({ userId: targetId, reason, duration, unit, date: new Date().toISOString() });
+                bans.push({ userId: targetId, reason, duration, unit, date: new Date().toLocaleString() });
             }
             saveAll();
             renderUserList();
@@ -1017,7 +1052,6 @@
 
     adminBanBtn.addEventListener('click', () => {
         if (!isAdmin()) return;
-        modalType = 'ban';
         modalTitle.textContent = '🔨 Бан пользователя';
         modalUserId.value = '';
         modalDuration.value = '';
@@ -1037,7 +1071,7 @@
                 alert('Пользователь не найден');
                 return;
             }
-            bans.push({ userId: targetId, reason, duration, unit, date: new Date().toISOString() });
+            bans.push({ userId: targetId, reason, duration, unit, date: new Date().toLocaleString() });
             saveAll();
             renderUserList();
             punishModal.classList.add('hidden');
@@ -1047,7 +1081,6 @@
 
     adminWarnBtn.addEventListener('click', () => {
         if (!isAdmin()) return;
-        modalType = 'warn';
         modalTitle.textContent = '⚠️ Выдача предупреждения';
         modalUserId.value = '';
         modalDuration.value = '';
@@ -1067,7 +1100,7 @@
                 alert('Пользователь не найден');
                 return;
             }
-            warns.push({ userId: targetId, reason, duration, unit, date: new Date().toISOString() });
+            warns.push({ userId: targetId, reason, duration, unit, date: new Date().toLocaleString() });
             const userWarns = getUserWarns(targetId);
             if (userWarns.length >= 3) {
                 alert(`⚠️ У пользователя ${targetUser.fio} накопилось 3 предупреждения! Рекомендуется бан.`);
@@ -1131,7 +1164,7 @@
         alert(`✅ ${targetUser.fio} назначен помощником`);
     });
 
-    // Очистка чатов (только админ)
+    // Очистка чатов
     adminClearChatBtn.addEventListener('click', () => {
         if (!isAdmin()) return;
         if (confirm('Очистить все чаты (жалобы и вопросы)?')) {
@@ -1162,7 +1195,7 @@
             proofs.push({ 
                 userId, 
                 data: e.target.result, 
-                date: new Date().toISOString(),
+                date: new Date().toLocaleString(),
                 fileName: file.name
             });
             saveAll();
@@ -1175,7 +1208,6 @@
     });
 
     // ===== ИНИЦИАЛИЗАЦИЯ =====
-    // Добавляем тестовых пользователей, если их нет
     if (!localStorage.getItem('misha_users') || users.length === 0) {
         users = [
             { fio: 'Иван Иванов', email: 'ivan@mail.ru', nick: 'ivan', tg: '@ivan', password: '123', id: 'abc001' },
@@ -1184,7 +1216,6 @@
         saveAll();
     }
 
-    // Добавляем админа, если его нет
     if (!users.find(u => u.id === ADMIN_ID)) {
         users.push({ 
             fio: ADMIN_FIO, 
@@ -1199,7 +1230,6 @@
 
     updateUI();
 
-    // Автовход для демонстрации (можно убрать)
     console.log('👋 Misha.Support загружен');
     console.log('🔑 Админ: ' + ADMIN_FIO + ' / пароль: ' + ADMIN_PASS);
     console.log('👤 Тестовый пользователь: Иван Иванов / пароль: 123');
