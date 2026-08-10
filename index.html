@@ -1,2212 +1,1209 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Misha. Поддержка</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misha.Support — Премиум поддержка</title>
     <style>
-        *,
-        *::before,
-        *::after {
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-
-        :root {
-            --bg-primary: #0c0c0e;
-            --bg-secondary: #16161a;
-            --bg-card: #1e1e24;
-            --bg-card-hover: #28282f;
-            --text-primary: #f0edea;
-            --text-secondary: #a8a4a0;
-            --text-muted: #6b6865;
-            --gold: #d4a84b;
-            --gold-dim: rgba(212, 168, 75, 0.15);
-            --border-subtle: rgba(255, 255, 255, 0.06);
-            --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.6);
-            --radius: 16px;
-            --radius-sm: 10px;
-            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.95);
-            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --dot-size: 3px;
-            --dot-gap: 32px;
-        }
-
-        html { font-size: 16px; scroll-behavior: smooth; }
 
         body {
-            font-family: var(--font);
-            background: var(--bg-primary);
-            color: var(--text-primary);
             min-height: 100vh;
+            background: #f5f3f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
             position: relative;
-            overflow-x: hidden;
         }
 
-        .dot-bg {
+        /* Фон с пунктирными линиями */
+        body::before {
+            content: '';
             position: fixed;
+            inset: 0;
+            z-index: 0;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(180, 180, 190, 0.15) 40px, rgba(180, 180, 190, 0.15) 41px),
+                repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(180, 180, 190, 0.15) 40px, rgba(180, 180, 190, 0.15) 41px),
+                repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(180, 180, 190, 0.08) 60px, rgba(180, 180, 190, 0.08) 61px),
+                repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(180, 180, 190, 0.08) 60px, rgba(180, 180, 190, 0.08) 61px);
+            background-size: 100% 100%;
+            pointer-events: none;
+        }
+
+        .app {
+            max-width: 1400px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 40px;
+            padding: 40px 48px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        /* Дополнительный слой пунктира внутри */
+        .dotted-overlay {
+            position: absolute;
             inset: 0;
             pointer-events: none;
             z-index: 0;
-            background-image: radial-gradient(circle, rgba(212, 168, 75, 0.12) 3px, transparent 3px);
-            background-size: 32px 32px;
+            border-radius: 40px;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 35px, rgba(200, 200, 210, 0.1) 35px, rgba(200, 200, 210, 0.1) 36px),
+                repeating-linear-gradient(90deg, transparent, transparent 35px, rgba(200, 200, 210, 0.1) 35px, rgba(200, 200, 210, 0.1) 36px);
+            opacity: 0.5;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #1a1a1e;
+        }
+
+        .premium-title {
+            font-size: 2.6rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #1a1a1e 0%, #4a4a50 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        .subhead {
+            color: #6e6e73;
+            font-size: 0.95rem;
+            border-left: 3px solid #d0d0d5;
+            padding-left: 16px;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 30px 0;
+        }
+
+        .big-btn {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            padding: 28px 16px 24px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(200, 200, 210, 0.3);
+            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            text-decoration: none;
+            color: #1a1a1e;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .big-btn:hover {
+            transform: translateY(-6px);
+            border-color: rgba(100, 100, 120, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .big-btn img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+            margin-bottom: 12px;
             opacity: 0.6;
-            animation: driftDots 120s linear infinite alternate;
+            filter: grayscale(0.2);
         }
-
-        @keyframes driftDots {
-            0% { background-position: 0 0; }
-            100% { background-position: 80px 80px; }
+        .big-btn.active {
+            border-color: #2c2c30;
+            background: rgba(255, 255, 255, 0.95);
         }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
-        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
-        .hidden { display: none !important; }
-        .text-gold { color: var(--gold); }
-        .text-muted { color: var(--text-muted); }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px 28px;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-family: var(--font);
-            font-weight: 600;
-            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #d9d9df;
+            padding: 10px 24px;
+            border-radius: 60px;
+            font-weight: 450;
+            color: #1a1a1e;
+            transition: 0.2s;
             cursor: pointer;
-            transition: var(--transition);
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 1px solid var(--border-subtle);
-        }
-
-        .btn:hover {
-            background: var(--bg-card-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .btn-gold {
-            background: var(--gold);
-            color: #0c0c0e;
-            border-color: var(--gold);
-        }
-
-        .btn-gold:hover {
-            background: #e0b85a;
-            border-color: #e0b85a;
-            color: #0c0c0e;
-        }
-
-        .btn-outline-gold {
-            background: transparent;
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-
-        .btn-outline-gold:hover {
-            background: var(--gold-dim);
-            border-color: var(--gold);
-        }
-
-        .btn-danger {
-            background: #b33a3a;
-            border-color: #b33a3a;
-            color: #fff;
-        }
-
-        .btn-danger:hover {
-            background: #d14444;
-            border-color: #d14444;
-        }
-
-        .btn-sm { padding: 8px 18px; font-size: 0.85rem; }
-        .btn-xs { padding: 4px 12px; font-size: 0.75rem; }
-        .btn-block { width: 100%; justify-content: center; }
-
-        .card {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 28px 32px;
-            border: 1px solid var(--border-subtle);
+            font-size: 0.9rem;
             backdrop-filter: blur(4px);
-            transition: var(--transition);
-            box-shadow: var(--shadow-card);
+        }
+        .btn:hover {
+            background: white;
+            border-color: #b0b0b8;
+            transform: scale(1.02);
+        }
+        .btn-primary {
+            background: #1a1a1e;
+            border-color: #1a1a1e;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #3a3a3e;
+            border-color: #3a3a3e;
+        }
+        .btn-danger {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #c82333;
+            border-color: #c82333;
+        }
+        .btn-success {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #218838;
+            border-color: #218838;
         }
 
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
+        .input-field {
             width: 100%;
-        }
-
-        .input-group label {
-            font-weight: 500;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            letter-spacing: 0.02em;
-        }
-
-        .input-group input,
-        .input-group textarea,
-        .input-group select {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-sm);
-            padding: 12px 16px;
-            font-family: var(--font);
+            padding: 14px 20px;
+            border-radius: 60px;
+            border: 1px solid #e2e2e8;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(4px);
             font-size: 0.95rem;
-            color: var(--text-primary);
-            transition: var(--transition);
+            transition: 0.2s;
+            margin: 6px 0;
+            color: #1a1a1e;
+        }
+        .input-field:focus {
             outline: none;
-            width: 100%;
+            border-color: #8b8b96;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.03);
+            background: white;
+        }
+        .input-field::placeholder {
+            color: #9a9aa0;
         }
 
-        .input-group input:focus,
-        .input-group textarea:focus,
-        .input-group select:focus {
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px var(--gold-dim);
+        textarea.input-field {
+            border-radius: 24px;
+            resize: vertical;
+            min-height: 60px;
         }
 
-        .input-group textarea { resize: vertical; min-height: 80px; }
+        .chat-box {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(6px);
+            border-radius: 24px;
+            padding: 20px;
+            border: 1px solid rgba(200, 200, 210, 0.2);
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 16px 0;
+        }
 
-        .checkbox-group {
+        .msg {
+            padding: 10px 18px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.7);
+            margin: 6px 0;
+            border: 1px solid rgba(200, 200, 210, 0.15);
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-top: 12px;
+            gap: 10px;
+            backdrop-filter: blur(4px);
+        }
+        .msg-admin {
+            background: rgba(26, 26, 30, 0.05);
+            border-color: rgba(26, 26, 30, 0.1);
+        }
+        .msg-user {
+            background: rgba(255, 255, 255, 0.8);
         }
 
-        .checkbox-group input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--gold);
-            cursor: pointer;
-        }
-
-        .checkbox-group label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        .auth-page {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-
-        .auth-card {
-            max-width: 480px;
-            width: 100%;
-            padding: 40px 36px;
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-card);
-        }
-
-        .auth-card .logo {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
-        .auth-card .logo h1 {
-            font-weight: 700;
-            font-size: 2rem;
-            letter-spacing: -0.02em;
-        }
-
-        .auth-card .logo h1 span { color: var(--gold); }
-        .auth-card .logo p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 4px;
-        }
-
-        .auth-card .toggle-auth {
-            text-align: center;
-            margin-top: 20px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .auth-card .toggle-auth a {
-            color: var(--gold);
-            cursor: pointer;
-            text-decoration: none;
+        .admin-tag {
+            background: #1a1a1e;
+            color: white;
+            border-radius: 30px;
+            padding: 0 14px;
             font-weight: 600;
-        }
-
-        .auth-card .toggle-auth a:hover { text-decoration: underline; }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .app-header {
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border-subtle);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: rgba(12, 12, 14, 0.85);
-            backdrop-filter: blur(12px);
-        }
-
-        .app-header .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .app-header .brand {
-            font-weight: 700;
-            font-size: 1.4rem;
-            letter-spacing: -0.02em;
-        }
-
-        .app-header .brand span { color: var(--gold); }
-
-        .app-header .user-info {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .app-header .user-info .badge {
-            background: var(--gold-dim);
-            color: var(--gold);
-            padding: 4px 12px;
-            border-radius: 20px;
             font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
+            display: inline-block;
+            height: 22px;
+            line-height: 22px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .admin-tag:hover {
+            transform: scale(1.05);
+            background: #3a3a3e;
         }
 
-        .main-grid {
+        .hidden {
+            display: none !important;
+        }
+
+        .section {
+            margin-top: 32px;
+            border-top: 1px solid rgba(200, 200, 210, 0.2);
+            padding-top: 28px;
+        }
+
+        .badge {
+            background: rgba(200, 200, 210, 0.15);
+            border-radius: 40px;
+            padding: 4px 16px;
+            font-size: 0.8rem;
+            color: #4a4a50;
+            backdrop-filter: blur(4px);
+        }
+
+        .user-card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(4px);
+            border-radius: 16px;
+            padding: 12px 18px;
+            border: 1px solid rgba(200, 200, 210, 0.15);
+            margin: 6px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 24px;
-            padding: 40px 0 60px;
-        }
-
-        .main-grid .section-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius);
-            padding: 32px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             gap: 16px;
-            text-decoration: none;
-            color: var(--text-primary);
+            margin: 16px 0;
         }
 
-        .main-grid .section-btn:hover {
-            transform: translateY(-6px);
-            border-color: var(--gold);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-            background: var(--bg-card-hover);
-        }
-
-        .main-grid .section-btn .icon-wrapper {
-            width: 64px;
-            height: 64px;
-            background: var(--bg-secondary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--border-subtle);
-            transition: var(--transition);
-            font-size: 28px;
-        }
-
-        .main-grid .section-btn:hover .icon-wrapper {
-            border-color: var(--gold);
-            transform: scale(1.05);
-        }
-
-        .main-grid .section-btn h3 {
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .main-grid .section-btn p {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin: 0;
-        }
-
-        .section-page {
-            padding: 32px 0 60px;
-        }
-
-        .section-page .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: var(--transition);
-            margin-bottom: 24px;
-            background: none;
-            border: none;
-            font-family: var(--font);
-        }
-
-        .section-page .back-btn:hover { color: var(--gold); }
-
-        .section-page .page-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .section-page .page-title span { color: var(--gold); }
-        .section-page .page-sub {
-            color: var(--text-secondary);
-            margin-bottom: 28px;
-        }
-
-        .faq-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .faq-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-sm);
-            padding: 18px 22px;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .faq-item:hover { border-color: rgba(212, 168, 75, 0.2); }
-
-        .faq-item .faq-q {
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-item .faq-q .icon {
-            color: var(--gold);
-            transition: var(--transition);
-            font-size: 1.2rem;
-        }
-
-        .faq-item .faq-a {
-            color: var(--text-secondary);
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid var(--border-subtle);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            display: none;
-        }
-
-        .faq-item.open .faq-a { display: block; }
-        .faq-item.open .faq-q .icon { transform: rotate(180deg); }
-
-        .chat-container {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .chat-messages {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-sm);
-            padding: 16px 20px;
-            max-height: 380px;
-            overflow-y: auto;
-            min-height: 200px;
-            border: 1px solid var(--border-subtle);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .chat-messages .msg {
-            padding: 10px 14px;
-            border-radius: var(--radius-sm);
-            max-width: 85%;
-            word-break: break-word;
-            line-height: 1.5;
-            font-size: 0.92rem;
-            animation: fadeIn 0.2s ease;
-        }
-
-        .chat-messages .msg.user {
-            background: var(--bg-card);
-            align-self: flex-end;
-            border: 1px solid var(--border-subtle);
-        }
-
-        .chat-messages .msg.admin {
-            background: var(--gold-dim);
-            border: 1px solid rgba(212, 168, 75, 0.2);
-            align-self: flex-start;
-            color: var(--text-primary);
-        }
-
-        .chat-messages .msg .meta {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .chat-messages .msg .meta .admin-badge {
-            display: inline-block;
-            background: var(--gold);
-            color: #0c0c0e;
-            font-weight: 700;
-            font-size: 0.6rem;
-            padding: 1px 8px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .chat-messages .msg .meta .admin-id {
-            display: none;
-            font-size: 0.6rem;
-            color: var(--text-muted);
-        }
-
-        .chat-messages .msg .meta .admin-id.show { display: inline; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .chat-input-row {
-            display: flex;
-            gap: 12px;
-            align-items: flex-end;
-        }
-
-        .chat-input-row .input-group { flex: 1; }
-        .chat-input-row .input-group textarea {
-            min-height: 52px;
-            max-height: 120px;
-        }
-
-        .about-content {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 32px 36px;
-            border: 1px solid var(--border-subtle);
-            line-height: 1.8;
-            font-size: 0.98rem;
-            color: var(--text-secondary);
-        }
-
-        .about-content strong { color: var(--text-primary); }
-        .about-content .rules-list {
-            margin-top: 16px;
-            padding-left: 20px;
-        }
-
-        .about-content .rules-list li { margin-bottom: 8px; }
-
-        .admin-panel {
-            padding: 24px 0 60px;
-        }
-
-        .admin-panel .admin-tabs {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 24px;
-            border-bottom: 1px solid var(--border-subtle);
-            padding-bottom: 16px;
-        }
-
-        .admin-panel .admin-tabs .tab {
-            padding: 8px 20px;
+        .stat-card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(4px);
             border-radius: 20px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.85rem;
-            transition: var(--transition);
-            background: transparent;
-            border: 1px solid transparent;
-            color: var(--text-secondary);
+            padding: 16px 20px;
+            border: 1px solid rgba(200, 200, 210, 0.15);
         }
 
-        .admin-panel .admin-tabs .tab:hover {
-            color: var(--text-primary);
-            background: var(--bg-card);
-        }
-
-        .admin-panel .admin-tabs .tab.active {
-            background: var(--gold);
-            color: #0c0c0e;
-            border-color: var(--gold);
-        }
-
-        .admin-panel .admin-content {
-            display: none;
-        }
-
-        .admin-panel .admin-content.active { display: block; }
-
-        .user-list-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 16px;
-            background: var(--bg-secondary);
-            border-radius: var(--radius-sm);
-            margin-bottom: 8px;
-            border: 1px solid var(--border-subtle);
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .user-list-item .user-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .user-list-item .user-info .id-badge {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            background: var(--bg-card);
-            padding: 2px 10px;
-            border-radius: 10px;
-        }
-
-        .user-list-item .user-actions {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .user-list-item .warn-badge {
-            font-size: 0.7rem;
-            padding: 2px 10px;
-            border-radius: 10px;
-            background: rgba(212, 168, 75, 0.15);
-            color: var(--gold);
-        }
-
-        .user-list-item .banned-badge {
-            font-size: 0.7rem;
-            padding: 2px 10px;
-            border-radius: 10px;
-            background: rgba(179, 58, 58, 0.2);
-            color: #d14444;
+        footer {
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #86868b;
+            text-align: center;
+            border-top: 1px solid rgba(200, 200, 210, 0.2);
+            padding-top: 24px;
         }
 
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(6px);
-            z-index: 999;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             padding: 20px;
-            animation: fadeIn 0.2s ease;
         }
-
-        .modal-overlay .modal {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 32px 36px;
+        .modal {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 32px;
+            padding: 32px 40px;
             max-width: 500px;
             width: 100%;
-            border: 1px solid var(--border-subtle);
-            max-height: 90vh;
-            overflow-y: auto;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .modal-overlay .modal h3 {
-            margin-bottom: 16px;
-            font-size: 1.2rem;
+        @media (max-width: 640px) {
+            .app { padding: 20px; }
+            .premium-title { font-size: 1.8rem; }
+            .modal { padding: 24px; }
         }
 
-        .modal-overlay .modal .close-modal {
-            float: right;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: var(--transition);
+        /* Стили для скролла */
+        .chat-box::-webkit-scrollbar {
+            width: 4px;
         }
-
-        .modal-overlay .modal .close-modal:hover { color: var(--text-primary); }
-
-        .news-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+        .chat-box::-webkit-scrollbar-track {
+            background: transparent;
         }
-
-        .news-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-sm);
-            padding: 20px 24px;
-            transition: var(--transition);
-            border-left: 3px solid var(--gold);
-        }
-
-        .news-item:hover { border-color: rgba(212, 168, 75, 0.3); }
-
-        .news-item .news-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 6px;
-        }
-
-        .news-item .news-meta {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: 10px;
-        }
-
-        .news-item .news-content {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        .news-item .news-actions {
-            margin-top: 12px;
-            display: flex;
-            gap: 8px;
-        }
-
-        @media (max-width: 768px) {
-            .auth-card { padding: 28px 20px; }
-            .form-row { grid-template-columns: 1fr; }
-            .app-header .brand { font-size: 1.1rem; }
-            .app-header .user-info { font-size: 0.8rem; gap: 8px; }
-            .main-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
-                padding: 24px 0 40px;
-            }
-            .main-grid .section-btn { padding: 20px 12px; }
-            .main-grid .section-btn .icon-wrapper {
-                width: 48px;
-                height: 48px;
-                font-size: 22px;
-            }
-            .card { padding: 20px 16px; }
-            .section-page .page-title { font-size: 1.4rem; }
-            .about-content { padding: 20px 16px; }
-            .admin-panel .admin-tabs .tab {
-                font-size: 0.75rem;
-                padding: 6px 14px;
-            }
-            .user-list-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .user-list-item .user-actions {
-                width: 100%;
-                justify-content: flex-start;
-            }
-            .chat-input-row {
-                flex-direction: column;
-            }
-            .chat-input-row .btn { width: 100%; }
-            .modal-overlay .modal { padding: 24px 16px; }
-        }
-
-        @media (max-width: 480px) {
-            .main-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-            }
-            .main-grid .section-btn h3 { font-size: 0.9rem; }
-            .main-grid .section-btn p { font-size: 0.75rem; }
-            .app-header .container {
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-            .app-header .user-info {
-                width: 100%;
-                justify-content: flex-start;
-            }
+        .chat-box::-webkit-scrollbar-thumb {
+            background: #c0c0c8;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
+<div class="app" id="app">
+    <div class="dotted-overlay"></div>
+    <div class="content">
 
-    <div class="dot-bg"></div>
-
-    <div id="app">
-
-        <div id="authPage" class="auth-page">
-            <div class="auth-card">
-                <div class="logo">
-                    <h1>Misha.<span>Поддержка</span></h1>
-                    <p>Премиум-сервис для ваших вопросов</p>
-                </div>
-
-                <div id="loginForm">
-                    <div class="input-group">
-                        <label>ФИО</label>
-                        <input type="text" id="loginFullName" placeholder="Иванов Иван Иванович" />
-                    </div>
-                    <div class="input-group" style="margin-top:12px;">
-                        <label>Пароль</label>
-                        <input type="password" id="loginPassword" placeholder="••••••••" />
-                    </div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="rememberMe" />
-                        <label for="rememberMe">Запомнить меня</label>
-                    </div>
-                    <button class="btn btn-gold btn-block" style="margin-top:16px;" onclick="handleLogin()">Войти</button>
-                    <div class="toggle-auth">
-                        Нет аккаунта? <a onclick="showRegister()">Зарегистрироваться</a>
-                    </div>
-                </div>
-
-                <div id="registerForm" class="hidden">
-                    <div class="form-row">
-                        <div class="input-group">
-                            <label>ФИО</label>
-                            <input type="text" id="regFullName" placeholder="Иванов Иван Иванович" />
-                        </div>
-                        <div class="input-group">
-                            <label>Email</label>
-                            <input type="email" id="regEmail" placeholder="mail@example.com" />
-                        </div>
-                    </div>
-                    <div class="form-row" style="margin-top:8px;">
-                        <div class="input-group">
-                            <label>Ник</label>
-                            <input type="text" id="regNick" placeholder="Ваш ник" />
-                        </div>
-                        <div class="input-group">
-                            <label>Telegram (юз)</label>
-                            <input type="text" id="regTelegram" placeholder="@username" />
-                        </div>
-                    </div>
-                    <div class="input-group" style="margin-top:8px;">
-                        <label>Пароль</label>
-                        <input type="password" id="regPassword" placeholder="••••••••" />
-                    </div>
-                    <button class="btn btn-gold btn-block" style="margin-top:16px;" onclick="handleRegister()">Создать аккаунт</button>
-                    <div class="toggle-auth">
-                        Уже есть аккаунт? <a onclick="showLogin()">Войти</a>
-                    </div>
-                </div>
+        <!-- Регистрация / Вход -->
+        <div id="authSection">
+            <div class="flex-row">
+                <span class="premium-title">✦ Misha.Support</span>
+                <span class="badge">премиум</span>
             </div>
+            <div class="subhead">Система поддержки с высоким уровнем сервиса</div>
+            
+            <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;">
+                <input class="input-field" style="flex:1; min-width:180px;" id="loginFio" placeholder="ФИО">
+                <input class="input-field" style="flex:1; min-width:140px;" id="loginPass" type="password" placeholder="Пароль">
+                <button class="btn btn-primary" id="loginBtn">Войти</button>
+                <button class="btn" id="showRegisterBtn">Регистрация</button>
+            </div>
+            
+            <div id="registerForm" class="hidden" style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 10px;">
+                <input class="input-field" style="flex:1; min-width:140px;" id="regFio" placeholder="ФИО">
+                <input class="input-field" style="flex:1; min-width:140px;" id="regEmail" placeholder="Email">
+                <input class="input-field" style="flex:1; min-width:120px;" id="regNick" placeholder="Ник">
+                <input class="input-field" style="flex:1; min-width:120px;" id="regTg" placeholder="ЮЗ телеграма">
+                <input class="input-field" style="flex:1; min-width:140px;" id="regPass" type="password" placeholder="Пароль">
+                <button class="btn btn-primary" id="registerBtn">Зарегистрироваться</button>
+            </div>
+            <div id="authStatus" style="margin: 10px 0; color:#6e6e73; font-size:0.9rem;"></div>
         </div>
 
+        <!-- Основной интерфейс -->
         <div id="mainApp" class="hidden">
+            <div class="flex-row">
+                <span class="premium-title">✦ Misha.Support</span>
+                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <span id="userDisplay" style="font-weight:450; background:rgba(240,240,243,0.6); padding:6px 20px; border-radius:40px; backdrop-filter:blur(4px);"></span>
+                    <button class="btn" id="logoutBtn">Выйти</button>
+                </div>
+            </div>
 
-            <header class="app-header">
-                <div class="container">
-                    <div class="brand">Misha.<span>Поддержка</span></div>
-                    <div class="user-info">
-                        <span id="headerUserName">Пользователь</span>
-                        <span class="badge" id="headerUserBadge">Пользователь</span>
-                        <button class="btn btn-sm btn-outline-gold" onclick="handleLogout()">Выйти</button>
-                        <button class="btn btn-sm btn-gold hidden" id="adminPanelBtn" onclick="showAdminPanel()">Админка</button>
+            <!-- Навигационные кнопки -->
+            <div class="card-grid">
+                <div class="big-btn" data-section="faq">
+                    <img src="https://cdn-icons-png.flaticon.com/512/545/545682.png" alt="faq"><br>FAQ
+                </div>
+                <div class="big-btn" data-section="complaint">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3891/3891136.png" alt="complaint"><br>Жалоба
+                </div>
+                <div class="big-btn" data-section="question">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2983/2983770.png" alt="question"><br>Вопрос
+                </div>
+                <div class="big-btn" data-section="about">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2917/2917995.png" alt="about"><br>О сайте
+                </div>
+                <div class="big-btn" data-section="news">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055666.png" alt="news"><br>Новости
+                </div>
+                <div class="big-btn" data-section="profile" id="profileBtn">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="profile"><br>Профиль
+                </div>
+            </div>
+
+            <!-- Контент разделов -->
+            <div id="sectionContent" class="section">
+                <!-- FAQ -->
+                <div id="faqContent" class="section-content">
+                    <h3 style="margin-bottom: 16px;">Часто задаваемые вопросы</h3>
+                    <div style="margin: 12px 0; padding: 16px 20px; background: rgba(255,255,255,0.4); border-radius: 20px; border: 1px solid rgba(200,200,210,0.1);">
+                        <b>Когда выйдет игра «Кальмар»?</b><br>
+                        <span style="color: #4a4a50;">Ответ: пока не планируется, так как принято решение приостановить ее разработку по решению подписчиков канала.</span>
                     </div>
-                </div>
-            </header>
-
-            <div id="mainContent" class="container">
-
-                <div id="mainGrid">
-                    <div class="main-grid">
-                        <div class="section-btn" onclick="navigateTo('news')">
-                            <div class="icon-wrapper">📰</div>
-                            <h3>Новости</h3>
-                            <p>Последние обновления</p>
-                        </div>
-                        <div class="section-btn" onclick="navigateTo('faq')">
-                            <div class="icon-wrapper">❓</div>
-                            <h3>Часто задаваемые вопросы</h3>
-                            <p>Ответы на популярные вопросы</p>
-                        </div>
-                        <div class="section-btn" onclick="navigateTo('complaint')">
-                            <div class="icon-wrapper">📝</div>
-                            <h3>Жалоба</h3>
-                            <p>Оставить жалобу админу</p>
-                        </div>
-                        <div class="section-btn" onclick="navigateTo('question')">
-                            <div class="icon-wrapper">💬</div>
-                            <h3>Вопрос</h3>
-                            <p>Задать вопрос поддержке</p>
-                        </div>
-                        <div class="section-btn" onclick="navigateTo('about')">
-                            <div class="icon-wrapper">ℹ️</div>
-                            <h3>О сайте</h3>
-                            <p>Информация о проекте</p>
-                        </div>
+                    <div style="margin: 12px 0; padding: 16px 20px; background: rgba(255,255,255,0.4); border-radius: 20px; border: 1px solid rgba(200,200,210,0.1);">
+                        <b>Кто является администраторами канала?</b><br>
+                        <span style="color: #4a4a50;">Создатель канала — Миша, а админ не хочет раскрывать свою личность.</span>
                     </div>
-                </div>
-
-                <div id="sectionNews" class="section-page hidden">
-                    <button class="back-btn" onclick="goBack()">← Назад</button>
-                    <h2 class="page-title"><span>Новости</span></h2>
-                    <p class="page-sub">Последние обновления и анонсы</p>
-                    <div id="newsContainer" class="news-list"></div>
-                </div>
-
-                <div id="sectionFaq" class="section-page hidden">
-                    <button class="back-btn" onclick="goBack()">← Назад</button>
-                    <h2 class="page-title">Часто <span>задаваемые</span> вопросы</h2>
-                    <p class="page-sub">Ответы на самые популярные вопросы</p>
-                    <div class="faq-list">
-                        <div class="faq-item" onclick="this.classList.toggle('open')">
-                            <div class="faq-q">Когда будет игра в кальмара? <span class="icon">▼</span></div>
-                            <div class="faq-a">Пока не планируется, так как принято решение приостановить её разработку по решению подписчиков канала.</div>
-                        </div>
-                        <div class="faq-item" onclick="this.classList.toggle('open')">
-                            <div class="faq-q">Кто являются админами канала? <span class="icon">▼</span></div>
-                            <div class="faq-a">Создатель канала — Миша, а админ не хочет раскрывать свою личность.</div>
-                        </div>
-                        <div class="faq-item" onclick="this.classList.toggle('open')">
-                            <div class="faq-q">Кто создаёт сайты? <span class="icon">▼</span></div>
-                            <div class="faq-a">Создатели сайта — админ канала и Миша, но основной разработчик — админ. Остальная информация в разделе "О сайте".</div>
-                        </div>
-                        <div class="faq-item" onclick="this.classList.toggle('open')">
-                            <div class="faq-q">Почему правила канала жёсткие? <span class="icon">▼</span></div>
-                            <div class="faq-a">Правила канала составлял админ и если есть вопросы по правилам, то пишите в раздел с жалобами. А правила такие жёсткие потому, что если их будут нарушать, то хоть было весомое наказание.</div>
-                        </div>
-                        <div class="faq-item" onclick="this.classList.toggle('open')">
-                            <div class="faq-q">Когда админ снимется в видео? <span class="icon">▼</span></div>
-                            <div class="faq-a">Админ снимался на канале не один раз и не хочет показывать лицо, так как хочет сохранить конфиденциальность.</div>
-                        </div>
+                    <div style="margin: 12px 0; padding: 16px 20px; background: rgba(255,255,255,0.4); border-radius: 20px; border: 1px solid rgba(200,200,210,0.1);">
+                        <b>Кто создаёт сайты?</b><br>
+                        <span style="color: #4a4a50;">Создатели сайта — админ канала и Миша, но основной разработчик — админ. Остальная информация в разделе «О сайте».</span>
+                    </div>
+                    <div style="margin: 12px 0; padding: 16px 20px; background: rgba(255,255,255,0.4); border-radius: 20px; border: 1px solid rgba(200,200,210,0.1);">
+                        <b>Почему правила канала такие жёсткие?</b><br>
+                        <span style="color: #4a4a50;">Правила канала составлял админ, и если у вас есть вопросы по правилам, пишите в раздел с жалобами. А правила такие жёсткие потому, что за их нарушение предусмотрено весомое наказание.</span>
+                    </div>
+                    <div style="margin: 12px 0; padding: 16px 20px; background: rgba(255,255,255,0.4); border-radius: 20px; border: 1px solid rgba(200,200,210,0.1);">
+                        <b>Когда админ снимется в видео?</b><br>
+                        <span style="color: #4a4a50;">Админ уже не раз снимался на канале и не хочет показывать лицо, чтобы сохранить конфиденциальность.</span>
                     </div>
                 </div>
 
-                <div id="sectionComplaint" class="section-page hidden">
-                    <button class="back-btn" onclick="goBack()">← Назад</button>
-                    <h2 class="page-title"><span>Жалоба</span></h2>
-                    <p class="page-sub">Напишите жалобу, и админ ответит вам в этом чате</p>
-                    <div class="card">
-                        <div class="chat-container">
-                            <div class="chat-messages" id="complaintMessages"></div>
-                            <div class="chat-input-row">
-                                <div class="input-group">
-                                    <textarea id="complaintInput" placeholder="Напишите вашу жалобу..." rows="2"></textarea>
-                                </div>
-                                <button class="btn btn-gold" onclick="sendComplaint()">Отправить</button>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Жалоба -->
+                <div id="complaintContent" class="section-content hidden">
+                    <h3 style="margin-bottom: 12px;">📩 Жалоба</h3>
+                    <textarea class="input-field" id="complaintInput" rows="2" placeholder="Опишите вашу жалобу..."></textarea>
+                    <button class="btn btn-primary" id="sendComplaintBtn">Отправить жалобу</button>
+                    <div class="chat-box" id="complaintChat"></div>
                 </div>
 
-                <div id="sectionQuestion" class="section-page hidden">
-                    <button class="back-btn" onclick="goBack()">← Назад</button>
-                    <h2 class="page-title"><span>Вопрос</span></h2>
-                    <p class="page-sub">Задайте вопрос поддержке</p>
-                    <div class="card">
-                        <div class="chat-container">
-                            <div class="chat-messages" id="questionMessages"></div>
-                            <div class="chat-input-row">
-                                <div class="input-group">
-                                    <textarea id="questionInput" placeholder="Напишите ваш вопрос..." rows="2"></textarea>
-                                </div>
-                                <button class="btn btn-gold" onclick="sendQuestion()">Отправить</button>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Вопрос -->
+                <div id="questionContent" class="section-content hidden">
+                    <h3 style="margin-bottom: 12px;">❓ Вопрос</h3>
+                    <textarea class="input-field" id="questionInput" rows="2" placeholder="Задайте ваш вопрос..."></textarea>
+                    <button class="btn btn-primary" id="sendQuestionBtn">Отправить вопрос</button>
+                    <div class="chat-box" id="questionChat"></div>
                 </div>
 
-                <div id="sectionAbout" class="section-page hidden">
-                    <button class="back-btn" onclick="goBack()">← Назад</button>
-                    <h2 class="page-title">О <span>сайте</span></h2>
-                    <p class="page-sub">Информация о проекте и правила</p>
-                    <div class="about-content">
-                        <p><strong>Разработчиком</strong> данного проекта считается админ канала, а Миша занимался дизайном. Админ через нейросеть создал данный сайт и выполнил действия для загрузки в интернет.</p>
-                        <br />
+                <!-- О сайте -->
+                <div id="aboutContent" class="section-content hidden">
+                    <h3 style="margin-bottom: 16px;">О сайте</h3>
+                    <div style="background: rgba(255,255,255,0.4); border-radius: 24px; padding: 24px; border: 1px solid rgba(200,200,210,0.1); line-height: 1.8; color: #3a3a3c;">
+                        <p><strong>Разработчиком</strong> данного проекта считается админ канала, а Миша занимался дизайном. Админ создал этот сайт с помощью нейросети и выполнил действия для его загрузки в интернет.</p>
+                        <br>
                         <p><strong>Правила:</strong></p>
-                        <ul class="rules-list">
-                            <li><strong>1.</strong> Запрещается писать чушь в поддержку. За это предусмотрен бан чата на время, которое напишет админ, затем выдаётся варн.</li>
-                            <li><strong>2.</strong> Запрещается использовать нецензурную лексику, за это выдаётся варн.</li>
-                            <li><strong>3.</strong> Запрещается оскорблять кого-либо и окливитать. За это предусмотрен варн.</li>
-                            <li>Остальные нарушения будут загружены позже.</li>
-                        </ul>
+                        <ol style="padding-left: 20px; margin-top: 8px;">
+                            <li>Запрещается писать чушь в поддержку. За это предусмотрен бан чата на время, которое укажет админ, затем выдается предупреждение.</li>
+                            <li>Запрещается использовать нецензурную лексику, за это выдается предупреждение.</li>
+                            <li>Запрещается оскорблять кого-либо и клеветать. За это предусмотрено предупреждение.</li>
+                        </ol>
+                        <p style="margin-top: 12px; color: #6e6e73;">Остальные нарушения будут добавлены позже.</p>
                     </div>
                 </div>
 
-                <div id="adminPanel" class="admin-panel hidden">
-                    <button class="back-btn" onclick="closeAdminPanel()">← Назад</button>
-                    <h2 class="page-title">Панель <span>администратора</span></h2>
-                    <p class="page-sub">Управление пользователями, чатами и наказаниями</p>
-
-                    <div class="admin-tabs">
-                        <button class="tab active" data-tab="users" onclick="switchAdminTab('users')">Пользователи</button>
-                        <button class="tab" data-tab="chats" onclick="switchAdminTab('chats')">Чаты</button>
-                        <button class="tab" data-tab="bans" onclick="switchAdminTab('bans')">Баны и варны</button>
-                        <button class="tab" data-tab="news" onclick="switchAdminTab('news')">Новости</button>
-                        <button class="tab" data-tab="settings" onclick="switchAdminTab('settings')">Настройки</button>
-                    </div>
-
-                    <div id="adminUsers" class="admin-content active">
-                        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
-                            <span style="color:var(--text-secondary);">Все пользователи</span>
-                            <button class="btn btn-sm btn-outline-gold" onclick="refreshUsers()">Обновить</button>
-                        </div>
-                        <div id="userList"></div>
-                    </div>
-
-                    <div id="adminChats" class="admin-content">
-                        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
-                            <button class="btn btn-sm btn-outline-gold" onclick="viewAdminChat('complaint')">Жалобы</button>
-                            <button class="btn btn-sm btn-outline-gold" onclick="viewAdminChat('question')">Вопросы</button>
-                        </div>
-                        <div id="adminChatView">
-                            <p style="color:var(--text-muted);">Выберите чат для просмотра</p>
-                        </div>
-                    </div>
-
-                    <div id="adminBans" class="admin-content">
-                        <h4 style="margin-bottom:12px;font-weight:500;">Активные наказания</h4>
-                        <div id="bansList"></div>
-                        <hr style="border-color:var(--border-subtle);margin:20px 0;" />
-                        <h4 style="margin-bottom:12px;font-weight:500;">Выдать наказание</h4>
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                            <div class="input-group">
-                                <label>ID пользователя</label>
-                                <input type="text" id="punishUserId" placeholder="Введите ID" />
-                            </div>
-                            <div class="input-group">
-                                <label>Тип</label>
-                                <select id="punishType">
-                                    <option value="ban">Бан</option>
-                                    <option value="warn">Варн</option>
-                                </select>
-                            </div>
-                            <div class="input-group">
-                                <label>Количество / срок</label>
-                                <input type="text" id="punishValue" placeholder="Напр. 7 или 3" />
-                            </div>
-                            <div class="input-group">
-                                <label>Единица</label>
-                                <select id="punishUnit">
-                                    <option value="minutes">Минуты</option>
-                                    <option value="hours">Часы</option>
-                                    <option value="days">Дни</option>
-                                    <option value="months">Месяцы</option>
-                                    <option value="years">Годы</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="input-group" style="margin-top:8px;">
-                            <label>Причина</label>
-                            <input type="text" id="punishReason" placeholder="Причина наказания" />
-                        </div>
-                        <button class="btn btn-danger" style="margin-top:12px;" onclick="applyPunishment()">Применить наказание</button>
-                    </div>
-
-                    <div id="adminNews" class="admin-content">
-                        <h4 style="margin-bottom:12px;font-weight:500;">Добавить новость</h4>
-                        <div class="input-group">
-                            <label>Заголовок</label>
-                            <input type="text" id="newsTitle" placeholder="Заголовок новости" />
-                        </div>
-                        <div class="input-group" style="margin-top:8px;">
-                            <label>Содержание</label>
-                            <textarea id="newsContent" placeholder="Текст новости..." rows="4"></textarea>
-                        </div>
-                        <button class="btn btn-gold" style="margin-top:12px;" onclick="addNews()">Опубликовать</button>
-                        <hr style="border-color:var(--border-subtle);margin:24px 0;" />
-                        <h4 style="margin-bottom:12px;font-weight:500;">Все новости</h4>
-                        <div id="adminNewsList"></div>
-                    </div>
-
-                    <div id="adminSettings" class="admin-content">
-                        <h4 style="margin-bottom:12px;font-weight:500;">Назначить помощника</h4>
-                        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-                            <div class="input-group" style="flex:1;min-width:180px;">
-                                <label>ID пользователя</label>
-                                <input type="text" id="assistantUserId" placeholder="Введите ID" />
-                            </div>
-                            <button class="btn btn-gold" style="align-self:flex-end;" onclick="assignAssistant()">Назначить</button>
-                        </div>
-                        <hr style="border-color:var(--border-subtle);margin:24px 0;" />
-                        <h4 style="margin-bottom:12px;font-weight:500;">Текущие помощники</h4>
-                        <div id="assistantsList"></div>
-                        <hr style="border-color:var(--border-subtle);margin:24px 0;" />
-                        <h4 style="margin-bottom:12px;font-weight:500;">Загрузить доказательства</h4>
-                        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-                            <div class="input-group" style="flex:1;min-width:160px;">
-                                <label>ID пользователя</label>
-                                <input type="text" id="evidenceUserId" placeholder="ID" />
-                            </div>
-                            <div class="input-group" style="flex:1;min-width:160px;">
-                                <label>Фото (URL)</label>
-                                <input type="text" id="evidenceUrl" placeholder="https://example.com/image.jpg" />
-                            </div>
-                            <button class="btn btn-outline-gold" style="align-self:flex-end;" onclick="addEvidence()">Добавить</button>
-                        </div>
-                        <div id="evidenceList" style="margin-top:12px;"></div>
+                <!-- Новости -->
+                <div id="newsContent" class="section-content hidden">
+                    <h3 style="margin-bottom: 12px;">📰 Новости</h3>
+                    <div id="newsFeed" class="chat-box"></div>
+                    <div id="adminNewsArea" class="hidden" style="margin-top: 12px;">
+                        <input class="input-field" id="newsInput" placeholder="Текст новости...">
+                        <button class="btn btn-primary" id="postNewsBtn">Опубликовать новость</button>
                     </div>
                 </div>
 
+                <!-- Профиль -->
+                <div id="profileContent" class="section-content hidden">
+                    <h3 style="margin-bottom: 16px;">👤 Личный кабинет</h3>
+                    <div id="profileInfo" style="background: rgba(255,255,255,0.4); border-radius: 24px; padding: 24px; border: 1px solid rgba(200,200,210,0.1);">
+                        <p><strong>ID:</strong> <span id="profileId">—</span></p>
+                        <p><strong>ФИО:</strong> <span id="profileFio">—</span></p>
+                        <p><strong>Email:</strong> <span id="profileEmail">—</span></p>
+                        <p><strong>Ник:</strong> <span id="profileNick">—</span></p>
+                        <p><strong>Telegram:</strong> <span id="profileTg">—</span></p>
+                        <p><strong>Роль:</strong> <span id="profileRole">Пользователь</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Админ-панель -->
+            <div id="adminPanel" class="hidden section">
+                <h3 style="margin-bottom: 16px;">⚙️ Админ-панель</h3>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+                    <button class="btn btn-danger" id="adminBanBtn">🔨 Бан</button>
+                    <button class="btn btn-warning" id="adminWarnBtn" style="background: #ffc107; border-color: #ffc107;">⚠️ Варн</button>
+                    <button class="btn btn-success" id="adminUnbanBtn">✅ Снять наказание</button>
+                    <button class="btn" id="adminAssignHelperBtn">👥 Назначить помощника</button>
+                    <button class="btn" id="adminClearChatBtn">🗑️ Очистить чаты</button>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>Пользователи</h4>
+                        <div id="userCount">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Забаненные</h4>
+                        <div id="banCount">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Предупреждения</h4>
+                        <div id="warnCount">0</div>
+                    </div>
+                </div>
+
+                <div id="adminUserList" style="margin-top: 16px;">
+                    <h4>Список пользователей</h4>
+                    <div id="userListContainer"></div>
+                </div>
+
+                <div id="adminProofSection" style="margin-top: 24px; border-top: 1px solid rgba(200,200,210,0.2); padding-top: 20px;">
+                    <h4>📎 Доказательства</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+                        <input class="input-field" style="flex:1; min-width:150px;" id="proofUserId" placeholder="ID пользователя">
+                        <input class="input-field" style="flex:1; min-width:150px;" id="proofFile" type="file" accept="image/*">
+                        <button class="btn btn-primary" id="uploadProofBtn">Загрузить</button>
+                    </div>
+                    <div id="proofsList" style="margin-top: 12px;"></div>
+                </div>
             </div>
         </div>
+
+        <footer>Misha.Support — премиум-минимализм</footer>
     </div>
+</div>
 
-    <div id="modalOverlay" class="modal-overlay hidden" onclick="if(event.target===this)closeModal()">
-        <div class="modal" id="modalContent">
-            <button class="close-modal" onclick="closeModal()">✕</button>
-            <div id="modalBody"></div>
-        </div>
-    </div>
-
-    <script>
-        // ============================================================
-        //  КОНФИГУРАЦИЯ JSONBIN
-        // ============================================================
-        const JSONBIN_API_KEY = '$2a$10$/lKNp2cCj9lOUJxhWQ0uI./vRHpINQt.MWizWPJOnRinj62u0JIgO';
-        
-        // Все ID корзин
-        const BIN_IDS = {
-            users: '6a746f3bf5f4af5e29f27af9',
-            complaints: '6a74702cf5f4af5e29f27e75',
-            questions: '6a747087f5f4af5e29f27ff6',
-            bans: '6a7470c4f5f4af5e29f28112',
-            warnings: '6a747233da38895dfec11298',
-            evidences: '6a74715af5f4af5e29f2834e',
-            assistants: '6a74718ff5f4af5e29f28409',
-            nextId: '6a747275f5f4af5e29f28779'
-        };
-
-        // ============================================================
-        //  STATE
-        // ============================================================
-        let currentUser = null;
-        let appData = null;
-        let currentSection = 'main';
-        let adminChatType = null;
-
-        // ============================================================
-        //  DATA HELPERS
-        // ============================================================
-        function generateId() {
-            return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-        }
-
-        function getDefaultData() {
-            return {
-                users: [],
-                complaints: [],
-                questions: [],
-                bans: [],
-                warnings: [{ userId: '0', count: 0, history: [] }],
-                evidences: [],
-                assistants: [],
-                nextId: 1,
-                news: []
-            };
-        }
-
-        // ============================================================
-        //  РАБОТА С JSONBIN (с исправлением CORS)
-        // ============================================================
-        async function loadBin(binId) {
-            try {
-                const response = await fetch(`https://api.jsonbin.io/v3/b/${binId}/latest`, {
-                    method: 'GET',
-                    headers: {
-                        'X-Master-Key': JSONBIN_API_KEY,
-                        'Content-Type': 'application/json'
-                    }
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                return data.record;
-            } catch (e) {
-                console.warn(`Failed to load bin ${binId}:`, e);
-                return null;
-            }
-        }
-
-        async function saveBin(binId, data) {
-            try {
-                const response = await fetch(`https://api.jsonbin.io/v3/b/${binId}`, {
-                    method: 'PUT',
-                    headers: {
-                        'X-Master-Key': JSONBIN_API_KEY,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                return true;
-            } catch (e) {
-                console.warn(`Failed to save bin ${binId}:`, e);
-                return false;
-            }
-        }
-
-        // ============================================================
-        //  ЗАГРУЗКА ВСЕХ ДАННЫХ
-        // ============================================================
-        async function loadAllData() {
-            try {
-                // Загружаем все корзины
-                const [users, complaints, questions, bans, warnings, evidences, assistants, nextId] = await Promise.all([
-                    loadBin(BIN_IDS.users),
-                    loadBin(BIN_IDS.complaints),
-                    loadBin(BIN_IDS.questions),
-                    loadBin(BIN_IDS.bans),
-                    loadBin(BIN_IDS.warnings),
-                    loadBin(BIN_IDS.evidences),
-                    loadBin(BIN_IDS.assistants),
-                    loadBin(BIN_IDS.nextId)
-                ]);
-
-                appData = {
-                    users: users || [],
-                    complaints: complaints || [],
-                    questions: questions || [],
-                    bans: bans || [],
-                    warnings: warnings || [{ userId: '0', count: 0, history: [] }],
-                    evidences: evidences || [],
-                    assistants: assistants || [],
-                    nextId: nextId || 1,
-                    news: []
-                };
-
-                // Если нет пользователей, создаем админа
-                if (appData.users.length === 0) {
-                    const admin = {
-                        id: "1",
-                        fullName: "Анурин Антон Максимович",
-                        email: "admin@support.com",
-                        nick: "Admin",
-                        telegram: "@admin",
-                        password: "31441537a",
-                        isAdmin: true,
-                        isAssistant: false,
-                        warnings: [],
-                        banned: false,
-                        banExpiry: null,
-                        banReason: ""
-                    };
-                    appData.users.push(admin);
-                    appData.nextId = 2;
-                    await saveAllData();
-                }
-
-                return true;
-            } catch (e) {
-                console.error('Failed to load data:', e);
-                // Если ошибка, используем localStorage как запасной
-                return loadLocalData();
-            }
-        }
-
-        // ============================================================
-        //  СОХРАНЕНИЕ ВСЕХ ДАННЫХ
-        // ============================================================
-        async function saveAllData() {
-            try {
-                await Promise.all([
-                    saveBin(BIN_IDS.users, appData.users),
-                    saveBin(BIN_IDS.complaints, appData.complaints),
-                    saveBin(BIN_IDS.questions, appData.questions),
-                    saveBin(BIN_IDS.bans, appData.bans),
-                    saveBin(BIN_IDS.warnings, appData.warnings),
-                    saveBin(BIN_IDS.evidences, appData.evidences),
-                    saveBin(BIN_IDS.assistants, appData.assistants),
-                    saveBin(BIN_IDS.nextId, appData.nextId)
-                ]);
-                saveLocalData();
-                return true;
-            } catch (e) {
-                console.error('Failed to save data:', e);
-                saveLocalData();
-                return false;
-            }
-        }
-
-        // ============================================================
-        //  ЗАПАСНОЙ ВАРИАНТ - localStorage
-        // ============================================================
-        function loadLocalData() {
-            try {
-                const saved = localStorage.getItem('misha_support_data');
-                if (saved) {
-                    appData = JSON.parse(saved);
-                    return true;
-                }
-            } catch (e) {}
-            appData = getDefaultData();
-            return true;
-        }
-
-        function saveLocalData() {
-            try {
-                localStorage.setItem('misha_support_data', JSON.stringify(appData));
-            } catch (e) {}
-        }
-
-        // ============================================================
-        //  AUTH FUNCTIONS
-        // ============================================================
-        function showRegister() {
-            document.getElementById('loginForm').classList.add('hidden');
-            document.getElementById('registerForm').classList.remove('hidden');
-        }
-
-        function showLogin() {
-            document.getElementById('loginForm').classList.remove('hidden');
-            document.getElementById('registerForm').classList.add('hidden');
-        }
-
-        async function handleRegister() {
-            const fullName = document.getElementById('regFullName').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
-            const nick = document.getElementById('regNick').value.trim();
-            const telegram = document.getElementById('regTelegram').value.trim();
-            const password = document.getElementById('regPassword').value.trim();
-
-            if (!fullName || !email || !nick || !telegram || !password) {
-                alert('Заполните все поля!');
-                return;
-            }
-
-            if (appData.users.find(u => u.fullName === fullName)) {
-                alert('Пользователь с таким ФИО уже существует!');
-                return;
-            }
-
-            const newUser = {
-                id: String(appData.nextId++),
-                fullName,
-                email,
-                nick,
-                telegram,
-                password,
-                isAdmin: false,
-                isAssistant: false,
-                warnings: [],
-                banned: false,
-                banExpiry: null,
-                banReason: ''
-            };
-
-            if (appData.users.length === 0) {
-                newUser.isAdmin = true;
-            }
-
-            appData.users.push(newUser);
-            await saveAllData();
-            alert('Регистрация успешна! Теперь войдите.');
-            showLogin();
-            document.getElementById('regFullName').value = '';
-            document.getElementById('regEmail').value = '';
-            document.getElementById('regNick').value = '';
-            document.getElementById('regTelegram').value = '';
-            document.getElementById('regPassword').value = '';
-        }
-
-        async function handleLogin() {
-            const fullName = document.getElementById('loginFullName').value.trim();
-            const password = document.getElementById('loginPassword').value.trim();
-
-            if (!fullName || !password) {
-                alert('Введите ФИО и пароль!');
-                return;
-            }
-
-            // Админ хардкод
-            if (fullName === 'Анурин Антон Максимович' && password === '31441537a') {
-                let admin = appData.users.find(u => u.fullName === fullName);
-                if (!admin) {
-                    admin = {
-                        id: String(appData.nextId++),
-                        fullName: fullName,
-                        email: 'admin@support.com',
-                        nick: 'Admin',
-                        telegram: '@admin',
-                        password: '31441537a',
-                        isAdmin: true,
-                        isAssistant: false,
-                        warnings: [],
-                        banned: false,
-                        banExpiry: null,
-                        banReason: ''
-                    };
-                    appData.users.push(admin);
-                    await saveAllData();
-                }
-                currentUser = admin;
-                
-                if (document.getElementById('rememberMe').checked) {
-                    localStorage.setItem('rememberedUser', JSON.stringify({ fullName, password }));
-                }
-                
-                enterApp();
-                return;
-            }
-
-            const user = appData.users.find(u => u.fullName === fullName && u.password === password);
-            if (!user) {
-                alert('Неверное ФИО или пароль!');
-                return;
-            }
-
-            if (user.banned) {
-                const expiry = user.banExpiry ? new Date(user.banExpiry) : null;
-                if (expiry && expiry > new Date()) {
-                    alert(`Вы забанены до ${expiry.toLocaleString()}. Причина: ${user.banReason || 'Не указана'}`);
-                    return;
-                } else if (expiry && expiry <= new Date()) {
-                    user.banned = false;
-                    user.banExpiry = null;
-                    user.banReason = '';
-                    await saveAllData();
-                } else {
-                    alert('Вы забанены навсегда.');
-                    return;
-                }
-            }
-
-            currentUser = user;
-            
-            if (document.getElementById('rememberMe').checked) {
-                localStorage.setItem('rememberedUser', JSON.stringify({ fullName, password }));
-            }
-            
-            enterApp();
-        }
-
-        function enterApp() {
-            document.getElementById('authPage').classList.add('hidden');
-            document.getElementById('mainApp').classList.remove('hidden');
-            document.getElementById('headerUserName').textContent = currentUser.fullName;
-            const badge = document.getElementById('headerUserBadge');
-            if (currentUser.isAdmin) {
-                badge.textContent = 'Админ';
-                badge.style.background = 'rgba(212,168,75,0.25)';
-                document.getElementById('adminPanelBtn').classList.remove('hidden');
-            } else if (currentUser.isAssistant) {
-                badge.textContent = 'Помощник';
-                badge.style.background = 'rgba(212,168,75,0.15)';
-                document.getElementById('adminPanelBtn').classList.remove('hidden');
-            } else {
-                badge.textContent = 'Пользователь';
-                badge.style.background = 'var(--gold-dim)';
-                document.getElementById('adminPanelBtn').classList.add('hidden');
-            }
-            showMainGrid();
-            renderAll();
-        }
-
-        function handleLogout() {
-            currentUser = null;
-            localStorage.removeItem('rememberedUser');
-            document.getElementById('mainApp').classList.add('hidden');
-            document.getElementById('authPage').classList.remove('hidden');
-            document.getElementById('loginFullName').value = '';
-            document.getElementById('loginPassword').value = '';
-            document.getElementById('rememberMe').checked = false;
-            showLogin();
-        }
-
-        // ============================================================
-        //  NAVIGATION
-        // ============================================================
-        function showMainGrid() {
-            document.getElementById('mainGrid').classList.remove('hidden');
-            document.querySelectorAll('.section-page').forEach(el => el.classList.add('hidden'));
-            document.getElementById('adminPanel').classList.add('hidden');
-            currentSection = 'main';
-        }
-
-        function navigateTo(section) {
-            document.getElementById('mainGrid').classList.add('hidden');
-            document.querySelectorAll('.section-page').forEach(el => el.classList.add('hidden'));
-            document.getElementById('adminPanel').classList.add('hidden');
-            const sectionMap = {
-                'news': 'sectionNews',
-                'faq': 'sectionFaq',
-                'complaint': 'sectionComplaint',
-                'question': 'sectionQuestion',
-                'about': 'sectionAbout'
-            };
-            document.getElementById(sectionMap[section]).classList.remove('hidden');
-            currentSection = section;
-            if (section === 'news') renderNews();
-            if (section === 'complaint' || section === 'question') renderChat(section);
-        }
-
-        function goBack() {
-            if (document.getElementById('adminPanel').classList.contains('hidden') === false) {
-                closeAdminPanel();
-                return;
-            }
-            showMainGrid();
-        }
-
-        // ============================================================
-        //  NEWS
-        // ============================================================
-        function renderNews() {
-            const container = document.getElementById('newsContainer');
-            if (!container) return;
-            const news = appData.news || [];
-            if (news.length === 0) {
-                container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px 0;">Новостей пока нет</p>';
-                return;
-            }
-            let html = '';
-            news.slice().reverse().forEach(item => {
-                html += `
-                <div class="news-item">
-                    <div class="news-title">${item.title}</div>
-                    <div class="news-meta">${new Date(item.timestamp).toLocaleString()} • ${item.author || 'Админ'}</div>
-                    <div class="news-content">${item.content}</div>
-                </div>
-            `;
-            });
-            container.innerHTML = html;
-        }
-
-        async function addNews() {
-            const title = document.getElementById('newsTitle').value.trim();
-            const content = document.getElementById('newsContent').value.trim();
-            
-            if (!title || !content) {
-                alert('Заполните заголовок и содержание новости!');
-                return;
-            }
-            
-            if (!appData.news) appData.news = [];
-            appData.news.push({
-                id: generateId(),
-                title,
-                content,
-                timestamp: Date.now(),
-                author: currentUser.fullName
-            });
-            
-            await saveAllData();
-            document.getElementById('newsTitle').value = '';
-            document.getElementById('newsContent').value = '';
-            renderNews();
-            renderAdminNews();
-            alert('Новость опубликована!');
-        }
-
-        function renderAdminNews() {
-            const container = document.getElementById('adminNewsList');
-            if (!container) return;
-            const news = appData.news || [];
-            if (news.length === 0) {
-                container.innerHTML = '<p style="color:var(--text-muted);">Новостей нет</p>';
-                return;
-            }
-            let html = '';
-            news.slice().reverse().forEach(item => {
-                html += `
-                <div class="news-item" style="border-left-color: var(--gold);">
-                    <div class="news-title">${item.title}</div>
-                    <div class="news-meta">${new Date(item.timestamp).toLocaleString()} • ${item.author || 'Админ'}</div>
-                    <div class="news-content">${item.content}</div>
-                    <div class="news-actions">
-                        <button class="btn btn-sm btn-danger" onclick="deleteNews('${item.id}')">Удалить</button>
-                    </div>
-                </div>
-            `;
-            });
-            container.innerHTML = html;
-        }
-
-        async function deleteNews(id) {
-            if (!confirm('Удалить эту новость?')) return;
-            appData.news = appData.news.filter(n => n.id !== id);
-            await saveAllData();
-            renderNews();
-            renderAdminNews();
-        }
-
-        // ============================================================
-        //  RENDER CHATS
-        // ============================================================
-        function renderChat(type) {
-            const container = document.getElementById(type + 'Messages');
-            if (!container) return;
-            const messages = type === 'complaint' ? appData.complaints : appData.questions;
-            let filtered;
-            if (currentUser.isAdmin || currentUser.isAssistant) {
-                filtered = messages;
-            } else {
-                filtered = messages.filter(m => m.userId === currentUser.id);
-            }
-            container.innerHTML = '';
-            if (filtered.length === 0) {
-                container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px 0;">Сообщений пока нет</p>';
-                return;
-            }
-            filtered.forEach(msg => {
-                const div = document.createElement('div');
-                div.className = 'msg ' + (msg.isAdmin ? 'admin' : 'user');
-                const isAdminMsg = msg.isAdmin || msg.adminId;
-                const senderName = isAdminMsg ? 'Админ' : (msg.userName || 'Пользователь');
-                div.innerHTML = `
-              <div>${msg.message}</div>
-              <div class="meta">
-                <span>${new Date(msg.timestamp).toLocaleString()}</span>
-                <span>•</span>
-                <span>${senderName}</span>
-                ${isAdminMsg ? `<span class="admin-badge" onclick="showAdminId('${msg.adminId || '11111'}')">A</span>` : ''}
-                <span class="admin-id" id="adminId_${msg.id}">ID: ${msg.adminId || '11111'}</span>
-              </div>
-            `;
-                container.appendChild(div);
-            });
-            container.scrollTop = container.scrollHeight;
-        }
-
-        function showAdminId(id) {
-            const el = document.querySelector(`.admin-id[id*="adminId_"]`);
-            if (el) {
-                el.classList.toggle('show');
-            }
-        }
-
-        async function sendComplaint() {
-            const input = document.getElementById('complaintInput');
-            const text = input.value.trim();
-            if (!text) return;
-            const msg = {
-                id: generateId(),
-                userId: currentUser.id,
-                userName: currentUser.fullName,
-                message: text,
-                timestamp: Date.now(),
-                isAdmin: false,
-                adminId: null
-            };
-            appData.complaints.push(msg);
-            await saveAllData();
-            input.value = '';
-            renderChat('complaint');
-        }
-
-        async function sendQuestion() {
-            const input = document.getElementById('questionInput');
-            const text = input.value.trim();
-            if (!text) return;
-            const msg = {
-                id: generateId(),
-                userId: currentUser.id,
-                userName: currentUser.fullName,
-                message: text,
-                timestamp: Date.now(),
-                isAdmin: false,
-                adminId: null
-            };
-            appData.questions.push(msg);
-            await saveAllData();
-            input.value = '';
-            renderChat('question');
-        }
-
-        // ============================================================
-        //  ADMIN PANEL
-        // ============================================================
-        function showAdminPanel() {
-            if (!currentUser.isAdmin && !currentUser.isAssistant) {
-                alert('У вас нет прав администратора.');
-                return;
-            }
-            document.getElementById('mainGrid').classList.add('hidden');
-            document.querySelectorAll('.section-page').forEach(el => el.classList.add('hidden'));
-            document.getElementById('adminPanel').classList.remove('hidden');
-            currentSection = 'admin';
-            refreshUsers();
-            renderBansList();
-            renderAssistants();
-            renderEvidence();
-            renderAdminNews();
-            switchAdminTab('users');
-        }
-
-        function closeAdminPanel() {
-            document.getElementById('adminPanel').classList.add('hidden');
-            showMainGrid();
-        }
-
-        function switchAdminTab(tab) {
-            document.querySelectorAll('.admin-tabs .tab').forEach(el => el.classList.remove('active'));
-            document.querySelector(`.admin-tabs .tab[data-tab="${tab}"]`).classList.add('active');
-            document.querySelectorAll('.admin-content').forEach(el => el.classList.remove('active'));
-            document.getElementById('admin' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
-        }
-
-        function refreshUsers() {
-            const list = document.getElementById('userList');
-            if (!list) return;
-            list.innerHTML = '';
-            if (appData.users.length === 0) {
-                list.innerHTML = '<p style="color:var(--text-muted);">Нет пользователей</p>';
-                return;
-            }
-            const sorted = [...appData.users].sort((a, b) => {
-                if (a.isAdmin) return -1;
-                if (b.isAdmin) return 1;
-                if (a.isAssistant) return -1;
-                if (b.isAssistant) return 1;
-                return 0;
-            });
-            sorted.forEach(user => {
-                const div = document.createElement('div');
-                div.className = 'user-list-item';
-                const warnCount = user.warnings ? user.warnings.length : 0;
-                const isBanned = user.banned;
-                const isAdmin = user.isAdmin;
-                const isAssistant = user.isAssistant;
-
-                div.innerHTML = `
-              <div class="user-info">
-                <span><strong>${user.fullName}</strong></span>
-                <span class="id-badge">ID: ${user.id}</span>
-                <span style="color:var(--text-muted);font-size:0.8rem;">${user.nick || ''}</span>
-                ${isAdmin ? '<span class="badge" style="background:var(--gold);color:#0c0c0e;">Админ</span>' : ''}
-                ${isAssistant ? '<span class="badge" style="background:rgba(212,168,75,0.2);color:var(--gold);">Помощник</span>' : ''}
-                ${warnCount > 0 ? `<span class="warn-badge">⚠ ${warnCount} варн</span>` : ''}
-                ${isBanned ? '<span class="banned-badge">🚫 Забанен</span>' : ''}
-              </div>
-              <div class="user-actions">
-                ${!isAdmin && currentUser.isAdmin ? `
-                  <button class="btn btn-sm btn-outline-gold" onclick="userAction('warn','${user.id}')">Варн</button>
-                  <button class="btn btn-sm btn-danger" onclick="userAction('ban','${user.id}')">Бан</button>
-                  <button class="btn btn-sm btn-outline-gold" onclick="userAction('unban','${user.id}')">Разбан</button>
-                  <button class="btn btn-sm btn-outline-gold" onclick="userAction('clearwarn','${user.id}')">Снять варны</button>
-                ` : ''}
-                ${currentUser.isAdmin && !isAdmin && !isAssistant ? `<button class="btn btn-sm btn-outline-gold" onclick="makeAssistant('${user.id}')">Назначить помощником</button>` : ''}
-                ${currentUser.isAdmin && isAssistant ? `<button class="btn btn-sm btn-outline-gold" onclick="removeAssistant('${user.id}')">Убрать помощника</button>` : ''}
-              </div>
-            `;
-                list.appendChild(div);
-            });
-        }
-
-        function userAction(action, userId) {
-            const user = appData.users.find(u => u.id === userId);
-            if (!user) return;
-            if (action === 'warn') {
-                showPunishModal('warn', userId);
-            } else if (action === 'ban') {
-                showPunishModal('ban', userId);
-            } else if (action === 'unban') {
-                user.banned = false;
-                user.banExpiry = null;
-                user.banReason = '';
-                saveAllData().then(() => refreshUsers());
-            } else if (action === 'clearwarn') {
-                user.warnings = [];
-                saveAllData().then(() => refreshUsers());
-            }
-        }
-
-        function showPunishModal(type, userId) {
-            const body = document.getElementById('modalBody');
-            body.innerHTML = `
-            <h3>${type === 'warn' ? 'Выдать варн' : 'Забанить'}</h3>
-            <div class="input-group" style="margin-top:12px;">
-              <label>Количество / срок</label>
-              <input type="text" id="modalPunishValue" placeholder="Напр. 7 или 3" />
-            </div>
-            <div class="input-group" style="margin-top:8px;">
-              <label>Единица</label>
-              <select id="modalPunishUnit">
+<!-- Модальное окно для бана/варна -->
+<div id="punishModal" class="modal-overlay hidden">
+    <div class="modal">
+        <h3 id="modalTitle">Выдача наказания</h3>
+        <div style="margin: 16px 0;">
+            <input class="input-field" id="modalUserId" placeholder="ID пользователя">
+            <input class="input-field" id="modalDuration" placeholder="Время (число)">
+            <select class="input-field" id="modalUnit">
                 <option value="minutes">Минуты</option>
                 <option value="hours">Часы</option>
                 <option value="days">Дни</option>
                 <option value="months">Месяцы</option>
                 <option value="years">Годы</option>
-              </select>
-            </div>
-            <div class="input-group" style="margin-top:8px;">
-              <label>Причина</label>
-              <input type="text" id="modalPunishReason" placeholder="Причина" />
-            </div>
-            <button class="btn btn-danger btn-block" style="margin-top:16px;" onclick="executePunish('${type}','${userId}')">Подтвердить</button>
-          `;
-            document.getElementById('modalOverlay').classList.remove('hidden');
+            </select>
+            <input class="input-field" id="modalReason" placeholder="Причина">
+        </div>
+        <div style="display: flex; gap: 12px; justify-content: flex-end;">
+            <button class="btn" id="modalCancel">Отмена</button>
+            <button class="btn btn-primary" id="modalConfirm">Подтвердить</button>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    // ===== СОСТОЯНИЕ =====
+    let currentUser = null;
+    let users = JSON.parse(localStorage.getItem('misha_users')) || [];
+    let complaints = JSON.parse(localStorage.getItem('misha_complaints')) || [];
+    let questions = JSON.parse(localStorage.getItem('misha_questions')) || [];
+    let news = JSON.parse(localStorage.getItem('misha_news')) || [];
+    let bans = JSON.parse(localStorage.getItem('misha_bans')) || [];
+    let warns = JSON.parse(localStorage.getItem('misha_warns')) || [];
+    let proofs = JSON.parse(localStorage.getItem('misha_proofs')) || [];
+    let helpers = JSON.parse(localStorage.getItem('misha_helpers')) || [];
+    let nextId = parseInt(localStorage.getItem('misha_nextId')) || 1000;
+
+    const ADMIN_FIO = 'Анурин Антон Максимович';
+    const ADMIN_PASS = '31441537a';
+    const ADMIN_ID = '11111';
+
+    let modalCallback = null;
+    let modalType = '';
+
+    // ===== DOM =====
+    const authSection = document.getElementById('authSection');
+    const mainApp = document.getElementById('mainApp');
+    const loginFio = document.getElementById('loginFio');
+    const loginPass = document.getElementById('loginPass');
+    const loginBtn = document.getElementById('loginBtn');
+    const showRegisterBtn = document.getElementById('showRegisterBtn');
+    const registerForm = document.getElementById('registerForm');
+    const regFio = document.getElementById('regFio');
+    const regEmail = document.getElementById('regEmail');
+    const regNick = document.getElementById('regNick');
+    const regTg = document.getElementById('regTg');
+    const regPass = document.getElementById('regPass');
+    const registerBtn = document.getElementById('registerBtn');
+    const authStatus = document.getElementById('authStatus');
+    const userDisplay = document.getElementById('userDisplay');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    const sectionBtns = document.querySelectorAll('[data-section]');
+    const faqContent = document.getElementById('faqContent');
+    const complaintContent = document.getElementById('complaintContent');
+    const questionContent = document.getElementById('questionContent');
+    const aboutContent = document.getElementById('aboutContent');
+    const newsContent = document.getElementById('newsContent');
+    const profileContent = document.getElementById('profileContent');
+    const complaintChat = document.getElementById('complaintChat');
+    const questionChat = document.getElementById('questionChat');
+    const sendComplaintBtn = document.getElementById('sendComplaintBtn');
+    const sendQuestionBtn = document.getElementById('sendQuestionBtn');
+    const complaintInput = document.getElementById('complaintInput');
+    const questionInput = document.getElementById('questionInput');
+    const newsFeed = document.getElementById('newsFeed');
+    const adminPanel = document.getElementById('adminPanel');
+    const adminNewsArea = document.getElementById('adminNewsArea');
+    const newsInput = document.getElementById('newsInput');
+    const postNewsBtn = document.getElementById('postNewsBtn');
+    const adminBanBtn = document.getElementById('adminBanBtn');
+    const adminWarnBtn = document.getElementById('adminWarnBtn');
+    const adminUnbanBtn = document.getElementById('adminUnbanBtn');
+    const adminAssignHelperBtn = document.getElementById('adminAssignHelperBtn');
+    const adminClearChatBtn = document.getElementById('adminClearChatBtn');
+    const proofUserId = document.getElementById('proofUserId');
+    const proofFile = document.getElementById('proofFile');
+    const uploadProofBtn = document.getElementById('uploadProofBtn');
+    const proofsList = document.getElementById('proofsList');
+    const userListContainer = document.getElementById('userListContainer');
+    const userCount = document.getElementById('userCount');
+    const banCount = document.getElementById('banCount');
+    const warnCount = document.getElementById('warnCount');
+
+    const punishModal = document.getElementById('punishModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalUserId = document.getElementById('modalUserId');
+    const modalDuration = document.getElementById('modalDuration');
+    const modalUnit = document.getElementById('modalUnit');
+    const modalReason = document.getElementById('modalReason');
+    const modalConfirm = document.getElementById('modalConfirm');
+    const modalCancel = document.getElementById('modalCancel');
+
+    // ===== ФУНКЦИИ СОХРАНЕНИЯ =====
+    function saveAll() {
+        localStorage.setItem('misha_users', JSON.stringify(users));
+        localStorage.setItem('misha_complaints', JSON.stringify(complaints));
+        localStorage.setItem('misha_questions', JSON.stringify(questions));
+        localStorage.setItem('misha_news', JSON.stringify(news));
+        localStorage.setItem('misha_bans', JSON.stringify(bans));
+        localStorage.setItem('misha_warns', JSON.stringify(warns));
+        localStorage.setItem('misha_proofs', JSON.stringify(proofs));
+        localStorage.setItem('misha_helpers', JSON.stringify(helpers));
+        localStorage.setItem('misha_nextId', String(nextId));
+    }
+
+    // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
+    function isAdmin() { return currentUser && currentUser.id === ADMIN_ID; }
+    function isHelper() { return currentUser && helpers.includes(currentUser.id); }
+    function canModerate() { return isAdmin() || isHelper(); }
+
+    function getUserById(id) { return users.find(u => u.id === id); }
+    function getUserWarns(id) { return warns.filter(w => w.userId === id); }
+    function getUserBans(id) { return bans.filter(b => b.userId === id); }
+    function isUserBanned(id) { return bans.some(b => b.userId === id && !b.unbanned); }
+
+    // ===== РЕНДЕРИНГ =====
+    function renderComplaints() {
+        if (!complaintChat) return;
+        if (complaints.length === 0) {
+            complaintChat.innerHTML = '<div class="msg" style="color:#888;">Чат жалоб пуст</div>';
+            return;
         }
+        complaintChat.innerHTML = complaints.map(c => {
+            const isAdminMsg = c.fromAdmin || c.fromHelper;
+            const sender = c.fromAdmin ? 'Админ' : (c.fromHelper ? 'Помощник' : 'Пользователь');
+            const user = getUserById(c.userId);
+            const name = user ? user.nick || user.fio : 'Неизвестный';
+            return `<div class="msg ${isAdminMsg ? 'msg-admin' : 'msg-user'}">
+                <span>${c.text}</span>
+                ${isAdminMsg ? `<span class="admin-tag" onclick="alert('ID: ${c.userId || ADMIN_ID}')">A</span>` : ''}
+                <span style="font-size:0.7rem; color:#888; margin-left:auto;">${name}</span>
+            </div>`;
+        }).join('');
+    }
 
-        function executePunish(type, userId) {
-            const value = document.getElementById('modalPunishValue').value.trim();
-            const unit = document.getElementById('modalPunishUnit').value;
-            const reason = document.getElementById('modalPunishReason').value.trim() || 'Не указана';
-            if (!value || isNaN(value)) {
-                alert('Введите корректное число!');
-                return;
-            }
-            const num = parseInt(value);
-            const user = appData.users.find(u => u.id === userId);
-            if (!user) return;
-
-            if (type === 'warn') {
-                if (!user.warnings) user.warnings = [];
-                user.warnings.push({ time: Date.now(), reason, unit, value: num });
-                if (user.warnings.length >= 3) {
-                    const body = document.getElementById('modalBody');
-                    body.innerHTML = `
-                <h3>⚠️ У пользователя ${user.fullName} 3 варна!</h3>
-                <p style="color:var(--text-secondary);margin:12px 0;">Выберите наказание:</p>
-                <div class="input-group">
-                  <label>Срок бана</label>
-                  <input type="text" id="autoBanValue" placeholder="Напр. 7" />
-                </div>
-                <div class="input-group" style="margin-top:8px;">
-                  <label>Единица</label>
-                  <select id="autoBanUnit">
-                    <option value="minutes">Минуты</option>
-                    <option value="hours">Часы</option>
-                    <option value="days">Дни</option>
-                    <option value="months">Месяцы</option>
-                    <option value="years">Годы</option>
-                  </select>
-                </div>
-                <div class="input-group" style="margin-top:8px;">
-                  <label>Причина</label>
-                  <input type="text" id="autoBanReason" placeholder="Причина" value="3 варна" />
-                </div>
-                <button class="btn btn-danger btn-block" style="margin-top:16px;" onclick="autoBanUser('${userId}')">Забанить</button>
-                <button class="btn btn-outline-gold btn-block" style="margin-top:8px;" onclick="closeModal()">Пропустить</button>
-              `;
-                    document.getElementById('modalOverlay').classList.remove('hidden');
-                }
-                saveAllData().then(() => { refreshUsers();
-                    closeModal(); });
-            } else if (type === 'ban') {
-                const expiry = new Date(Date.now() + getMsFromUnit(num, unit));
-                user.banned = true;
-                user.banExpiry = expiry.toISOString();
-                user.banReason = reason;
-                saveAllData().then(() => { refreshUsers();
-                    closeModal(); });
-            }
-            closeModal();
+    function renderQuestions() {
+        if (!questionChat) return;
+        if (questions.length === 0) {
+            questionChat.innerHTML = '<div class="msg" style="color:#888;">Чат вопросов пуст</div>';
+            return;
         }
+        questionChat.innerHTML = questions.map(q => {
+            const isAdminMsg = q.fromAdmin || q.fromHelper;
+            const sender = q.fromAdmin ? 'Админ' : (q.fromHelper ? 'Помощник' : 'Пользователь');
+            const user = getUserById(q.userId);
+            const name = user ? user.nick || user.fio : 'Неизвестный';
+            return `<div class="msg ${isAdminMsg ? 'msg-admin' : 'msg-user'}">
+                <span>${q.text}</span>
+                ${isAdminMsg ? `<span class="admin-tag" onclick="alert('ID: ${q.userId || ADMIN_ID}')">A</span>` : ''}
+                <span style="font-size:0.7rem; color:#888; margin-left:auto;">${name}</span>
+            </div>`;
+        }).join('');
+    }
 
-        function autoBanUser(userId) {
-            const value = document.getElementById('autoBanValue').value.trim();
-            const unit = document.getElementById('autoBanUnit').value;
-            const reason = document.getElementById('autoBanReason').value.trim() || '3 варна';
-            if (!value || isNaN(value)) {
-                alert('Введите срок бана!');
-                return;
-            }
-            const num = parseInt(value);
-            const user = appData.users.find(u => u.id === userId);
-            if (!user) return;
-            const expiry = new Date(Date.now() + getMsFromUnit(num, unit));
-            user.banned = true;
-            user.banExpiry = expiry.toISOString();
-            user.banReason = reason;
-            saveAllData().then(() => { refreshUsers();
-                closeModal(); });
+    function renderNews() {
+        if (!newsFeed) return;
+        if (news.length === 0) {
+            newsFeed.innerHTML = '<div class="msg" style="color:#888;">Новостей пока нет</div>';
+            return;
         }
+        newsFeed.innerHTML = news.map(n => 
+            `<div class="msg">${n.text} <span style="font-size:0.7rem;color:#888;margin-left:auto;">${n.date || ''}</span></div>`
+        ).join('');
+    }
 
-        function getMsFromUnit(value, unit) {
-            const map = {
-                minutes: 60 * 1000,
-                hours: 60 * 60 * 1000,
-                days: 24 * 60 * 60 * 1000,
-                months: 30 * 24 * 60 * 60 * 1000,
-                years: 365 * 24 * 60 * 60 * 1000
-            };
-            return value * (map[unit] || 60 * 1000);
+    function renderProofs() {
+        if (!proofsList) return;
+        if (proofs.length === 0) {
+            proofsList.innerHTML = '<div style="color:#888; font-size:0.9rem;">Доказательств пока нет</div>';
+            return;
         }
+        proofsList.innerHTML = proofs.map(p => 
+            `<div class="user-card">
+                <span>ID: ${p.userId}</span>
+                <span style="font-size:0.8rem;color:#888;">${p.date || ''}</span>
+                <span class="badge">📎 загружено</span>
+            </div>`
+        ).join('');
+    }
 
-        function closeModal() {
-            document.getElementById('modalOverlay').classList.add('hidden');
+    function renderUserList() {
+        if (!userListContainer) return;
+        if (users.length === 0) {
+            userListContainer.innerHTML = '<div style="color:#888;">Нет пользователей</div>';
+            return;
         }
-
-        // ============================================================
-        //  ADMIN CHAT VIEW
-        // ============================================================
-        function viewAdminChat(type) {
-            adminChatType = type;
-            const container = document.getElementById('adminChatView');
-            const messages = type === 'complaint' ? appData.complaints : appData.questions;
-            if (messages.length === 0) {
-                container.innerHTML = '<p style="color:var(--text-muted);">Сообщений нет</p>';
-                return;
-            }
-            let html = `<div style="display:flex;flex-direction:column;gap:8px;max-height:400px;overflow-y:auto;">`;
-            messages.forEach(msg => {
-                const isAdmin = msg.isAdmin || msg.adminId;
-                html += `
-              <div style="background:var(--bg-secondary);padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid ${isAdmin ? 'var(--gold)' : 'var(--border-subtle)'};">
-                <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text-muted);">
-                  <span>${msg.userName || 'Пользователь'} (ID: ${msg.userId})</span>
-                  <span>${new Date(msg.timestamp).toLocaleString()}</span>
-                </div>
-                <div style="margin-top:4px;">${msg.message}</div>
-                ${isAdmin ? `<div style="font-size:0.7rem;color:var(--gold);margin-top:4px;">✉ Ответ админа</div>` : ''}
-                ${!isAdmin && (currentUser.isAdmin || currentUser.isAssistant) ? `
-                  <div style="margin-top:6px;">
-                    <input type="text" id="adminReply_${msg.id}" placeholder="Ответить..." style="background:var(--bg-primary);border:1px solid var(--border-subtle);border-radius:6px;padding:6px 10px;color:var(--text-primary);width:70%;font-size:0.85rem;" />
-                    <button class="btn btn-xs btn-gold" onclick="adminReply('${type}','${msg.id}')">Ответить</button>
-                  </div>
+        userListContainer.innerHTML = users.map(u => {
+            const userWarns = getUserWarns(u.id).length;
+            const userBans = getUserBans(u.id).length;
+            const isBanned = isUserBanned(u.id);
+            return `<div class="user-card">
+                <span><strong>${u.fio}</strong> (${u.nick})</span>
+                <span>ID: ${u.id}</span>
+                <span>⚠️ ${userWarns} | 🔨 ${userBans}</span>
+                ${isBanned ? '<span style="color:#dc3545;">🔒 Забанен</span>' : ''}
+                ${isAdmin() ? `
+                    <div style="display:flex; gap:6px;">
+                        <button class="btn" style="padding:4px 12px; font-size:0.8rem;" onclick="adminAction('warn','${u.id}')">Варн</button>
+                        <button class="btn" style="padding:4px 12px; font-size:0.8rem;" onclick="adminAction('ban','${u.id}')">Бан</button>
+                    </div>
                 ` : ''}
-              </div>
-            `;
-            });
-            html += `</div>`;
-            container.innerHTML = html;
-        }
+            </div>`;
+        }).join('');
+        userCount.textContent = users.length;
+        banCount.textContent = bans.length;
+        warnCount.textContent = warns.length;
+    }
 
-        async function adminReply(type, msgId) {
-            const input = document.getElementById(`adminReply_${msgId}`);
-            const text = input.value.trim();
-            if (!text) return;
-            const messages = type === 'complaint' ? appData.complaints : appData.questions;
-            const msg = messages.find(m => m.id === msgId);
-            if (!msg) return;
-            const reply = {
-                id: generateId(),
-                userId: currentUser.id,
-                userName: currentUser.fullName,
-                message: text,
-                timestamp: Date.now(),
-                isAdmin: true,
-                adminId: currentUser.id
-            };
-            messages.push(reply);
-            await saveAllData();
-            viewAdminChat(type);
-            if (type === 'complaint') renderChat('complaint');
-            else renderChat('question');
-        }
+    function renderProfile() {
+        if (!currentUser) return;
+        document.getElementById('profileId').textContent = currentUser.id || '—';
+        document.getElementById('profileFio').textContent = currentUser.fio || '—';
+        document.getElementById('profileEmail').textContent = currentUser.email || '—';
+        document.getElementById('profileNick').textContent = currentUser.nick || '—';
+        document.getElementById('profileTg').textContent = currentUser.tg || '—';
+        const role = isAdmin() ? 'Администратор' : (isHelper() ? 'Помощник' : 'Пользователь');
+        document.getElementById('profileRole').textContent = role;
+    }
 
-        // ============================================================
-        //  BANS LIST
-        // ============================================================
-        function renderBansList() {
-            const container = document.getElementById('bansList');
-            if (!container) return;
-            const banned = appData.users.filter(u => u.banned);
-            if (banned.length === 0) {
-                container.innerHTML = '<p style="color:var(--text-muted);">Нет забаненных пользователей</p>';
+    function updateUI() {
+        if (!currentUser) {
+            authSection.classList.remove('hidden');
+            mainApp.classList.add('hidden');
+            return;
+        }
+        authSection.classList.add('hidden');
+        mainApp.classList.remove('hidden');
+        
+        const displayName = currentUser.fio || currentUser.nick || 'Пользователь';
+        userDisplay.textContent = `${displayName} (ID: ${currentUser.id || '—'})`;
+        
+        const isAdminUser = isAdmin();
+        const isHelperUser = isHelper();
+        
+        if (isAdminUser) {
+            adminPanel.classList.remove('hidden');
+            adminNewsArea.classList.remove('hidden');
+        } else {
+            adminPanel.classList.add('hidden');
+            adminNewsArea.classList.add('hidden');
+        }
+        
+        renderComplaints();
+        renderQuestions();
+        renderNews();
+        renderUserList();
+        renderProofs();
+        renderProfile();
+    }
+
+    // ===== ОБРАБОТЧИКИ =====
+    // Авторизация
+    function login(fio, pass) {
+        const user = users.find(u => u.fio === fio && u.password === pass);
+        if (user) {
+            if (isUserBanned(user.id)) {
+                authStatus.textContent = '❌ Ваш аккаунт заблокирован';
+                return false;
+            }
+            currentUser = user;
+            updateUI();
+            authStatus.textContent = '';
+            return true;
+        } else if (fio === ADMIN_FIO && pass === ADMIN_PASS) {
+            let adminUser = users.find(u => u.id === ADMIN_ID);
+            if (!adminUser) {
+                adminUser = { 
+                    fio: ADMIN_FIO, 
+                    password: ADMIN_PASS, 
+                    email: 'admin@misha.support', 
+                    nick: 'admin', 
+                    tg: '@admin', 
+                    id: ADMIN_ID 
+                };
+                users.push(adminUser);
+                saveAll();
+            }
+            currentUser = adminUser;
+            updateUI();
+            authStatus.textContent = '';
+            return true;
+        } else {
+            authStatus.textContent = '❌ Неверное ФИО или пароль';
+            return false;
+        }
+    }
+
+    loginBtn.addEventListener('click', () => {
+        login(loginFio.value.trim(), loginPass.value.trim());
+    });
+
+    loginFio.addEventListener('keypress', (e) => { if (e.key === 'Enter') loginBtn.click(); });
+    loginPass.addEventListener('keypress', (e) => { if (e.key === 'Enter') loginBtn.click(); });
+
+    showRegisterBtn.addEventListener('click', () => {
+        registerForm.classList.toggle('hidden');
+    });
+
+    registerBtn.addEventListener('click', () => {
+        const fio = regFio.value.trim();
+        const email = regEmail.value.trim();
+        const nick = regNick.value.trim();
+        const tg = regTg.value.trim();
+        const pass = regPass.value.trim();
+        if (!fio || !email || !nick || !tg || !pass) {
+            authStatus.textContent = '❌ Заполните все поля';
+            return;
+        }
+        if (users.find(u => u.fio === fio)) {
+            authStatus.textContent = '❌ Пользователь с таким ФИО уже существует';
+            return;
+        }
+        if (users.find(u => u.email === email)) {
+            authStatus.textContent = '❌ Этот email уже зарегистрирован';
+            return;
+        }
+        const newUser = { 
+            fio, email, nick, tg, 
+            password: pass, 
+            id: String(nextId++)
+        };
+        users.push(newUser);
+        saveAll();
+        authStatus.textContent = '✅ Регистрация успешна! Войдите.';
+        registerForm.classList.add('hidden');
+        regFio.value = regEmail.value = regNick.value = regTg.value = regPass.value = '';
+    });
+
+    logoutBtn.addEventListener('click', () => {
+        currentUser = null;
+        updateUI();
+    });
+
+    // Переключение разделов
+    sectionBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const sec = btn.dataset.section;
+            document.querySelectorAll('.section-content').forEach(el => el.classList.add('hidden'));
+            sectionBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            if (sec === 'faq') faqContent.classList.remove('hidden');
+            else if (sec === 'complaint') complaintContent.classList.remove('hidden');
+            else if (sec === 'question') questionContent.classList.remove('hidden');
+            else if (sec === 'about') aboutContent.classList.remove('hidden');
+            else if (sec === 'news') newsContent.classList.remove('hidden');
+            else if (sec === 'profile') {
+                profileContent.classList.remove('hidden');
+                renderProfile();
+            }
+        });
+    });
+
+    // Отправка жалобы
+    sendComplaintBtn.addEventListener('click', () => {
+        const text = complaintInput.value.trim();
+        if (!text) return;
+        if (isUserBanned(currentUser.id)) {
+            alert('❌ Вы забанены и не можете писать в чаты');
+            return;
+        }
+        complaints.push({ 
+            text, 
+            fromAdmin: isAdmin(), 
+            fromHelper: isHelper(), 
+            userId: currentUser.id,
+            date: new Date().toISOString()
+        });
+        saveAll();
+        renderComplaints();
+        complaintInput.value = '';
+    });
+
+    // Отправка вопроса
+    sendQuestionBtn.addEventListener('click', () => {
+        const text = questionInput.value.trim();
+        if (!text) return;
+        if (isUserBanned(currentUser.id)) {
+            alert('❌ Вы забанены и не можете писать в чаты');
+            return;
+        }
+        questions.push({ 
+            text, 
+            fromAdmin: isAdmin(), 
+            fromHelper: isHelper(), 
+            userId: currentUser.id,
+            date: new Date().toISOString()
+        });
+        saveAll();
+        renderQuestions();
+        questionInput.value = '';
+    });
+
+    // Новости (только админ)
+    postNewsBtn.addEventListener('click', () => {
+        if (!isAdmin()) return;
+        const text = newsInput.value.trim();
+        if (!text) return;
+        news.push({ text, date: new Date().toLocaleString(), author: currentUser.fio });
+        saveAll();
+        renderNews();
+        newsInput.value = '';
+    });
+
+    // ===== АДМИН-ФУНКЦИИ =====
+    window.adminAction = function(type, userId) {
+        if (!isAdmin()) return;
+        modalType = type;
+        modalTitle.textContent = type === 'warn' ? '⚠️ Выдача предупреждения' : '🔨 Бан пользователя';
+        modalUserId.value = userId || '';
+        modalDuration.value = '';
+        modalReason.value = '';
+        punishModal.classList.remove('hidden');
+        
+        modalCallback = function() {
+            const targetId = modalUserId.value.trim();
+            const duration = modalDuration.value.trim();
+            const unit = modalUnit.value;
+            const reason = modalReason.value.trim();
+            if (!targetId || !duration || !reason) {
+                alert('Заполните все поля');
                 return;
             }
-            let html = '';
-            banned.forEach(u => {
-                const expiry = u.banExpiry ? new Date(u.banExpiry) : null;
-                html += `
-              <div class="user-list-item">
-                <div class="user-info">
-                  <span><strong>${u.fullName}</strong></span>
-                  <span class="id-badge">ID: ${u.id}</span>
-                  ${expiry ? `<span style="color:var(--text-muted);font-size:0.8rem;">до ${expiry.toLocaleString()}</span>` : '<span style="color:var(--text-muted);font-size:0.8rem;">Навсегда</span>'}
-                  <span style="color:var(--text-muted);font-size:0.8rem;">Причина: ${u.banReason || 'Не указана'}</span>
-                </div>
-                <div class="user-actions">
-                  <button class="btn btn-sm btn-outline-gold" onclick="userAction('unban','${u.id}')">Разбанить</button>
-                </div>
-              </div>
-            `;
-            });
-            container.innerHTML = html;
-        }
-
-        // ============================================================
-        //  ASSISTANTS
-        // ============================================================
-        async function makeAssistant(userId) {
-            const user = appData.users.find(u => u.id === userId);
-            if (!user) return;
-            if (user.isAdmin) { alert('Админ не может быть помощником.'); return; }
-            user.isAssistant = true;
-            if (!appData.assistants) appData.assistants = [];
-            if (!appData.assistants.includes(userId)) {
-                appData.assistants.push(userId);
-            }
-            await saveAllData();
-            refreshUsers();
-            renderAssistants();
-        }
-
-        async function removeAssistant(userId) {
-            const user = appData.users.find(u => u.id === userId);
-            if (!user) return;
-            user.isAssistant = false;
-            if (appData.assistants) {
-                appData.assistants = appData.assistants.filter(id => id !== userId);
-            }
-            await saveAllData();
-            refreshUsers();
-            renderAssistants();
-        }
-
-        function renderAssistants() {
-            const container = document.getElementById('assistantsList');
-            if (!container) return;
-            const assistants = appData.users.filter(u => u.isAssistant);
-            if (assistants.length === 0) {
-                container.innerHTML = '<p style="color:var(--text-muted);">Нет назначенных помощников</p>';
+            const targetUser = getUserById(targetId);
+            if (!targetUser) {
+                alert('Пользователь не найден');
                 return;
             }
-            let html = '';
-            assistants.forEach(a => {
-                html += `
-              <div class="user-list-item">
-                <div class="user-info">
-                  <span><strong>${a.fullName}</strong></span>
-                  <span class="id-badge">ID: ${a.id}</span>
-                </div>
-                <div class="user-actions">
-                  <button class="btn btn-sm btn-outline-gold" onclick="removeAssistant('${a.id}')">Убрать</button>
-                </div>
-              </div>
-            `;
-            });
-            container.innerHTML = html;
-        }
-
-        // ============================================================
-        //  EVIDENCE
-        // ============================================================
-        async function addEvidence() {
-            const userId = document.getElementById('evidenceUserId').value.trim();
-            const url = document.getElementById('evidenceUrl').value.trim();
-            if (!userId || !url) {
-                alert('Введите ID пользователя и URL фото!');
-                return;
-            }
-            if (!appData.evidences) appData.evidences = [];
-            appData.evidences.push({
-                id: generateId(),
-                userId,
-                url,
-                timestamp: Date.now(),
-                adminId: currentUser.id
-            });
-            await saveAllData();
-            renderEvidence();
-            document.getElementById('evidenceUserId').value = '';
-            document.getElementById('evidenceUrl').value = '';
-        }
-
-        function renderEvidence() {
-            const container = document.getElementById('evidenceList');
-            if (!container) return;
-            if (!appData.evidences || appData.evidences.length === 0) {
-                container.innerHTML = '<p style="color:var(--text-muted);">Нет загруженных доказательств</p>';
-                return;
-            }
-            let html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">';
-            appData.evidences.slice().reverse().forEach(e => {
-                html += `
-              <div style="background:var(--bg-secondary);border-radius:var(--radius-sm);padding:12px;border:1px solid var(--border-subtle);">
-                <div style="font-size:0.8rem;color:var(--text-muted);">ID пользователя: ${e.userId}</div>
-                <img src="${e.url}" alt="Evidence" style="max-width:100%;max-height:120px;object-fit:cover;border-radius:6px;margin-top:6px;" onerror="this.style.display='none'" />
-                <div style="font-size:0.7rem;color:var(--text-muted);margin-top:4px;">${new Date(e.timestamp).toLocaleString()}</div>
-              </div>
-            `;
-            });
-            html += '</div>';
-            container.innerHTML = html;
-        }
-
-        // ============================================================
-        //  PUNISHMENT FROM ADMIN TAB
-        // ============================================================
-        async function applyPunishment() {
-            const userId = document.getElementById('punishUserId').value.trim();
-            const type = document.getElementById('punishType').value;
-            const value = document.getElementById('punishValue').value.trim();
-            const unit = document.getElementById('punishUnit').value;
-            const reason = document.getElementById('punishReason').value.trim() || 'Не указана';
-
-            if (!userId || !value || isNaN(value)) {
-                alert('Заполните все поля корректно!');
-                return;
-            }
-            const user = appData.users.find(u => u.id === userId);
-            if (!user) {
-                alert('Пользователь не найден!');
-                return;
-            }
-            const num = parseInt(value);
-
             if (type === 'warn') {
-                if (!user.warnings) user.warnings = [];
-                user.warnings.push({ time: Date.now(), reason, unit, value: num });
-                if (user.warnings.length >= 3) {
-                    alert(`⚠️ У пользователя ${user.fullName} 3 варна! Используйте раздел "Баны и варны" для выдачи бана.`);
+                warns.push({ userId: targetId, reason, duration, unit, date: new Date().toISOString() });
+                // Проверка на 3 предупреждения
+                const userWarns = getUserWarns(targetId);
+                if (userWarns.length >= 3) {
+                    alert(`⚠️ У пользователя ${targetUser.fio} накопилось 3 предупреждения! Рекомендуется бан.`);
                 }
             } else if (type === 'ban') {
-                const expiry = new Date(Date.now() + getMsFromUnit(num, unit));
-                user.banned = true;
-                user.banExpiry = expiry.toISOString();
-                user.banReason = reason;
+                bans.push({ userId: targetId, reason, duration, unit, date: new Date().toISOString() });
             }
-            await saveAllData();
-            refreshUsers();
-            renderBansList();
-            alert('Наказание применено!');
-            document.getElementById('punishUserId').value = '';
-            document.getElementById('punishValue').value = '';
-            document.getElementById('punishReason').value = '';
-        }
+            saveAll();
+            renderUserList();
+            punishModal.classList.add('hidden');
+            alert(`✅ ${type === 'warn' ? 'Предупреждение' : 'Бан'} выдан пользователю ${targetUser.fio}`);
+        };
+    };
 
-        // ============================================================
-        //  ASSIGN ASSISTANT FROM SETTINGS
-        // ============================================================
-        async function assignAssistant() {
-            const userId = document.getElementById('assistantUserId').value.trim();
-            if (!userId) {
-                alert('Введите ID пользователя!');
+    adminBanBtn.addEventListener('click', () => {
+        if (!isAdmin()) return;
+        modalType = 'ban';
+        modalTitle.textContent = '🔨 Бан пользователя';
+        modalUserId.value = '';
+        modalDuration.value = '';
+        modalReason.value = '';
+        punishModal.classList.remove('hidden');
+        modalCallback = function() {
+            const targetId = modalUserId.value.trim();
+            const duration = modalDuration.value.trim();
+            const unit = modalUnit.value;
+            const reason = modalReason.value.trim();
+            if (!targetId || !duration || !reason) {
+                alert('Заполните все поля');
                 return;
             }
-            const user = appData.users.find(u => u.id === userId);
-            if (!user) {
-                alert('Пользователь не найден!');
+            const targetUser = getUserById(targetId);
+            if (!targetUser) {
+                alert('Пользователь не найден');
                 return;
             }
-            if (user.isAdmin) {
-                alert('Админ не может быть помощником.');
+            bans.push({ userId: targetId, reason, duration, unit, date: new Date().toISOString() });
+            saveAll();
+            renderUserList();
+            punishModal.classList.add('hidden');
+            alert(`✅ Пользователь ${targetUser.fio} забанен`);
+        };
+    });
+
+    adminWarnBtn.addEventListener('click', () => {
+        if (!isAdmin()) return;
+        modalType = 'warn';
+        modalTitle.textContent = '⚠️ Выдача предупреждения';
+        modalUserId.value = '';
+        modalDuration.value = '';
+        modalReason.value = '';
+        punishModal.classList.remove('hidden');
+        modalCallback = function() {
+            const targetId = modalUserId.value.trim();
+            const duration = modalDuration.value.trim();
+            const unit = modalUnit.value;
+            const reason = modalReason.value.trim();
+            if (!targetId || !duration || !reason) {
+                alert('Заполните все поля');
                 return;
             }
-            user.isAssistant = true;
-            if (!appData.assistants) appData.assistants = [];
-            if (!appData.assistants.includes(userId)) {
-                appData.assistants.push(userId);
+            const targetUser = getUserById(targetId);
+            if (!targetUser) {
+                alert('Пользователь не найден');
+                return;
             }
-            await saveAllData();
-            refreshUsers();
-            renderAssistants();
-            document.getElementById('assistantUserId').value = '';
-            alert('Помощник назначен!');
+            warns.push({ userId: targetId, reason, duration, unit, date: new Date().toISOString() });
+            const userWarns = getUserWarns(targetId);
+            if (userWarns.length >= 3) {
+                alert(`⚠️ У пользователя ${targetUser.fio} накопилось 3 предупреждения! Рекомендуется бан.`);
+            }
+            saveAll();
+            renderUserList();
+            punishModal.classList.add('hidden');
+            alert(`✅ Предупреждение выдано ${targetUser.fio}`);
+        };
+    });
+
+    modalConfirm.addEventListener('click', () => {
+        if (modalCallback) modalCallback();
+    });
+
+    modalCancel.addEventListener('click', () => {
+        punishModal.classList.add('hidden');
+        modalCallback = null;
+    });
+
+    // Снятие наказания
+    adminUnbanBtn.addEventListener('click', () => {
+        if (!isAdmin()) return;
+        const userId = prompt('Введите ID пользователя для снятия наказания:');
+        if (!userId) return;
+        const targetUser = getUserById(userId);
+        if (!targetUser) {
+            alert('Пользователь не найден');
+            return;
         }
-
-        // ============================================================
-        //  RENDER ALL
-        // ============================================================
-        function renderAll() {
-            if (currentSection === 'news') renderNews();
-            if (currentSection === 'complaint') renderChat('complaint');
-            if (currentSection === 'question') renderChat('question');
-            if (currentSection === 'admin') {
-                refreshUsers();
-                renderBansList();
-                renderAssistants();
-                renderEvidence();
-                renderAdminNews();
-            }
+        const beforeBans = bans.length;
+        const beforeWarns = warns.length;
+        bans = bans.filter(b => b.userId !== userId);
+        warns = warns.filter(w => w.userId !== userId);
+        if (bans.length < beforeBans || warns.length < beforeWarns) {
+            saveAll();
+            renderUserList();
+            alert(`✅ Наказания сняты с ${targetUser.fio}`);
+        } else {
+            alert('У пользователя нет активных наказаний');
         }
+    });
 
-        // ============================================================
-        //  INIT
-        // ============================================================
-        (async function init() {
-            await loadAllData();
-            
-            const remembered = localStorage.getItem('rememberedUser');
-            if (remembered) {
-                try {
-                    const data = JSON.parse(remembered);
-                    document.getElementById('loginFullName').value = data.fullName;
-                    document.getElementById('loginPassword').value = data.password;
-                    document.getElementById('rememberMe').checked = true;
-                    await handleLogin();
-                } catch (e) {
-                    console.warn('Failed to auto-login:', e);
-                }
-            }
-            
-            document.getElementById('authPage').classList.remove('hidden');
-            document.getElementById('mainApp').classList.add('hidden');
-        })();
+    // Назначить помощника
+    adminAssignHelperBtn.addEventListener('click', () => {
+        if (!isAdmin()) return;
+        const userId = prompt('Введите ID пользователя для назначения помощником:');
+        if (!userId) return;
+        const targetUser = getUserById(userId);
+        if (!targetUser) {
+            alert('Пользователь не найден');
+            return;
+        }
+        if (helpers.includes(userId)) {
+            alert('Этот пользователь уже является помощником');
+            return;
+        }
+        helpers.push(userId);
+        saveAll();
+        renderUserList();
+        alert(`✅ ${targetUser.fio} назначен помощником`);
+    });
 
-        // ============================================================
-        //  GLOBAL EXPOSURE
-        // ============================================================
-        window.showRegister = showRegister;
-        window.showLogin = showLogin;
-        window.handleRegister = handleRegister;
-        window.handleLogin = handleLogin;
-        window.handleLogout = handleLogout;
-        window.navigateTo = navigateTo;
-        window.goBack = goBack;
-        window.sendComplaint = sendComplaint;
-        window.sendQuestion = sendQuestion;
-        window.showAdminPanel = showAdminPanel;
-        window.closeAdminPanel = closeAdminPanel;
-        window.switchAdminTab = switchAdminTab;
-        window.refreshUsers = refreshUsers;
-        window.userAction = userAction;
-        window.viewAdminChat = viewAdminChat;
-        window.adminReply = adminReply;
-        window.makeAssistant = makeAssistant;
-        window.removeAssistant = removeAssistant;
-        window.addEvidence = addEvidence;
-        window.applyPunishment = applyPunishment;
-        window.assignAssistant = assignAssistant;
-        window.closeModal = closeModal;
-        window.executePunish = executePunish;
-        window.autoBanUser = autoBanUser;
-        window.showAdminId = showAdminId;
-        window.renderChat = renderChat;
-        window.addNews = addNews;
-        window.deleteNews = deleteNews;
-        window.renderNews = renderNews;
-        window.renderAdminNews = renderAdminNews;
-    </script>
+    // Очистка чатов (только админ)
+    adminClearChatBtn.addEventListener('click', () => {
+        if (!isAdmin()) return;
+        if (confirm('Очистить все чаты (жалобы и вопросы)?')) {
+            complaints = [];
+            questions = [];
+            saveAll();
+            renderComplaints();
+            renderQuestions();
+            alert('✅ Чаты очищены');
+        }
+    });
 
+    // Загрузка доказательств
+    uploadProofBtn.addEventListener('click', () => {
+        if (!isAdmin()) return;
+        const userId = proofUserId.value.trim();
+        if (!userId) {
+            alert('Введите ID пользователя');
+            return;
+        }
+        const file = proofFile.files[0];
+        if (!file) {
+            alert('Выберите файл');
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            proofs.push({ 
+                userId, 
+                data: e.target.result, 
+                date: new Date().toISOString(),
+                fileName: file.name
+            });
+            saveAll();
+            renderProofs();
+            alert('✅ Доказательство загружено');
+            proofUserId.value = '';
+            proofFile.value = '';
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // ===== ИНИЦИАЛИЗАЦИЯ =====
+    // Добавляем тестовых пользователей, если их нет
+    if (!localStorage.getItem('misha_users') || users.length === 0) {
+        users = [
+            { fio: 'Иван Иванов', email: 'ivan@mail.ru', nick: 'ivan', tg: '@ivan', password: '123', id: 'abc001' },
+            { fio: 'Петр Петров', email: 'petr@mail.ru', nick: 'petr', tg: '@petr', password: '123', id: 'abc002' }
+        ];
+        saveAll();
+    }
+
+    // Добавляем админа, если его нет
+    if (!users.find(u => u.id === ADMIN_ID)) {
+        users.push({ 
+            fio: ADMIN_FIO, 
+            password: ADMIN_PASS, 
+            email: 'admin@misha.support', 
+            nick: 'admin', 
+            tg: '@admin', 
+            id: ADMIN_ID 
+        });
+        saveAll();
+    }
+
+    updateUI();
+
+    // Автовход для демонстрации (можно убрать)
+    console.log('👋 Misha.Support загружен');
+    console.log('🔑 Админ: ' + ADMIN_FIO + ' / пароль: ' + ADMIN_PASS);
+    console.log('👤 Тестовый пользователь: Иван Иванов / пароль: 123');
+})();
+</script>
 </body>
 </html>
