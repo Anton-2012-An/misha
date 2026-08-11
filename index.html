@@ -24,7 +24,6 @@
             position: relative;
         }
 
-        /* Фон с пунктирными линиями */
         body::before {
             content: '';
             position: fixed;
@@ -362,11 +361,43 @@
             margin-bottom: 16px;
         }
 
+        .banned-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .banned-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 32px;
+            padding: 40px 48px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+        }
+        .banned-card h2 {
+            color: #dc3545;
+            margin-bottom: 12px;
+        }
+        .banned-card .timer {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1a1a1e;
+            margin: 16px 0;
+        }
+
         @media (max-width: 640px) {
             .app { padding: 20px; }
             .premium-title { font-size: 1.8rem; }
             .modal { padding: 24px; }
             .card-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+            .banned-card { padding: 24px; }
         }
 
         .chat-box::-webkit-scrollbar {
@@ -621,6 +652,17 @@
     </div>
 </div>
 
+<!-- Оверлей бана -->
+<div id="bannedOverlay" class="banned-overlay hidden">
+    <div class="banned-card">
+        <h2>🔒 Аккаунт заблокирован</h2>
+        <p id="banReason" style="color: #6e6e73; margin-bottom: 8px;">Причина: нарушение правил</p>
+        <p style="color: #6e6e73; margin-bottom: 16px;">Осталось времени:</p>
+        <div class="timer" id="banTimer">--:--</div>
+        <button class="btn btn-primary" id="banRefreshBtn" style="margin-top: 16px;">🔄 Проверить статус</button>
+    </div>
+</div>
+
 <script>
 (function() {
     // ===== СОСТОЯНИЕ =====
@@ -640,6 +682,7 @@
     const ADMIN_ID = '11111';
 
     let modalCallback = null;
+    let banTimerInterval = null;
 
     // ===== DOM =====
     const authSection = document.getElementById('authSection');
@@ -700,6 +743,11 @@
     const modalConfirm = document.getElementById('modalConfirm');
     const modalCancel = document.getElementById('modalCancel');
 
+    const bannedOverlay = document.getElementById('bannedOverlay');
+    const banTimer = document.getElementById('banTimer');
+    const banReason = document.getElementById('banReason');
+    const banRefreshBtn = document.getElementById('banRefreshBtn');
+
     // ===== ФУНКЦИИ СОХРАНЕНИЯ =====
     function saveAll() {
         localStorage.setItem('misha_users', JSON.stringify(users));
@@ -716,12 +764,105 @@
     // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
     function isAdmin() { return currentUser && currentUser.id === ADMIN_ID; }
     function isHelper() { return currentUser && helpers.includes(currentUser.id); }
-    function canModerate() { return isAdmin() || isHelper(); }
 
     function getUserById(id) { return users.find(u => u.id === id); }
     function getUserWarns(id) { return warns.filter(w => w.userId === id); }
-    function getUserBans(id) { return bans.filter(b => b.userId === id); }
-    function isUserBanned(id) { return bans.some(b => b.userId === id && !b.unbanned); }
+    function getUserBans(id) { return bans.filter(b => b.userId === id && !b.unbanned); }
+
+    // ===== ПРОВЕРКА И СНЯТИЕ БАНА ПО ВРЕМЕНИ =====
+    function checkAndRemoveExpiredBans() {
+        let removed = false;
+        const now = Date.now();
+        
+        bans = bans.map(ban => {
+            if (ban.unbanned) return ban;
+            
+            // Если есть время окончания и оно прошло
+            if (ban.expiresAt && now >= ban.expiresAt) {
+                ban.unbanned = true;
+                ban.unbannedAt = new Date().toLocaleString();
+                removed = true;
+                return ban;
+            }
+            return ban;
+        });
+        
+        if (removed) {
+            saveAll();
+            renderUserList();
+            renderProfile();
+        }
+        return removed;
+    }
+
+    // ===== ПОЛУЧЕНИЕ АКТИВНОГО БАНА ПОЛЬЗОВАТЕЛЯ =====
+    function getActiveBan(userId) {
+        checkAndRemoveExpiredBans();
+        return bans.find(b => b.userId === userId && !b.unbanned);
+    }
+
+    function isUserBanned(userId) {
+        return !!getActiveBan(userId);
+    }
+
+    // ===== РАСЧЁТ ОСТАВШЕГОСЯ ВРЕМЕНИ БАНА =====
+    function getBanTimeLeft(ban) {
+        if (!ban || ban.unbanned || !ban.expiresAt) return null;
+        const now = Date.now();
+        if (now >= ban.expiresAt) {
+            ban.unbanned = true;
+            saveAll();
+            return null;
+        }
+        return ban.expiresAt - now;
+    }
+
+    function formatTimeLeft(ms) {
+        if (ms === null || ms === undefined || ms <= 0) return '0:00';
+        const totalSeconds = Math.floor(ms / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // ===== ОТОБРАЖЕНИЕ ЭКРАНА БАНА =====
+    function showBanScreen(ban) {
+        if (!ban) {
+            bannedOverlay.classList.add('hidden');
+            if (banTimerInterval) {
+                clearInterval(banTimerInterval);
+                banTimerInterval = null;
+            }
+            return;
+        }
+        
+        bannedOverlay.classList.remove('hidden');
+        banReason.textContent = `Причина: ${ban.reason || 'Нарушение правил'}`;
+        
+        function updateTimer() {
+            const timeLeft = getBanTimeLeft(ban);
+            if (timeLeft === null || timeLeft <= 0) {
+                banTimer.textContent = '0:00';
+                // Бан снят, обновляем статус
+                checkAndRemoveExpiredBans();
+                if (!isUserBanned(ban.userId)) {
+                    showBanScreen(null);
+                    // Если это был текущий пользователь, разблокируем его
+                    if (currentUser && currentUser.id === ban.userId) {
+                        updateUI();
+                    }
+                }
+                return;
+            }
+            banTimer.textContent = formatTimeLeft(timeLeft);
+        }
+        
+        if (banTimerInterval) {
+            clearInterval(banTimerInterval);
+        }
+        updateTimer();
+        banTimerInterval = setInterval(updateTimer, 1000);
+    }
 
     // ===== РЕНДЕРИНГ =====
     function renderComplaints() {
@@ -796,21 +937,24 @@
             const userWarns = getUserWarns(u.id).length;
             const userBans = getUserBans(u.id).length;
             const isBanned = isUserBanned(u.id);
+            const activeBan = getActiveBan(u.id);
+            const banTimeLeft = activeBan ? formatTimeLeft(getBanTimeLeft(activeBan)) : '';
             return `<div class="user-card">
                 <span><strong>${u.fio}</strong> (${u.nick})</span>
                 <span>ID: ${u.id}</span>
                 <span>⚠️ ${userWarns} | 🔨 ${userBans}</span>
-                ${isBanned ? '<span style="color:#dc3545;">🔒 Забанен</span>' : ''}
+                ${isBanned ? `<span style="color:#dc3545;">🔒 Забанен ${banTimeLeft ? 'осталось ' + banTimeLeft : ''}</span>` : ''}
                 ${isAdmin() ? `
                     <div style="display:flex; gap:6px;">
                         <button class="btn" style="padding:4px 12px; font-size:0.8rem;" onclick="adminAction('warn','${u.id}')">Варн</button>
                         <button class="btn" style="padding:4px 12px; font-size:0.8rem;" onclick="adminAction('ban','${u.id}')">Бан</button>
+                        ${isBanned ? `<button class="btn btn-success" style="padding:4px 12px; font-size:0.8rem;" onclick="unbanUser('${u.id}')">Разбан</button>` : ''}
                     </div>
                 ` : ''}
             </div>`;
         }).join('');
         userCount.textContent = users.length;
-        banCount.textContent = bans.length;
+        banCount.textContent = bans.filter(b => !b.unbanned).length;
         warnCount.textContent = warns.length;
     }
 
@@ -824,18 +968,64 @@
         const role = isAdmin() ? 'Администратор' : (isHelper() ? 'Помощник' : 'Пользователь');
         document.getElementById('profileRole').textContent = role;
         document.getElementById('profileWarns').textContent = getUserWarns(currentUser.id).length;
-        document.getElementById('profileStatus').textContent = isUserBanned(currentUser.id) ? '🔒 Забанен' : '✅ Активен';
-        document.getElementById('profileStatus').style.color = isUserBanned(currentUser.id) ? '#dc3545' : '#28a745';
+        const isBanned = isUserBanned(currentUser.id);
+        document.getElementById('profileStatus').textContent = isBanned ? '🔒 Забанен' : '✅ Активен';
+        document.getElementById('profileStatus').style.color = isBanned ? '#dc3545' : '#28a745';
     }
+
+    // ===== ФУНКЦИЯ РАЗБАНА =====
+    window.unbanUser = function(userId) {
+        if (!isAdmin()) return;
+        const targetUser = getUserById(userId);
+        if (!targetUser) {
+            alert('Пользователь не найден');
+            return;
+        }
+        const activeBan = getActiveBan(userId);
+        if (!activeBan) {
+            alert('У пользователя нет активного бана');
+            return;
+        }
+        activeBan.unbanned = true;
+        activeBan.unbannedAt = new Date().toLocaleString();
+        saveAll();
+        renderUserList();
+        renderProfile();
+        // Если разбанен текущий пользователь
+        if (currentUser && currentUser.id === userId) {
+            showBanScreen(null);
+            updateUI();
+        }
+        alert(`✅ Бан снят с ${targetUser.fio}`);
+    };
 
     function updateUI() {
         if (!currentUser) {
             authSection.classList.remove('hidden');
             mainApp.classList.add('hidden');
+            bannedOverlay.classList.add('hidden');
+            if (banTimerInterval) {
+                clearInterval(banTimerInterval);
+                banTimerInterval = null;
+            }
             return;
         }
-        authSection.classList.add('hidden');
-        mainApp.classList.remove('hidden');
+        
+        // Проверяем бан
+        checkAndRemoveExpiredBans();
+        const activeBan = getActiveBan(currentUser.id);
+        
+        if (activeBan) {
+            // Показываем экран бана
+            showBanScreen(activeBan);
+            authSection.classList.add('hidden');
+            mainApp.classList.add('hidden');
+            return;
+        } else {
+            showBanScreen(null);
+            authSection.classList.add('hidden');
+            mainApp.classList.remove('hidden');
+        }
         
         const displayName = currentUser.fio || currentUser.nick || 'Пользователь';
         userDisplay.textContent = `${displayName} (ID: ${currentUser.id || '—'})`;
@@ -862,9 +1052,13 @@
     function login(fio, pass) {
         const user = users.find(u => u.fio === fio && u.password === pass);
         if (user) {
+            // Проверяем бан перед входом
+            checkAndRemoveExpiredBans();
             if (isUserBanned(user.id)) {
-                authStatus.textContent = '❌ Ваш аккаунт заблокирован';
-                return false;
+                currentUser = user;
+                updateUI();
+                authStatus.textContent = '';
+                return true;
             }
             currentUser = user;
             updateUI();
@@ -883,6 +1077,14 @@
                 };
                 users.push(adminUser);
                 saveAll();
+            }
+            // Проверяем бан админа
+            checkAndRemoveExpiredBans();
+            if (isUserBanned(adminUser.id)) {
+                currentUser = adminUser;
+                updateUI();
+                authStatus.textContent = '';
+                return true;
             }
             currentUser = adminUser;
             updateUI();
@@ -938,6 +1140,28 @@
     logoutBtn.addEventListener('click', () => {
         currentUser = null;
         updateUI();
+    });
+
+    // Кнопка обновления статуса бана
+    banRefreshBtn.addEventListener('click', () => {
+        if (currentUser) {
+            checkAndRemoveExpiredBans();
+            const activeBan = getActiveBan(currentUser.id);
+            if (!activeBan) {
+                showBanScreen(null);
+                updateUI();
+            } else {
+                const timeLeft = getBanTimeLeft(activeBan);
+                if (timeLeft === null || timeLeft <= 0) {
+                    activeBan.unbanned = true;
+                    saveAll();
+                    showBanScreen(null);
+                    updateUI();
+                } else {
+                    banTimer.textContent = formatTimeLeft(timeLeft);
+                }
+            }
+        }
     });
 
     // Переключение разделов
@@ -1034,19 +1258,54 @@
                 alert('Пользователь не найден');
                 return;
             }
+            
+            // Создаём время окончания бана
+            const now = Date.now();
+            const durationMs = parseInt(duration) * {
+                'minutes': 60 * 1000,
+                'hours': 60 * 60 * 1000,
+                'days': 24 * 60 * 60 * 1000,
+                'months': 30 * 24 * 60 * 60 * 1000,
+                'years': 365 * 24 * 60 * 60 * 1000
+            }[unit] || 60 * 1000;
+            
             if (type === 'warn') {
-                warns.push({ userId: targetId, reason, duration, unit, date: new Date().toLocaleString() });
+                warns.push({ 
+                    userId: targetId, 
+                    reason, 
+                    duration, 
+                    unit, 
+                    date: new Date().toLocaleString() 
+                });
                 const userWarns = getUserWarns(targetId);
                 if (userWarns.length >= 3) {
                     alert(`⚠️ У пользователя ${targetUser.fio} накопилось 3 предупреждения! Рекомендуется бан.`);
                 }
             } else if (type === 'ban') {
-                bans.push({ userId: targetId, reason, duration, unit, date: new Date().toLocaleString() });
+                // Сначала снимаем старый бан, если был
+                bans = bans.map(b => {
+                    if (b.userId === targetId) b.unbanned = true;
+                    return b;
+                });
+                bans.push({ 
+                    userId: targetId, 
+                    reason, 
+                    duration, 
+                    unit, 
+                    date: new Date().toLocaleString(),
+                    expiresAt: now + durationMs,
+                    unbanned: false
+                });
             }
             saveAll();
             renderUserList();
             punishModal.classList.add('hidden');
             alert(`✅ ${type === 'warn' ? 'Предупреждение' : 'Бан'} выдан пользователю ${targetUser.fio}`);
+            
+            // Если забанили админа или текущего пользователя, обновляем UI
+            if (type === 'ban' && currentUser && currentUser.id === targetId) {
+                updateUI();
+            }
         };
     };
 
@@ -1071,11 +1330,38 @@
                 alert('Пользователь не найден');
                 return;
             }
-            bans.push({ userId: targetId, reason, duration, unit, date: new Date().toLocaleString() });
+            
+            const now = Date.now();
+            const durationMs = parseInt(duration) * {
+                'minutes': 60 * 1000,
+                'hours': 60 * 60 * 1000,
+                'days': 24 * 60 * 60 * 1000,
+                'months': 30 * 24 * 60 * 60 * 1000,
+                'years': 365 * 24 * 60 * 60 * 1000
+            }[unit] || 60 * 1000;
+            
+            // Снимаем старый бан
+            bans = bans.map(b => {
+                if (b.userId === targetId) b.unbanned = true;
+                return b;
+            });
+            bans.push({ 
+                userId: targetId, 
+                reason, 
+                duration, 
+                unit, 
+                date: new Date().toLocaleString(),
+                expiresAt: now + durationMs,
+                unbanned: false
+            });
             saveAll();
             renderUserList();
             punishModal.classList.add('hidden');
-            alert(`✅ Пользователь ${targetUser.fio} забанен`);
+            alert(`✅ Пользователь ${targetUser.fio} забанен на ${duration} ${unit}`);
+            
+            if (currentUser && currentUser.id === targetId) {
+                updateUI();
+            }
         };
     });
 
@@ -1100,7 +1386,13 @@
                 alert('Пользователь не найден');
                 return;
             }
-            warns.push({ userId: targetId, reason, duration, unit, date: new Date().toLocaleString() });
+            warns.push({ 
+                userId: targetId, 
+                reason, 
+                duration, 
+                unit, 
+                date: new Date().toLocaleString() 
+            });
             const userWarns = getUserWarns(targetId);
             if (userWarns.length >= 3) {
                 alert(`⚠️ У пользователя ${targetUser.fio} накопилось 3 предупреждения! Рекомендуется бан.`);
@@ -1121,7 +1413,7 @@
         modalCallback = null;
     });
 
-    // Снятие наказания
+    // Снятие наказания (оставляем для совместимости)
     adminUnbanBtn.addEventListener('click', () => {
         if (!isAdmin()) return;
         const userId = prompt('Введите ID пользователя для снятия наказания:');
@@ -1131,13 +1423,30 @@
             alert('Пользователь не найден');
             return;
         }
-        const beforeBans = bans.length;
+        
+        // Снимаем бан
+        let unbanned = false;
+        bans = bans.map(b => {
+            if (b.userId === userId && !b.unbanned) {
+                b.unbanned = true;
+                b.unbannedAt = new Date().toLocaleString();
+                unbanned = true;
+            }
+            return b;
+        });
+        
+        // Удаляем варны
         const beforeWarns = warns.length;
-        bans = bans.filter(b => b.userId !== userId);
         warns = warns.filter(w => w.userId !== userId);
-        if (bans.length < beforeBans || warns.length < beforeWarns) {
+        
+        if (unbanned || beforeWarns > warns.length) {
             saveAll();
             renderUserList();
+            renderProfile();
+            if (currentUser && currentUser.id === userId) {
+                showBanScreen(null);
+                updateUI();
+            }
             alert(`✅ Наказания сняты с ${targetUser.fio}`);
         } else {
             alert('У пользователя нет активных наказаний');
@@ -1207,6 +1516,19 @@
         reader.readAsDataURL(file);
     });
 
+    // ===== ПЕРИОДИЧЕСКАЯ ПРОВЕРКА БАНОВ =====
+    setInterval(() => {
+        checkAndRemoveExpiredBans();
+        // Если текущий пользователь был разбанен
+        if (currentUser) {
+            const activeBan = getActiveBan(currentUser.id);
+            if (!activeBan && !bannedOverlay.classList.contains('hidden')) {
+                showBanScreen(null);
+                updateUI();
+            }
+        }
+    }, 5000);
+
     // ===== ИНИЦИАЛИЗАЦИЯ =====
     if (!localStorage.getItem('misha_users') || users.length === 0) {
         users = [
@@ -1233,6 +1555,7 @@
     console.log('👋 Misha.Support загружен');
     console.log('🔑 Админ: ' + ADMIN_FIO + ' / пароль: ' + ADMIN_PASS);
     console.log('👤 Тестовый пользователь: Иван Иванов / пароль: 123');
+    console.log('💡 Если вы забанили себя, подождите до окончания бана или используйте кнопку "Снять наказание"');
 })();
 </script>
 </body>
