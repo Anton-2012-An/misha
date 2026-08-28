@@ -299,18 +299,6 @@
             color: #ff6666;
         }
 
-        .btn-warning {
-            background: rgba(255, 193, 7, 0.12);
-            border-color: rgba(255, 193, 7, 0.2);
-            color: rgba(255, 200, 50, 0.9);
-        }
-
-        .btn-warning:hover {
-            background: rgba(255, 193, 7, 0.2);
-            border-color: rgba(255, 193, 7, 0.3);
-            color: #ffd700;
-        }
-
         .btn-success {
             background: rgba(40, 167, 69, 0.12);
             border-color: rgba(40, 167, 69, 0.2);
@@ -384,6 +372,24 @@
             border-color: rgba(200, 168, 110, 0.1);
         }
 
+        .badge-new {
+            background: rgba(255, 100, 100, 0.15);
+            color: rgba(255, 100, 100, 0.8);
+            border-color: rgba(255, 100, 100, 0.1);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .badge-resolved {
+            background: rgba(40, 167, 69, 0.12);
+            color: rgba(100, 255, 100, 0.8);
+            border-color: rgba(40, 167, 69, 0.1);
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -452,7 +458,7 @@
             backdrop-filter: blur(40px);
             border-radius: 32px;
             padding: 32px 40px;
-            max-width: 700px;
+            max-width: 800px;
             width: 100%;
             max-height: 85vh;
             overflow-y: auto;
@@ -665,6 +671,12 @@
             border-color: rgba(255, 255, 255, 0.06);
         }
 
+        .user-card .actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
         .checkbox-container {
             display: flex;
             align-items: center;
@@ -805,12 +817,6 @@
             color: rgba(255, 255, 255, 0.8);
         }
 
-        .modal-content .section-title {
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
         .about-text {
             line-height: 1.8;
             color: rgba(255, 255, 255, 0.5);
@@ -829,6 +835,139 @@
             margin: 4px 0;
         }
 
+        /* Стили для заявок */
+        .ticket-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 16px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin: 8px 0;
+            transition: 0.3s ease;
+        }
+
+        .ticket-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .ticket-user {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        .ticket-type {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .ticket-text {
+            color: rgba(255, 255, 255, 0.5);
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .ticket-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .proof-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin: 4px 0;
+        }
+
+        .proof-item .proof-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .proof-item .proof-info {
+            flex: 1;
+        }
+
+        .proof-item .proof-info .proof-user {
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
+        .proof-item .proof-info .proof-date {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .admin-tab {
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.02);
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .admin-tab:hover {
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .admin-tab.active {
+            background: rgba(200, 168, 110, 0.08);
+            border-color: rgba(200, 168, 110, 0.2);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .empty-state .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            opacity: 0.3;
+        }
+
         @media (max-width: 640px) {
             .app { padding: 20px; }
             .premium-title { font-size: 1.8rem; }
@@ -836,6 +975,7 @@
             .card-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
             .banned-card { padding: 24px; }
             .permission-grid { grid-template-columns: 1fr; }
+            .ticket-header { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
@@ -916,43 +1056,95 @@
                 <div id="adminPanel" class="hidden section">
                     <h3 style="margin-bottom: 16px;">⚙️ Админ-панель</h3>
                     
-                    <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
-                        <button class="btn btn-danger" id="adminBanBtn">🔨 Бан</button>
-                        <button class="btn btn-warning" id="adminWarnBtn">⚠️ Варн</button>
-                        <button class="btn btn-success" id="adminUnbanBtn">✅ Снять наказание</button>
-                        <button class="btn" id="adminPermissionsBtn">🔑 Управление правами</button>
-                        <button class="btn" id="adminClearChatBtn">🗑️ Очистить чаты</button>
+                    <div class="admin-tabs">
+                        <button class="admin-tab active" data-tab="dashboard">📊 Обзор</button>
+                        <button class="admin-tab" data-tab="tickets">🎫 Заявки <span id="newTicketsCount" class="badge badge-new hidden">0</span></button>
+                        <button class="admin-tab" data-tab="proofs">📎 Доказательства</button>
+                        <button class="admin-tab" data-tab="users">👥 Пользователи</button>
+                        <button class="admin-tab" data-tab="permissions">🔑 Права</button>
                     </div>
 
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <h4>Пользователи</h4>
-                            <div id="userCount">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <h4>Забаненные</h4>
-                            <div id="banCount">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <h4>Предупреждения</h4>
-                            <div id="warnCount">0</div>
+                    <!-- Вкладка: Обзор -->
+                    <div id="tab-dashboard" class="tab-content active">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <h4>Всего пользователей</h4>
+                                <div id="userCount">0</div>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Забаненные</h4>
+                                <div id="banCount">0</div>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Предупреждения</h4>
+                                <div id="warnCount">0</div>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Активных заявок</h4>
+                                <div id="ticketCount">0</div>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Доказательств</h4>
+                                <div id="proofCount">0</div>
+                            </div>
                         </div>
                     </div>
 
-                    <div id="adminUserList" style="margin-top: 16px;">
-                        <h4 style="margin-bottom: 12px;">Список пользователей</h4>
+                    <!-- Вкладка: Заявки -->
+                    <div id="tab-tickets" class="tab-content">
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;">
+                            <button class="btn btn-sm" id="filterAllTickets">Все</button>
+                            <button class="btn btn-sm" id="filterNewTickets">🆕 Новые</button>
+                            <button class="btn btn-sm" id="filterResolvedTickets">✅ Решённые</button>
+                            <button class="btn btn-sm btn-danger" id="clearTicketsBtn">🗑️ Очистить все</button>
+                        </div>
+                        <div id="ticketsList"></div>
+                    </div>
+
+                    <!-- Вкладка: Доказательства -->
+                    <div id="tab-proofs" class="tab-content">
+                        <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 16px;">
+                            <input class="input-field" style="flex:1; min-width:150px;" id="proofUserId" placeholder="ID пользователя">
+                            <input class="input-field" style="flex:1; min-width:150px;" id="proofDescription" placeholder="Описание">
+                            <input class="input-field" style="flex:1; min-width:150px;" id="proofFile" type="file" accept="image/*">
+                            <button class="btn btn-primary" id="uploadProofBtn">📤 Загрузить</button>
+                        </div>
+                        <div id="proofsList"></div>
+                    </div>
+
+                    <!-- Вкладка: Пользователи -->
+                    <div id="tab-users" class="tab-content">
                         <div id="userListContainer"></div>
                     </div>
 
-                    <!-- Раздел с доказательствами -->
-                    <div id="adminProofSection" style="margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 20px;">
-                        <h4>📎 Доказательства</h4>
-                        <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
-                            <input class="input-field" style="flex:1; min-width:150px;" id="proofUserId" placeholder="ID пользователя">
-                            <input class="input-field" style="flex:1; min-width:150px;" id="proofFile" type="file" accept="image/*">
-                            <button class="btn btn-primary" id="uploadProofBtn">Загрузить</button>
+                    <!-- Вкладка: Права -->
+                    <div id="tab-permissions" class="tab-content">
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                            <input class="input-field" style="flex:1; min-width:200px;" id="permUserId" placeholder="ID пользователя">
+                            <button class="btn btn-primary" id="permLoadBtn">📥 Загрузить</button>
                         </div>
-                        <div id="proofsList" style="margin-top: 12px;"></div>
+                        <div id="permUserInfo" style="margin: 12px 0; padding: 12px; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid rgba(255,255,255,0.04);">
+                            <span style="color: rgba(255,255,255,0.3);">Введите ID пользователя</span>
+                        </div>
+                        <div class="permission-grid">
+                            <div class="permission-item">
+                                <input type="checkbox" id="permAnswerQuestions">
+                                <label for="permAnswerQuestions">📝 Отвечать на вопросы</label>
+                            </div>
+                            <div class="permission-item">
+                                <input type="checkbox" id="permAnswerComplaints">
+                                <label for="permAnswerComplaints">📩 Отвечать на жалобы</label>
+                            </div>
+                            <div class="permission-item">
+                                <input type="checkbox" id="permPostNews">
+                                <label for="permPostNews">📰 Размещать новости</label>
+                            </div>
+                            <div class="permission-item">
+                                <input type="checkbox" id="permViewUsers">
+                                <label for="permViewUsers">👥 Просмотр пользователей</label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" id="permSaveBtn">💾 Сохранить права</button>
                     </div>
                 </div>
             </div>
@@ -1028,7 +1220,7 @@
                 <button class="modal-close" onclick="closeModal('complaintModal')">✕</button>
             </div>
             <textarea class="input-field" id="complaintInput" rows="2" placeholder="Опишите вашу жалобу..."></textarea>
-            <button class="btn btn-primary" id="sendComplaintBtn">Отправить жалобу</button>
+            <button class="btn btn-primary" id="sendComplaintBtn">📤 Отправить жалобу</button>
             <div class="chat-box" id="complaintChat"></div>
         </div>
     </div>
@@ -1041,7 +1233,7 @@
                 <button class="modal-close" onclick="closeModal('questionModal')">✕</button>
             </div>
             <textarea class="input-field" id="questionInput" rows="2" placeholder="Задайте ваш вопрос..."></textarea>
-            <button class="btn btn-primary" id="sendQuestionBtn">Отправить вопрос</button>
+            <button class="btn btn-primary" id="sendQuestionBtn">📤 Отправить вопрос</button>
             <div class="chat-box" id="questionChat"></div>
         </div>
     </div>
@@ -1077,7 +1269,7 @@
             <div id="newsFeed" class="chat-box"></div>
             <div id="newsInputArea" style="margin-top: 12px;">
                 <input class="input-field" id="newsInput" placeholder="Текст новости...">
-                <button class="btn btn-primary" id="postNewsBtn">Опубликовать новость</button>
+                <button class="btn btn-primary" id="postNewsBtn">📤 Опубликовать</button>
             </div>
         </div>
     </div>
@@ -1099,71 +1291,6 @@
                 <p><strong>Права:</strong> <span id="profilePermissions">Нет</span></p>
                 <p><strong>Предупреждений:</strong> <span id="profileWarns">0</span></p>
                 <p><strong>Статус:</strong> <span id="profileStatus">Активен</span></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Модальное окно для бана/варна -->
-    <div id="punishModal" class="modal-overlay hidden">
-        <div class="modal-content" style="max-width: 500px;">
-            <div class="modal-header">
-                <h2 id="modalTitle">Выдача наказания</h2>
-                <button class="modal-close" onclick="document.getElementById('punishModal').classList.add('hidden')">✕</button>
-            </div>
-            <div style="margin: 16px 0;">
-                <input class="input-field" id="modalUserId" placeholder="ID пользователя">
-                <input class="input-field" id="modalDuration" placeholder="Время (число)">
-                <select class="input-field" id="modalUnit">
-                    <option value="minutes">Минуты</option>
-                    <option value="hours">Часы</option>
-                    <option value="days">Дни</option>
-                    <option value="months">Месяцы</option>
-                    <option value="years">Годы</option>
-                </select>
-                <input class="input-field" id="modalReason" placeholder="Причина">
-            </div>
-            <div style="display: flex; gap: 12px; justify-content: flex-end;">
-                <button class="btn" onclick="document.getElementById('punishModal').classList.add('hidden')">Отмена</button>
-                <button class="btn btn-primary" id="modalConfirm">Подтвердить</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Модальное окно для прав -->
-    <div id="permissionsModal" class="modal-overlay hidden">
-        <div class="modal-content" style="max-width: 600px;">
-            <div class="modal-header">
-                <h2>🔑 Управление правами</h2>
-                <button class="modal-close" onclick="document.getElementById('permissionsModal').classList.add('hidden')">✕</button>
-            </div>
-            <div style="margin: 12px 0;">
-                <input class="input-field" id="permUserId" placeholder="ID пользователя">
-                <button class="btn btn-primary" id="permLoadBtn">Загрузить права</button>
-            </div>
-            <div id="permUserInfo" style="margin: 12px 0; padding: 12px; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid rgba(255,255,255,0.04);">
-                <span style="color: rgba(255,255,255,0.3);">Выберите пользователя</span>
-            </div>
-            <div class="permission-grid">
-                <div class="permission-item">
-                    <input type="checkbox" id="permAnswerQuestions">
-                    <label for="permAnswerQuestions">📝 Отвечать на вопросы</label>
-                </div>
-                <div class="permission-item">
-                    <input type="checkbox" id="permAnswerComplaints">
-                    <label for="permAnswerComplaints">📩 Отвечать на жалобы</label>
-                </div>
-                <div class="permission-item">
-                    <input type="checkbox" id="permPostNews">
-                    <label for="permPostNews">📰 Размещать новости</label>
-                </div>
-                <div class="permission-item">
-                    <input type="checkbox" id="permViewUsers">
-                    <label for="permViewUsers">👥 Просмотр пользователей</label>
-                </div>
-            </div>
-            <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 16px;">
-                <button class="btn" onclick="document.getElementById('permissionsModal').classList.add('hidden')">Отмена</button>
-                <button class="btn btn-primary" id="permSaveBtn">Сохранить права</button>
             </div>
         </div>
     </div>
@@ -1208,9 +1335,10 @@
         let warns = JSON.parse(localStorage.getItem('misha_warns')) || [];
         let proofs = JSON.parse(localStorage.getItem('misha_proofs')) || [];
         let permissions = JSON.parse(localStorage.getItem('misha_permissions')) || {};
+        let tickets = JSON.parse(localStorage.getItem('misha_tickets')) || [];
         let nextId = parseInt(localStorage.getItem('misha_nextId')) || 1000;
+        let nextTicketId = parseInt(localStorage.getItem('misha_nextTicketId')) || 1;
 
-        let modalCallback = null;
         let banTimerInterval = null;
 
         // ===== DOM =====
@@ -1238,19 +1366,15 @@
         const userCount = document.getElementById('userCount');
         const banCount = document.getElementById('banCount');
         const warnCount = document.getElementById('warnCount');
-
-        // Модальные окна
-        const faqModal = document.getElementById('faqModal');
-        const complaintModal = document.getElementById('complaintModal');
-        const questionModal = document.getElementById('questionModal');
-        const aboutModal = document.getElementById('aboutModal');
-        const newsModal = document.getElementById('newsModal');
-        const profileModal = document.getElementById('profileModal');
+        const ticketCount = document.getElementById('ticketCount');
+        const proofCount = document.getElementById('proofCount');
+        const newTicketsCount = document.getElementById('newTicketsCount');
+        const ticketsList = document.getElementById('ticketsList');
+        const proofsList = document.getElementById('proofsList');
 
         const complaintChat = document.getElementById('complaintChat');
         const questionChat = document.getElementById('questionChat');
         const newsFeed = document.getElementById('newsFeed');
-        const proofsList = document.getElementById('proofsList');
 
         const sendComplaintBtn = document.getElementById('sendComplaintBtn');
         const sendQuestionBtn = document.getElementById('sendQuestionBtn');
@@ -1260,25 +1384,11 @@
         const postNewsBtn = document.getElementById('postNewsBtn');
         const newsInputArea = document.getElementById('newsInputArea');
 
-        const adminBanBtn = document.getElementById('adminBanBtn');
-        const adminWarnBtn = document.getElementById('adminWarnBtn');
-        const adminUnbanBtn = document.getElementById('adminUnbanBtn');
-        const adminPermissionsBtn = document.getElementById('adminPermissionsBtn');
-        const adminClearChatBtn = document.getElementById('adminClearChatBtn');
-
         const proofUserId = document.getElementById('proofUserId');
+        const proofDescription = document.getElementById('proofDescription');
         const proofFile = document.getElementById('proofFile');
         const uploadProofBtn = document.getElementById('uploadProofBtn');
 
-        const punishModal = document.getElementById('punishModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalUserId = document.getElementById('modalUserId');
-        const modalDuration = document.getElementById('modalDuration');
-        const modalUnit = document.getElementById('modalUnit');
-        const modalReason = document.getElementById('modalReason');
-        const modalConfirm = document.getElementById('modalConfirm');
-
-        const permissionsModal = document.getElementById('permissionsModal');
         const permUserId = document.getElementById('permUserId');
         const permLoadBtn = document.getElementById('permLoadBtn');
         const permUserInfo = document.getElementById('permUserInfo');
@@ -1288,12 +1398,17 @@
         const permViewUsers = document.getElementById('permViewUsers');
         const permSaveBtn = document.getElementById('permSaveBtn');
 
+        const filterAllTickets = document.getElementById('filterAllTickets');
+        const filterNewTickets = document.getElementById('filterNewTickets');
+        const filterResolvedTickets = document.getElementById('filterResolvedTickets');
+        const clearTicketsBtn = document.getElementById('clearTicketsBtn');
+
         const bannedOverlay = document.getElementById('bannedOverlay');
         const banTimer = document.getElementById('banTimer');
         const banReason = document.getElementById('banReason');
         const banRefreshBtn = document.getElementById('banRefreshBtn');
 
-        // ===== ФУНКЦИИ =====
+        // ===== ФУНКЦИИ СОХРАНЕНИЯ =====
         function saveAll() {
             localStorage.setItem('misha_users', JSON.stringify(users));
             localStorage.setItem('misha_complaints', JSON.stringify(complaints));
@@ -1303,9 +1418,12 @@
             localStorage.setItem('misha_warns', JSON.stringify(warns));
             localStorage.setItem('misha_proofs', JSON.stringify(proofs));
             localStorage.setItem('misha_permissions', JSON.stringify(permissions));
+            localStorage.setItem('misha_tickets', JSON.stringify(tickets));
             localStorage.setItem('misha_nextId', String(nextId));
+            localStorage.setItem('misha_nextTicketId', String(nextTicketId));
         }
 
+        // ===== СИСТЕМА ПРАВ =====
         function getPermissions(userId) {
             return permissions[userId] || { answerQuestions: false, answerComplaints: false, postNews: false, viewUsers: false };
         }
@@ -1326,9 +1444,14 @@
             return currentUser && (isAdmin() || getPermissions(currentUser.id).postNews);
         }
 
+        function canViewUsers() {
+            return currentUser && (isAdmin() || getPermissions(currentUser.id).viewUsers);
+        }
+
         function getUserById(id) { return users.find(u => u.id === id); }
         function getUserWarns(id) { return warns.filter(w => w.userId === id); }
 
+        // ===== БАНЫ =====
         function checkAndRemoveExpiredBans() {
             let removed = false;
             const now = Date.now();
@@ -1344,8 +1467,7 @@
             });
             if (removed) {
                 saveAll();
-                renderUserList();
-                renderProfile();
+                renderAll();
             }
             return removed;
         }
@@ -1412,6 +1534,7 @@
             banTimerInterval = setInterval(updateTimer, 1000);
         }
 
+        // ===== ЗАПОМНИТЬ МЕНЯ =====
         function saveRememberedUser(user) {
             if (user) {
                 localStorage.setItem('misha_remembered', JSON.stringify({
@@ -1497,16 +1620,68 @@
         function renderProofs() {
             if (!proofsList) return;
             if (proofs.length === 0) {
-                proofsList.innerHTML = '<div style="color:rgba(255,255,255,0.2); font-size:0.9rem;">Доказательств пока нет</div>';
+                proofsList.innerHTML = '<div class="empty-state"><div class="empty-icon">📎</div><p>Доказательств пока нет</p></div>';
                 return;
             }
-            proofsList.innerHTML = proofs.map(p => 
-                `<div class="user-card">
-                    <span>ID: ${p.userId}</span>
-                    <span style="font-size:0.8rem;color:rgba(255,255,255,0.2);">${p.date || ''}</span>
-                    <span class="badge">📎 ${p.fileName || 'фото'}</span>
-                </div>`
-            ).join('');
+            proofsList.innerHTML = proofs.map(p => {
+                const user = getUserById(p.userId);
+                const userName = user ? user.fio : 'Неизвестный';
+                return `<div class="proof-item">
+                    <div class="proof-info">
+                        <div class="proof-user">${userName} (ID: ${p.userId})</div>
+                        <div style="font-size:0.85rem; color:rgba(255,255,255,0.4);">${p.description || 'Без описания'}</div>
+                        <div class="proof-date">${p.date || ''}</div>
+                    </div>
+                    ${p.data ? `<img src="${p.data}" class="proof-preview" onclick="window.open('${p.data}','_blank')" style="cursor:pointer;">` : ''}
+                    <button class="btn btn-sm btn-danger" onclick="deleteProof('${p.id || p.userId + '_' + p.date}')">✕</button>
+                </div>`;
+            }).join('');
+            proofCount.textContent = proofs.length;
+        }
+
+        function renderTickets(filter = 'all') {
+            if (!ticketsList) return;
+            
+            let filteredTickets = tickets;
+            if (filter === 'new') {
+                filteredTickets = tickets.filter(t => !t.resolved);
+            } else if (filter === 'resolved') {
+                filteredTickets = tickets.filter(t => t.resolved);
+            }
+            
+            if (filteredTickets.length === 0) {
+                ticketsList.innerHTML = '<div class="empty-state"><div class="empty-icon">🎫</div><p>Заявок нет</p></div>';
+                return;
+            }
+            
+            ticketsList.innerHTML = filteredTickets.map(t => {
+                const user = getUserById(t.userId);
+                const userName = user ? user.fio : 'Неизвестный';
+                const status = t.resolved ? '✅ Решена' : '🆕 Новая';
+                const statusClass = t.resolved ? 'badge-resolved' : 'badge-new';
+                
+                return `<div class="ticket-card">
+                    <div class="ticket-header">
+                        <span class="ticket-user">${userName} (ID: ${t.userId})</span>
+                        <span class="badge ${statusClass}">${status}</span>
+                    </div>
+                    <div class="ticket-type">Тип: ${t.type || 'Обращение'} | №${t.id}</div>
+                    <div class="ticket-text">${t.text}</div>
+                    <div class="ticket-actions">
+                        ${!t.resolved ? `<button class="btn btn-sm btn-success" onclick="resolveTicket('${t.id}')">✅ Решить</button>` : ''}
+                        <button class="btn btn-sm btn-danger" onclick="deleteTicket('${t.id}')">🗑️ Удалить</button>
+                    </div>
+                </div>`;
+            }).join('');
+            
+            const newCount = tickets.filter(t => !t.resolved).length;
+            ticketCount.textContent = tickets.length;
+            if (newCount > 0) {
+                newTicketsCount.textContent = newCount;
+                newTicketsCount.classList.remove('hidden');
+            } else {
+                newTicketsCount.classList.add('hidden');
+            }
         }
 
         function renderUserList() {
@@ -1538,11 +1713,10 @@
                     ${isAdminUser ? '<span class="badge badge-admin">👑 Админ</span>' : ''}
                     ${permLabels.length > 0 ? `<span class="badge badge-role">${permLabels.join(' ')}</span>` : ''}
                     ${isAdmin() && !isAdminUser ? `
-                        <div style="display:flex; gap:6px; flex-wrap:wrap;">
-                            <button class="btn btn-sm" onclick="adminAction('warn','${u.id}')">Варн</button>
-                            <button class="btn btn-sm" onclick="adminAction('ban','${u.id}')">Бан</button>
-                            ${isBanned ? `<button class="btn btn-sm btn-success" onclick="unbanUser('${u.id}')">Разбан</button>` : ''}
-                            <button class="btn btn-sm btn-primary" onclick="openPermissions('${u.id}')">Права</button>
+                        <div class="actions">
+                            <button class="btn btn-sm" onclick="adminAction('warn','${u.id}')">⚠️</button>
+                            <button class="btn btn-sm" onclick="adminAction('ban','${u.id}')">🔨</button>
+                            ${isBanned ? `<button class="btn btn-sm btn-success" onclick="unbanUser('${u.id}')">✅</button>` : ''}
                         </div>
                     ` : ''}
                 </div>`;
@@ -1577,13 +1751,22 @@
             document.getElementById('profileStatus').style.color = isBanned ? 'rgba(255,100,100,0.8)' : 'rgba(100,255,100,0.8)';
         }
 
+        function renderAll() {
+            renderComplaints();
+            renderQuestions();
+            renderNews();
+            renderProofs();
+            renderTickets();
+            renderUserList();
+            renderProfile();
+        }
+
         // ===== ГЛОБАЛЬНЫЕ ФУНКЦИИ =====
         window.toggleAnswer = function(element) {
             const answer = element.querySelector('.faq-answer');
             const question = element.querySelector('.faq-question');
             const isOpen = answer.classList.contains('open');
             
-            // Закрываем все
             document.querySelectorAll('.faq-answer').forEach(el => el.classList.remove('open'));
             document.querySelectorAll('.faq-question').forEach(el => el.classList.remove('active'));
             
@@ -1595,6 +1778,38 @@
 
         window.closeModal = function(id) {
             document.getElementById(id).classList.add('hidden');
+        };
+
+        window.resolveTicket = function(ticketId) {
+            if (!isAdmin()) return;
+            const ticket = tickets.find(t => t.id === ticketId);
+            if (ticket) {
+                ticket.resolved = true;
+                ticket.resolvedAt = new Date().toLocaleString();
+                saveAll();
+                renderTickets();
+                alert('✅ Заявка отмечена как решённая');
+            }
+        };
+
+        window.deleteTicket = function(ticketId) {
+            if (!isAdmin()) return;
+            if (confirm('Удалить эту заявку?')) {
+                tickets = tickets.filter(t => t.id !== ticketId);
+                saveAll();
+                renderTickets();
+                alert('🗑️ Заявка удалена');
+            }
+        };
+
+        window.deleteProof = function(proofId) {
+            if (!isAdmin()) return;
+            if (confirm('Удалить это доказательство?')) {
+                proofs = proofs.filter((p, i) => (p.id || p.userId + '_' + p.date) !== proofId);
+                saveAll();
+                renderProofs();
+                alert('🗑️ Доказательство удалено');
+            }
         };
 
         window.unbanUser = function(userId) {
@@ -1612,8 +1827,7 @@
             activeBan.unbanned = true;
             activeBan.unbannedAt = new Date().toLocaleString();
             saveAll();
-            renderUserList();
-            renderProfile();
+            renderAll();
             if (currentUser && currentUser.id === userId) {
                 showBanScreen(null);
                 updateUI();
@@ -1623,97 +1837,61 @@
 
         window.adminAction = function(type, userId) {
             if (!isAdmin()) return;
-            modalTitle.textContent = type === 'warn' ? '⚠️ Выдача предупреждения' : '🔨 Бан пользователя';
-            modalUserId.value = userId || '';
-            modalDuration.value = '';
-            modalReason.value = '';
-            punishModal.classList.remove('hidden');
-            
-            modalCallback = function() {
-                const targetId = modalUserId.value.trim();
-                const duration = modalDuration.value.trim();
-                const unit = modalUnit.value;
-                const reason = modalReason.value.trim();
-                if (!targetId || !duration || !reason) {
-                    alert('Заполните все поля');
-                    return;
-                }
-                const targetUser = getUserById(targetId);
-                if (!targetUser) {
-                    alert('Пользователь не найден');
-                    return;
-                }
-                
-                const now = Date.now();
-                const durationMs = parseInt(duration) * {
-                    'minutes': 60 * 1000,
-                    'hours': 60 * 60 * 1000,
-                    'days': 24 * 60 * 60 * 1000,
-                    'months': 30 * 24 * 60 * 60 * 1000,
-                    'years': 365 * 24 * 60 * 60 * 1000
-                }[unit] || 60 * 1000;
-                
-                if (type === 'warn') {
-                    warns.push({ 
-                        userId: targetId, 
-                        reason, 
-                        duration, 
-                        unit, 
-                        date: new Date().toLocaleString() 
-                    });
-                    const userWarns = getUserWarns(targetId);
-                    if (userWarns.length >= 3) {
-                        alert(`⚠️ У пользователя ${targetUser.fio} накопилось 3 предупреждения! Рекомендуется бан.`);
-                    }
-                } else if (type === 'ban') {
-                    bans = bans.map(b => {
-                        if (b.userId === targetId) b.unbanned = true;
-                        return b;
-                    });
-                    bans.push({ 
-                        userId: targetId, 
-                        reason, 
-                        duration, 
-                        unit, 
-                        date: new Date().toLocaleString(),
-                        expiresAt: now + durationMs,
-                        unbanned: false
-                    });
-                }
-                saveAll();
-                renderUserList();
-                punishModal.classList.add('hidden');
-                alert(`✅ ${type === 'warn' ? 'Предупреждение' : 'Бан'} выдан пользователю ${targetUser.fio}`);
-                
-                if (type === 'ban' && currentUser && currentUser.id === targetId) {
-                    updateUI();
-                }
-            };
-        };
-
-        window.openPermissions = function(userId) {
-            if (!isAdmin()) return;
-            permUserId.value = userId || '';
-            loadPermissions(userId);
-            permissionsModal.classList.remove('hidden');
-        };
-
-        function loadPermissions(userId) {
-            const user = getUserById(userId);
-            if (!user) {
-                permUserInfo.innerHTML = '<span style="color:rgba(255,100,100,0.6);">❌ Пользователь не найден</span>';
+            const targetUser = getUserById(userId);
+            if (!targetUser) {
+                alert('Пользователь не найден');
                 return;
             }
-            permUserInfo.innerHTML = `
-                <strong style="color:rgba(255,255,255,0.8);">${user.fio}</strong> (${user.nick}) — ID: ${user.id}
-                ${user.id === ADMIN_ID ? ' <span class="badge badge-admin">👑 Админ</span>' : ''}
-            `;
-            const perms = getPermissions(userId);
-            permAnswerQuestions.checked = perms.answerQuestions || false;
-            permAnswerComplaints.checked = perms.answerComplaints || false;
-            permPostNews.checked = perms.postNews || false;
-            permViewUsers.checked = perms.viewUsers || false;
-        }
+            
+            const duration = prompt(`Введите время для ${type === 'warn' ? 'предупреждения' : 'бана'} (число):`);
+            if (!duration) return;
+            const unit = prompt('Единица (minutes/hours/days/months/years):') || 'minutes';
+            const reason = prompt('Причина:') || 'Нарушение правил';
+            
+            const now = Date.now();
+            const durationMs = parseInt(duration) * {
+                'minutes': 60 * 1000,
+                'hours': 60 * 60 * 1000,
+                'days': 24 * 60 * 60 * 1000,
+                'months': 30 * 24 * 60 * 60 * 1000,
+                'years': 365 * 24 * 60 * 60 * 1000
+            }[unit] || 60 * 1000;
+            
+            if (type === 'warn') {
+                warns.push({ 
+                    userId, 
+                    reason, 
+                    duration, 
+                    unit, 
+                    date: new Date().toLocaleString() 
+                });
+                const userWarns = getUserWarns(userId);
+                if (userWarns.length >= 3) {
+                    alert(`⚠️ У пользователя ${targetUser.fio} накопилось 3 предупреждения! Рекомендуется бан.`);
+                }
+            } else if (type === 'ban') {
+                bans = bans.map(b => {
+                    if (b.userId === userId) b.unbanned = true;
+                    return b;
+                });
+                bans.push({ 
+                    userId, 
+                    reason, 
+                    duration, 
+                    unit, 
+                    date: new Date().toLocaleString(),
+                    expiresAt: now + durationMs,
+                    unbanned: false
+                });
+            }
+            saveAll();
+            renderAll();
+            alert(`✅ ${type === 'warn' ? 'Предупреждение' : 'Бан'} выдан пользователю ${targetUser.fio}`);
+            
+            if (type === 'ban' && currentUser && currentUser.id === userId) {
+                updateUI();
+            }
+        };
 
         // ===== ОБНОВЛЕНИЕ UI =====
         function updateUI() {
@@ -1769,12 +1947,7 @@
             
             newsInputArea.style.display = canPostNews() ? 'block' : 'none';
             
-            renderComplaints();
-            renderQuestions();
-            renderNews();
-            renderUserList();
-            renderProofs();
-            renderProfile();
+            renderAll();
         }
 
         // ===== АВТОРИЗАЦИЯ =====
@@ -1940,11 +2113,7 @@
                 };
                 const targetId = modalMap[modalId];
                 if (targetId) {
-                    // Обновляем данные перед открытием
-                    if (modalId === 'complaint') renderComplaints();
-                    if (modalId === 'question') renderQuestions();
-                    if (modalId === 'news') renderNews();
-                    if (modalId === 'profile') renderProfile();
+                    renderAll();
                     document.getElementById(targetId).classList.remove('hidden');
                 }
             });
@@ -1967,6 +2136,17 @@
                 alert('❌ Вы забанены и не можете писать в чаты');
                 return;
             }
+            
+            // Создаём заявку
+            tickets.push({
+                id: 'T' + String(nextTicketId++).padStart(4, '0'),
+                userId: currentUser.id,
+                text: text,
+                type: 'Жалоба',
+                date: new Date().toLocaleString(),
+                resolved: false
+            });
+            
             complaints.push({ 
                 text, 
                 fromAdmin: isAdmin(), 
@@ -1975,8 +2155,9 @@
                 date: new Date().toLocaleString()
             });
             saveAll();
-            renderComplaints();
+            renderAll();
             complaintInput.value = '';
+            alert('✅ Жалоба отправлена!');
         });
 
         sendQuestionBtn.addEventListener('click', () => {
@@ -1986,6 +2167,16 @@
                 alert('❌ Вы забанены и не можете писать в чаты');
                 return;
             }
+            
+            tickets.push({
+                id: 'T' + String(nextTicketId++).padStart(4, '0'),
+                userId: currentUser.id,
+                text: text,
+                type: 'Вопрос',
+                date: new Date().toLocaleString(),
+                resolved: false
+            });
+            
             questions.push({ 
                 text, 
                 fromAdmin: isAdmin(), 
@@ -1994,8 +2185,9 @@
                 date: new Date().toLocaleString()
             });
             saveAll();
-            renderQuestions();
+            renderAll();
             questionInput.value = '';
+            alert('✅ Вопрос отправлен!');
         });
 
         postNewsBtn.addEventListener('click', () => {
@@ -2009,160 +2201,110 @@
             saveAll();
             renderNews();
             newsInput.value = '';
+            alert('✅ Новость опубликована!');
         });
 
-        // ===== АДМИН-ФУНКЦИИ =====
-        adminBanBtn.addEventListener('click', () => {
+        // ===== АДМИН-ВКЛАДКИ =====
+        document.querySelectorAll('.admin-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                const tabId = tab.dataset.tab;
+                document.getElementById('tab-' + tabId).classList.add('active');
+                
+                renderAll();
+            });
+        });
+
+        // ===== ФИЛЬТРЫ ЗАЯВОК =====
+        let currentFilter = 'all';
+        
+        filterAllTickets.addEventListener('click', () => {
+            currentFilter = 'all';
+            renderTickets('all');
+        });
+        
+        filterNewTickets.addEventListener('click', () => {
+            currentFilter = 'new';
+            renderTickets('new');
+        });
+        
+        filterResolvedTickets.addEventListener('click', () => {
+            currentFilter = 'resolved';
+            renderTickets('resolved');
+        });
+        
+        clearTicketsBtn.addEventListener('click', () => {
             if (!isAdmin()) return;
-            modalTitle.textContent = '🔨 Бан пользователя';
-            modalUserId.value = '';
-            modalDuration.value = '';
-            modalReason.value = '';
-            punishModal.classList.remove('hidden');
-            modalCallback = function() {
-                const targetId = modalUserId.value.trim();
-                const duration = modalDuration.value.trim();
-                const unit = modalUnit.value;
-                const reason = modalReason.value.trim();
-                if (!targetId || !duration || !reason) {
-                    alert('Заполните все поля');
-                    return;
-                }
-                const targetUser = getUserById(targetId);
-                if (!targetUser) {
-                    alert('Пользователь не найден');
-                    return;
-                }
-                
-                const now = Date.now();
-                const durationMs = parseInt(duration) * {
-                    'minutes': 60 * 1000,
-                    'hours': 60 * 60 * 1000,
-                    'days': 24 * 60 * 60 * 1000,
-                    'months': 30 * 24 * 60 * 60 * 1000,
-                    'years': 365 * 24 * 60 * 60 * 1000
-                }[unit] || 60 * 1000;
-                
-                bans = bans.map(b => {
-                    if (b.userId === targetId) b.unbanned = true;
-                    return b;
-                });
-                bans.push({ 
-                    userId: targetId, 
-                    reason, 
-                    duration, 
-                    unit, 
-                    date: new Date().toLocaleString(),
-                    expiresAt: now + durationMs,
-                    unbanned: false
-                });
+            if (confirm('Удалить все заявки?')) {
+                tickets = [];
                 saveAll();
-                renderUserList();
-                punishModal.classList.add('hidden');
-                alert(`✅ Пользователь ${targetUser.fio} забанен на ${duration} ${unit}`);
-                
-                if (currentUser && currentUser.id === targetId) {
-                    updateUI();
-                }
-            };
+                renderTickets();
+                alert('🗑️ Все заявки удалены');
+            }
         });
 
-        adminWarnBtn.addEventListener('click', () => {
+        // ===== ДОКАЗАТЕЛЬСТВА =====
+        uploadProofBtn.addEventListener('click', () => {
             if (!isAdmin()) return;
-            modalTitle.textContent = '⚠️ Выдача предупреждения';
-            modalUserId.value = '';
-            modalDuration.value = '';
-            modalReason.value = '';
-            punishModal.classList.remove('hidden');
-            modalCallback = function() {
-                const targetId = modalUserId.value.trim();
-                const duration = modalDuration.value.trim();
-                const unit = modalUnit.value;
-                const reason = modalReason.value.trim();
-                if (!targetId || !duration || !reason) {
-                    alert('Заполните все поля');
-                    return;
-                }
-                const targetUser = getUserById(targetId);
-                if (!targetUser) {
-                    alert('Пользователь не найден');
-                    return;
-                }
-                warns.push({ 
-                    userId: targetId, 
-                    reason, 
-                    duration, 
-                    unit, 
-                    date: new Date().toLocaleString() 
-                });
-                const userWarns = getUserWarns(targetId);
-                if (userWarns.length >= 3) {
-                    alert(`⚠️ У пользователя ${targetUser.fio} накопилось 3 предупреждения! Рекомендуется бан.`);
-                }
-                saveAll();
-                renderUserList();
-                punishModal.classList.add('hidden');
-                alert(`✅ Предупреждение выдано ${targetUser.fio}`);
-            };
-        });
-
-        modalConfirm.addEventListener('click', () => {
-            if (modalCallback) modalCallback();
-        });
-
-        adminUnbanBtn.addEventListener('click', () => {
-            if (!isAdmin()) return;
-            const userId = prompt('Введите ID пользователя для снятия наказания:');
-            if (!userId) return;
-            const targetUser = getUserById(userId);
-            if (!targetUser) {
-                alert('Пользователь не найден');
+            const userId = proofUserId.value.trim();
+            if (!userId) {
+                alert('Введите ID пользователя');
                 return;
             }
-            
-            let unbanned = false;
-            bans = bans.map(b => {
-                if (b.userId === userId && !b.unbanned) {
-                    b.unbanned = true;
-                    b.unbannedAt = new Date().toLocaleString();
-                    unbanned = true;
-                }
-                return b;
-            });
-            
-            const beforeWarns = warns.length;
-            warns = warns.filter(w => w.userId !== userId);
-            
-            if (unbanned || beforeWarns > warns.length) {
-                saveAll();
-                renderUserList();
-                renderProfile();
-                if (currentUser && currentUser.id === userId) {
-                    showBanScreen(null);
-                    updateUI();
-                }
-                alert(`✅ Наказания сняты с ${targetUser.fio}`);
-            } else {
-                alert('У пользователя нет активных наказаний');
+            const description = proofDescription.value.trim() || 'Без описания';
+            const file = proofFile.files[0];
+            if (!file) {
+                alert('Выберите файл');
+                return;
             }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                proofs.push({ 
+                    id: 'P' + Date.now(),
+                    userId, 
+                    description,
+                    data: e.target.result, 
+                    date: new Date().toLocaleString(),
+                    fileName: file.name
+                });
+                saveAll();
+                renderProofs();
+                alert('✅ Доказательство загружено');
+                proofUserId.value = '';
+                proofDescription.value = '';
+                proofFile.value = '';
+            };
+            reader.readAsDataURL(file);
         });
 
-        adminPermissionsBtn.addEventListener('click', () => {
-            if (!isAdmin()) return;
-            permUserId.value = '';
-            permUserInfo.innerHTML = '<span style="color:rgba(255,255,255,0.3);">Введите ID пользователя</span>';
-            permAnswerQuestions.checked = false;
-            permAnswerComplaints.checked = false;
-            permPostNews.checked = false;
-            permViewUsers.checked = false;
-            permissionsModal.classList.remove('hidden');
-        });
-
+        // ===== ПРАВА =====
         permLoadBtn.addEventListener('click', () => {
-            loadPermissions(permUserId.value.trim());
+            const userId = permUserId.value.trim();
+            if (!userId) {
+                alert('Введите ID пользователя');
+                return;
+            }
+            const user = getUserById(userId);
+            if (!user) {
+                permUserInfo.innerHTML = '<span style="color:rgba(255,100,100,0.6);">❌ Пользователь не найден</span>';
+                return;
+            }
+            const perms = getPermissions(userId);
+            permUserInfo.innerHTML = `
+                <strong style="color:rgba(255,255,255,0.8);">${user.fio}</strong> (${user.nick}) — ID: ${user.id}
+                ${user.id === ADMIN_ID ? ' <span class="badge badge-admin">👑 Админ</span>' : ''}
+            `;
+            permAnswerQuestions.checked = perms.answerQuestions || false;
+            permAnswerComplaints.checked = perms.answerComplaints || false;
+            permPostNews.checked = perms.postNews || false;
+            permViewUsers.checked = perms.viewUsers || false;
         });
 
         permSaveBtn.addEventListener('click', () => {
+            if (!isAdmin()) return;
             const userId = permUserId.value.trim();
             if (!userId) {
                 alert('Введите ID пользователя');
@@ -2178,59 +2320,15 @@
                 return;
             }
             
-            setPermissions(userId, {
+            permissions[userId] = {
                 answerQuestions: permAnswerQuestions.checked,
                 answerComplaints: permAnswerComplaints.checked,
                 postNews: permPostNews.checked,
                 viewUsers: permViewUsers.checked
-            });
-            
-            permissionsModal.classList.add('hidden');
-            renderUserList();
-            renderProfile();
-            updateUI();
-            alert(`✅ Права сохранены для ${user.fio}`);
-        });
-
-        adminClearChatBtn.addEventListener('click', () => {
-            if (!isAdmin()) return;
-            if (confirm('Очистить все чаты (жалобы и вопросы)?')) {
-                complaints = [];
-                questions = [];
-                saveAll();
-                renderComplaints();
-                renderQuestions();
-                alert('✅ Чаты очищены');
-            }
-        });
-
-        uploadProofBtn.addEventListener('click', () => {
-            if (!isAdmin()) return;
-            const userId = proofUserId.value.trim();
-            if (!userId) {
-                alert('Введите ID пользователя');
-                return;
-            }
-            const file = proofFile.files[0];
-            if (!file) {
-                alert('Выберите файл');
-                return;
-            }
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                proofs.push({ 
-                    userId, 
-                    data: e.target.result, 
-                    date: new Date().toLocaleString(),
-                    fileName: file.name
-                });
-                saveAll();
-                renderProofs();
-                alert('✅ Доказательство загружено');
-                proofUserId.value = '';
-                proofFile.value = '';
             };
-            reader.readAsDataURL(file);
+            saveAll();
+            renderAll();
+            alert(`✅ Права сохранены для ${user.fio}`);
         });
 
         // ===== ПЕРИОДИЧЕСКАЯ ПРОВЕРКА =====
