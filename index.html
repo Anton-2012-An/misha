@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misha.Support — Премиум поддержка</title>
+    <title>Misha.Support</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;600;700&display=swap');
 
@@ -25,7 +25,6 @@
             overflow-x: hidden;
         }
 
-        /* Анимированный фон с частицами */
         body::before {
             content: '';
             position: fixed;
@@ -43,7 +42,6 @@
             100% { opacity: 1; }
         }
 
-        /* Сетка с пунктирными линиями */
         body::after {
             content: '';
             position: fixed;
@@ -64,7 +62,6 @@
             100% { transform: translate(10px, 10px); }
         }
 
-        /* Плавающие блики */
         .glow-orb {
             position: fixed;
             border-radius: 50%;
@@ -133,7 +130,6 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
 
-        /* Внутренняя пунктирная рамка */
         .app::before {
             content: '';
             position: absolute;
@@ -258,12 +254,6 @@
             filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.05));
         }
 
-        .big-btn.active {
-            border-color: rgba(200, 168, 110, 0.3);
-            background: rgba(200, 168, 110, 0.05);
-            color: rgba(255, 255, 255, 0.95);
-        }
-
         .btn {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -362,106 +352,14 @@
             color: rgba(255, 255, 255, 0.25);
         }
 
-        .input-field:-webkit-autofill {
-            -webkit-box-shadow: 0 0 0 1000px rgba(10, 10, 15, 0.9) inset !important;
-            -webkit-text-fill-color: rgba(255, 255, 255, 0.9) !important;
-        }
-
         textarea.input-field {
             border-radius: 24px;
             resize: vertical;
             min-height: 60px;
         }
 
-        .chat-box {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            max-height: 400px;
-            overflow-y: auto;
-            margin: 16px 0;
-        }
-
-        .chat-box::-webkit-scrollbar {
-            width: 4px;
-        }
-        .chat-box::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .chat-box::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        .msg {
-            padding: 10px 18px;
-            border-radius: 40px;
-            background: rgba(255, 255, 255, 0.03);
-            margin: 6px 0;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            backdrop-filter: blur(10px);
-            flex-wrap: wrap;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .msg-admin {
-            background: rgba(200, 168, 110, 0.05);
-            border-color: rgba(200, 168, 110, 0.08);
-        }
-
-        .msg-user {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .msg-helper {
-            background: rgba(0, 123, 255, 0.04);
-            border-color: rgba(0, 123, 255, 0.06);
-        }
-
-        .admin-tag {
-            background: rgba(200, 168, 110, 0.2);
-            color: rgba(255, 255, 255, 0.9);
-            border-radius: 30px;
-            padding: 0 14px;
-            font-weight: 600;
-            font-size: 0.7rem;
-            display: inline-block;
-            height: 22px;
-            line-height: 22px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .admin-tag:hover {
-            background: rgba(200, 168, 110, 0.3);
-        }
-
-        .helper-tag {
-            background: rgba(0, 123, 255, 0.15);
-            color: rgba(100, 200, 255, 0.9);
-            border-radius: 30px;
-            padding: 0 14px;
-            font-weight: 600;
-            font-size: 0.7rem;
-            display: inline-block;
-            height: 22px;
-            line-height: 22px;
-        }
-
         .hidden {
             display: none !important;
-        }
-
-        .section {
-            margin-top: 32px;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-            padding-top: 28px;
         }
 
         .badge {
@@ -484,27 +382,6 @@
             background: rgba(200, 168, 110, 0.08);
             color: rgba(200, 168, 110, 0.8);
             border-color: rgba(200, 168, 110, 0.1);
-        }
-
-        .user-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 12px 18px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            margin: 6px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            color: rgba(255, 255, 255, 0.7);
-            transition: 0.3s ease;
-        }
-
-        .user-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.06);
         }
 
         .stats-grid {
@@ -551,11 +428,12 @@
             letter-spacing: 1px;
         }
 
+        /* ===== МОДАЛЬНЫЕ ОКНА ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(30px);
             z-index: 1000;
             display: flex;
             justify-content: center;
@@ -569,65 +447,222 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        .modal {
+        .modal-content {
             background: rgba(20, 20, 30, 0.95);
             backdrop-filter: blur(40px);
             border-radius: 32px;
             padding: 32px 40px;
-            max-width: 600px;
+            max-width: 700px;
             width: 100%;
-            max-height: 90vh;
+            max-height: 85vh;
             overflow-y: auto;
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: 0 60px 150px rgba(0, 0, 0, 0.5);
             color: rgba(255, 255, 255, 0.8);
+            position: relative;
         }
 
-        .modal h3 {
-            margin-bottom: 16px;
+        .modal-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .modal-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .modal-header h2 {
             color: rgba(255, 255, 255, 0.9);
             font-weight: 600;
+            font-size: 1.5rem;
         }
 
-        .modal .input-field {
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .banned-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(30px);
-            z-index: 999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .banned-card {
-            background: rgba(20, 20, 30, 0.95);
-            border-radius: 32px;
-            padding: 40px 48px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
+        .modal-close {
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: 0 60px 150px rgba(0, 0, 0, 0.5);
+            color: rgba(255, 255, 255, 0.4);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .banned-card h2 {
-            color: rgba(255, 100, 100, 0.9);
-            margin-bottom: 12px;
-            font-weight: 700;
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.8);
+            transform: rotate(90deg);
         }
 
-        .banned-card .timer {
-            font-size: 3rem;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.9);
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .faq-question {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .faq-question .q-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        .faq-question .q-arrow {
+            color: rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .faq-question.active .q-arrow {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+            padding: 0 20px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.6;
+        }
+
+        .faq-answer.open {
+            max-height: 300px;
+            padding: 12px 20px 16px;
+        }
+
+        .faq-answer .a-label {
+            color: rgba(200, 168, 110, 0.6);
+            font-weight: 500;
+            margin-right: 6px;
+        }
+
+        .chat-box {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            max-height: 400px;
+            overflow-y: auto;
             margin: 16px 0;
-            font-family: 'Playfair Display', serif;
+        }
+
+        .chat-box::-webkit-scrollbar {
+            width: 4px;
+        }
+        .chat-box::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .chat-box::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .msg {
+            padding: 10px 18px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            margin: 6px 0;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+            flex-wrap: wrap;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .msg-admin {
+            background: rgba(200, 168, 110, 0.05);
+            border-color: rgba(200, 168, 110, 0.08);
+        }
+
+        .msg-helper {
+            background: rgba(0, 123, 255, 0.04);
+            border-color: rgba(0, 123, 255, 0.06);
+        }
+
+        .admin-tag {
+            background: rgba(200, 168, 110, 0.2);
+            color: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            padding: 0 14px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            display: inline-block;
+            height: 22px;
+            line-height: 22px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .admin-tag:hover {
+            background: rgba(200, 168, 110, 0.3);
+        }
+
+        .helper-tag {
+            background: rgba(0, 123, 255, 0.15);
+            color: rgba(100, 200, 255, 0.9);
+            border-radius: 30px;
+            padding: 0 14px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            display: inline-block;
+            height: 22px;
+            line-height: 22px;
+        }
+
+        .user-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 12px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin: 6px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            transition: 0.3s ease;
+        }
+
+        .user-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.06);
         }
 
         .checkbox-container {
@@ -678,40 +713,6 @@
             cursor: pointer;
         }
 
-        @media (max-width: 640px) {
-            .app { padding: 20px; }
-            .premium-title { font-size: 1.8rem; }
-            .modal { padding: 24px; }
-            .card-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
-            .banned-card { padding: 24px; }
-            .permission-grid { grid-template-columns: 1fr; }
-        }
-
-        .faq-item {
-            margin: 12px 0;
-            padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            transition: 0.3s ease;
-        }
-
-        .faq-item:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.06);
-        }
-
-        .faq-item b {
-            display: block;
-            margin-bottom: 4px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .faq-item span {
-            color: rgba(255, 255, 255, 0.4);
-            line-height: 1.6;
-        }
-
         #userDisplay {
             background: rgba(255, 255, 255, 0.03);
             padding: 6px 20px;
@@ -722,6 +723,43 @@
 
         #authStatus {
             color: rgba(255, 255, 255, 0.4);
+        }
+
+        .banned-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(30px);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .banned-card {
+            background: rgba(20, 20, 30, 0.95);
+            border-radius: 32px;
+            padding: 40px 48px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 60px 150px rgba(0, 0, 0, 0.5);
+        }
+
+        .banned-card h2 {
+            color: rgba(255, 100, 100, 0.9);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .banned-card .timer {
+            font-size: 3rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 16px 0;
+            font-family: 'Playfair Display', serif;
         }
 
         .banned-card p {
@@ -742,28 +780,17 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        /* Стили для ссылок */
-        a {
-            color: rgba(200, 168, 110, 0.7);
-            text-decoration: none;
-            transition: 0.3s ease;
+        .section {
+            margin-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding-top: 28px;
         }
 
-        a:hover {
-            color: rgba(200, 168, 110, 0.9);
-        }
-
-        /* Стили для заголовков */
         h3 {
             color: rgba(255, 255, 255, 0.8);
             font-weight: 600;
         }
 
-        .section-content h3 {
-            margin-bottom: 16px;
-        }
-
-        /* Стили для профиля */
         #profileInfo p {
             color: rgba(255, 255, 255, 0.6);
             padding: 4px 0;
@@ -777,10 +804,42 @@
         #profileInfo span {
             color: rgba(255, 255, 255, 0.8);
         }
+
+        .modal-content .section-title {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .about-text {
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .about-text strong {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .about-text ol {
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+
+        .about-text ol li {
+            margin: 4px 0;
+        }
+
+        @media (max-width: 640px) {
+            .app { padding: 20px; }
+            .premium-title { font-size: 1.8rem; }
+            .modal-content { padding: 24px; }
+            .card-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+            .banned-card { padding: 24px; }
+            .permission-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
-    <!-- Плавающие блики -->
     <div class="glow-orb"></div>
     <div class="glow-orb"></div>
     <div class="glow-orb"></div>
@@ -793,7 +852,7 @@
             <div id="authSection">
                 <div class="flex-row">
                     <span class="premium-title"><span class="star">✦</span> Misha.Support</span>
-                    <span class="badge">премиум</span>
+                    <span class="badge">support</span>
                 </div>
                 <div class="subhead">Система поддержки с высоким уровнем сервиса</div>
                 
@@ -833,113 +892,27 @@
 
                 <!-- Навигационные кнопки -->
                 <div class="card-grid">
-                    <div class="big-btn" data-section="faq">
+                    <div class="big-btn" data-modal="faq">
                         <span class="icon">❓</span>FAQ
                     </div>
-                    <div class="big-btn" data-section="complaint">
+                    <div class="big-btn" data-modal="complaint">
                         <span class="icon">📩</span>Жалоба
                     </div>
-                    <div class="big-btn" data-section="question">
+                    <div class="big-btn" data-modal="question">
                         <span class="icon">❔</span>Вопрос
                     </div>
-                    <div class="big-btn" data-section="about">
+                    <div class="big-btn" data-modal="about">
                         <span class="icon">ℹ️</span>О сайте
                     </div>
-                    <div class="big-btn" data-section="news">
+                    <div class="big-btn" data-modal="news">
                         <span class="icon">📰</span>Новости
                     </div>
-                    <div class="big-btn" data-section="profile" id="profileBtn">
+                    <div class="big-btn" data-modal="profile" id="profileBtn">
                         <span class="icon">👤</span>Профиль
                     </div>
                 </div>
 
-                <!-- Контент разделов -->
-                <div id="sectionContent" class="section">
-                    <!-- FAQ -->
-                    <div id="faqContent" class="section-content">
-                        <h3>Часто задаваемые вопросы</h3>
-                        <div class="faq-item">
-                            <b>Когда выйдет игра «Кальмар»?</b>
-                            <span>Ответ: пока не планируется, так как принято решение приостановить ее разработку по решению подписчиков канала.</span>
-                        </div>
-                        <div class="faq-item">
-                            <b>Кто является администраторами канала?</b>
-                            <span>Создатель канала — Миша, а админ не хочет раскрывать свою личность.</span>
-                        </div>
-                        <div class="faq-item">
-                            <b>Кто создаёт сайты?</b>
-                            <span>Создатели сайта — админ канала и Миша, но основной разработчик — админ. Остальная информация в разделе «О сайте».</span>
-                        </div>
-                        <div class="faq-item">
-                            <b>Почему правила канала такие жёсткие?</b>
-                            <span>Правила канала составлял админ, и если у вас есть вопросы по правилам, пишите в раздел с жалобами. А правила такие жёсткие потому, что за их нарушение предусмотрено весомое наказание.</span>
-                        </div>
-                        <div class="faq-item">
-                            <b>Когда админ снимется в видео?</b>
-                            <span>Админ уже не раз снимался на канале и не хочет показывать лицо, чтобы сохранить конфиденциальность.</span>
-                        </div>
-                    </div>
-
-                    <!-- Жалоба -->
-                    <div id="complaintContent" class="section-content hidden">
-                        <h3>📩 Жалоба</h3>
-                        <textarea class="input-field" id="complaintInput" rows="2" placeholder="Опишите вашу жалобу..."></textarea>
-                        <button class="btn btn-primary" id="sendComplaintBtn">Отправить жалобу</button>
-                        <div class="chat-box" id="complaintChat"></div>
-                    </div>
-
-                    <!-- Вопрос -->
-                    <div id="questionContent" class="section-content hidden">
-                        <h3>❓ Вопрос</h3>
-                        <textarea class="input-field" id="questionInput" rows="2" placeholder="Задайте ваш вопрос..."></textarea>
-                        <button class="btn btn-primary" id="sendQuestionBtn">Отправить вопрос</button>
-                        <div class="chat-box" id="questionChat"></div>
-                    </div>
-
-                    <!-- О сайте -->
-                    <div id="aboutContent" class="section-content hidden">
-                        <h3>О сайте</h3>
-                        <div style="background: rgba(255,255,255,0.02); border-radius: 24px; padding: 24px; border: 1px solid rgba(255,255,255,0.04); line-height: 1.8; color: rgba(255,255,255,0.6);">
-                            <p><strong style="color: rgba(255,255,255,0.8);">Разработчиком</strong> данного проекта считается админ канала, а Миша занимался дизайном. Админ создал этот сайт с помощью нейросети и выполнил действия для его загрузки в интернет.</p>
-                            <br>
-                            <p><strong style="color: rgba(255,255,255,0.8);">Правила:</strong></p>
-                            <ol style="padding-left: 20px; margin-top: 8px;">
-                                <li>Запрещается писать чушь в поддержку. За это предусмотрен бан чата на время, которое укажет админ, затем выдается предупреждение.</li>
-                                <li>Запрещается использовать нецензурную лексику, за это выдается предупреждение.</li>
-                                <li>Запрещается оскорблять кого-либо и клеветать. За это предусмотрено предупреждение.</li>
-                            </ol>
-                            <p style="margin-top: 12px; color: rgba(255,255,255,0.3);">Остальные нарушения будут добавлены позже.</p>
-                        </div>
-                    </div>
-
-                    <!-- Новости -->
-                    <div id="newsContent" class="section-content hidden">
-                        <h3>📰 Новости</h3>
-                        <div id="newsFeed" class="chat-box"></div>
-                        <div id="newsInputArea" style="margin-top: 12px;">
-                            <input class="input-field" id="newsInput" placeholder="Текст новости...">
-                            <button class="btn btn-primary" id="postNewsBtn">Опубликовать новость</button>
-                        </div>
-                    </div>
-
-                    <!-- Профиль -->
-                    <div id="profileContent" class="section-content hidden">
-                        <h3>👤 Личный кабинет</h3>
-                        <div id="profileInfo" style="background: rgba(255,255,255,0.02); border-radius: 24px; padding: 24px; border: 1px solid rgba(255,255,255,0.04);">
-                            <p><strong>ID:</strong> <span id="profileId">—</span></p>
-                            <p><strong>ФИО:</strong> <span id="profileFio">—</span></p>
-                            <p><strong>Email:</strong> <span id="profileEmail">—</span></p>
-                            <p><strong>Ник:</strong> <span id="profileNick">—</span></p>
-                            <p><strong>Telegram:</strong> <span id="profileTg">—</span></p>
-                            <p><strong>Роль:</strong> <span id="profileRole">Пользователь</span></p>
-                            <p><strong>Права:</strong> <span id="profilePermissions">Нет</span></p>
-                            <p><strong>Предупреждений:</strong> <span id="profileWarns">0</span></p>
-                            <p><strong>Статус:</strong> <span id="profileStatus">Активен</span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Админ-панель -->
+                <!-- Админ-панель (видна только админу) -->
                 <div id="adminPanel" class="hidden section">
                     <h3 style="margin-bottom: 16px;">⚙️ Админ-панель</h3>
                     
@@ -971,6 +944,7 @@
                         <div id="userListContainer"></div>
                     </div>
 
+                    <!-- Раздел с доказательствами -->
                     <div id="adminProofSection" style="margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 20px;">
                         <h4>📎 Доказательства</h4>
                         <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
@@ -983,14 +957,159 @@
                 </div>
             </div>
 
-            <footer>Misha.Support — премиум-минимализм</footer>
+            <footer>Misha.Support</footer>
+        </div>
+    </div>
+
+    <!-- ===== МОДАЛЬНЫЕ ОКНА ===== -->
+
+    <!-- FAQ Модальное окно -->
+    <div id="faqModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>❓ Часто задаваемые вопросы</h2>
+                <button class="modal-close" onclick="closeModal('faqModal')">✕</button>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item" onclick="toggleAnswer(this)">
+                    <div class="faq-question">
+                        <span class="q-text">Когда выйдет игра «Кальмар»?</span>
+                        <span class="q-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <span class="a-label">Ответ:</span> пока не планируется, так как принято решение приостановить ее разработку по решению подписчиков канала.
+                    </div>
+                </div>
+                <div class="faq-item" onclick="toggleAnswer(this)">
+                    <div class="faq-question">
+                        <span class="q-text">Кто является администраторами канала?</span>
+                        <span class="q-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <span class="a-label">Ответ:</span> Создатель канала — Миша, а админ не хочет раскрывать свою личность.
+                    </div>
+                </div>
+                <div class="faq-item" onclick="toggleAnswer(this)">
+                    <div class="faq-question">
+                        <span class="q-text">Кто создаёт сайты?</span>
+                        <span class="q-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <span class="a-label">Ответ:</span> Создатели сайта — админ канала и Миша, но основной разработчик — админ. Остальная информация в разделе «О сайте».
+                    </div>
+                </div>
+                <div class="faq-item" onclick="toggleAnswer(this)">
+                    <div class="faq-question">
+                        <span class="q-text">Почему правила канала такие жёсткие?</span>
+                        <span class="q-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <span class="a-label">Ответ:</span> Правила канала составлял админ, и если у вас есть вопросы по правилам, пишите в раздел с жалобами. А правила такие жёсткие потому, что за их нарушение предусмотрено весомое наказание.
+                    </div>
+                </div>
+                <div class="faq-item" onclick="toggleAnswer(this)">
+                    <div class="faq-question">
+                        <span class="q-text">Когда админ снимется в видео?</span>
+                        <span class="q-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <span class="a-label">Ответ:</span> Админ уже не раз снимался на канале и не хочет показывать лицо, чтобы сохранить конфиденциальность.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Жалоба Модальное окно -->
+    <div id="complaintModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📩 Жалоба</h2>
+                <button class="modal-close" onclick="closeModal('complaintModal')">✕</button>
+            </div>
+            <textarea class="input-field" id="complaintInput" rows="2" placeholder="Опишите вашу жалобу..."></textarea>
+            <button class="btn btn-primary" id="sendComplaintBtn">Отправить жалобу</button>
+            <div class="chat-box" id="complaintChat"></div>
+        </div>
+    </div>
+
+    <!-- Вопрос Модальное окно -->
+    <div id="questionModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>❓ Вопрос</h2>
+                <button class="modal-close" onclick="closeModal('questionModal')">✕</button>
+            </div>
+            <textarea class="input-field" id="questionInput" rows="2" placeholder="Задайте ваш вопрос..."></textarea>
+            <button class="btn btn-primary" id="sendQuestionBtn">Отправить вопрос</button>
+            <div class="chat-box" id="questionChat"></div>
+        </div>
+    </div>
+
+    <!-- О сайте Модальное окно -->
+    <div id="aboutModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>ℹ️ О сайте</h2>
+                <button class="modal-close" onclick="closeModal('aboutModal')">✕</button>
+            </div>
+            <div class="about-text">
+                <p><strong>Разработчиком</strong> данного проекта считается админ канала, а Миша занимался дизайном. Админ создал этот сайт с помощью нейросети и выполнил действия для его загрузки в интернет.</p>
+                <br>
+                <p><strong>Правила:</strong></p>
+                <ol>
+                    <li>Запрещается писать чушь в поддержку. За это предусмотрен бан чата на время, которое укажет админ, затем выдается предупреждение.</li>
+                    <li>Запрещается использовать нецензурную лексику, за это выдается предупреждение.</li>
+                    <li>Запрещается оскорблять кого-либо и клеветать. За это предусмотрено предупреждение.</li>
+                </ol>
+                <p style="margin-top: 12px; color: rgba(255,255,255,0.3);">Остальные нарушения будут добавлены позже.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Новости Модальное окно -->
+    <div id="newsModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📰 Новости</h2>
+                <button class="modal-close" onclick="closeModal('newsModal')">✕</button>
+            </div>
+            <div id="newsFeed" class="chat-box"></div>
+            <div id="newsInputArea" style="margin-top: 12px;">
+                <input class="input-field" id="newsInput" placeholder="Текст новости...">
+                <button class="btn btn-primary" id="postNewsBtn">Опубликовать новость</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Профиль Модальное окно -->
+    <div id="profileModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>👤 Личный кабинет</h2>
+                <button class="modal-close" onclick="closeModal('profileModal')">✕</button>
+            </div>
+            <div id="profileInfo">
+                <p><strong>ID:</strong> <span id="profileId">—</span></p>
+                <p><strong>ФИО:</strong> <span id="profileFio">—</span></p>
+                <p><strong>Email:</strong> <span id="profileEmail">—</span></p>
+                <p><strong>Ник:</strong> <span id="profileNick">—</span></p>
+                <p><strong>Telegram:</strong> <span id="profileTg">—</span></p>
+                <p><strong>Роль:</strong> <span id="profileRole">Пользователь</span></p>
+                <p><strong>Права:</strong> <span id="profilePermissions">Нет</span></p>
+                <p><strong>Предупреждений:</strong> <span id="profileWarns">0</span></p>
+                <p><strong>Статус:</strong> <span id="profileStatus">Активен</span></p>
+            </div>
         </div>
     </div>
 
     <!-- Модальное окно для бана/варна -->
     <div id="punishModal" class="modal-overlay hidden">
-        <div class="modal">
-            <h3 id="modalTitle">Выдача наказания</h3>
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2 id="modalTitle">Выдача наказания</h2>
+                <button class="modal-close" onclick="document.getElementById('punishModal').classList.add('hidden')">✕</button>
+            </div>
             <div style="margin: 16px 0;">
                 <input class="input-field" id="modalUserId" placeholder="ID пользователя">
                 <input class="input-field" id="modalDuration" placeholder="Время (число)">
@@ -1004,7 +1123,7 @@
                 <input class="input-field" id="modalReason" placeholder="Причина">
             </div>
             <div style="display: flex; gap: 12px; justify-content: flex-end;">
-                <button class="btn" id="modalCancel">Отмена</button>
+                <button class="btn" onclick="document.getElementById('punishModal').classList.add('hidden')">Отмена</button>
                 <button class="btn btn-primary" id="modalConfirm">Подтвердить</button>
             </div>
         </div>
@@ -1012,8 +1131,11 @@
 
     <!-- Модальное окно для прав -->
     <div id="permissionsModal" class="modal-overlay hidden">
-        <div class="modal">
-            <h3>🔑 Управление правами пользователя</h3>
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>🔑 Управление правами</h2>
+                <button class="modal-close" onclick="document.getElementById('permissionsModal').classList.add('hidden')">✕</button>
+            </div>
             <div style="margin: 12px 0;">
                 <input class="input-field" id="permUserId" placeholder="ID пользователя">
                 <button class="btn btn-primary" id="permLoadBtn">Загрузить права</button>
@@ -1040,7 +1162,7 @@
                 </div>
             </div>
             <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 16px;">
-                <button class="btn" id="permCancel">Отмена</button>
+                <button class="btn" onclick="document.getElementById('permissionsModal').classList.add('hidden')">Отмена</button>
                 <button class="btn btn-primary" id="permSaveBtn">Сохранить права</button>
             </div>
         </div>
@@ -1111,37 +1233,42 @@
         const logoutBtn = document.getElementById('logoutBtn');
         const rememberMe = document.getElementById('rememberMe');
 
-        const sectionBtns = document.querySelectorAll('[data-section]');
-        const faqContent = document.getElementById('faqContent');
-        const complaintContent = document.getElementById('complaintContent');
-        const questionContent = document.getElementById('questionContent');
-        const aboutContent = document.getElementById('aboutContent');
-        const newsContent = document.getElementById('newsContent');
-        const profileContent = document.getElementById('profileContent');
+        const adminPanel = document.getElementById('adminPanel');
+        const userListContainer = document.getElementById('userListContainer');
+        const userCount = document.getElementById('userCount');
+        const banCount = document.getElementById('banCount');
+        const warnCount = document.getElementById('warnCount');
+
+        // Модальные окна
+        const faqModal = document.getElementById('faqModal');
+        const complaintModal = document.getElementById('complaintModal');
+        const questionModal = document.getElementById('questionModal');
+        const aboutModal = document.getElementById('aboutModal');
+        const newsModal = document.getElementById('newsModal');
+        const profileModal = document.getElementById('profileModal');
+
         const complaintChat = document.getElementById('complaintChat');
         const questionChat = document.getElementById('questionChat');
+        const newsFeed = document.getElementById('newsFeed');
+        const proofsList = document.getElementById('proofsList');
+
         const sendComplaintBtn = document.getElementById('sendComplaintBtn');
         const sendQuestionBtn = document.getElementById('sendQuestionBtn');
         const complaintInput = document.getElementById('complaintInput');
         const questionInput = document.getElementById('questionInput');
-        const newsFeed = document.getElementById('newsFeed');
-        const adminPanel = document.getElementById('adminPanel');
-        const newsInputArea = document.getElementById('newsInputArea');
         const newsInput = document.getElementById('newsInput');
         const postNewsBtn = document.getElementById('postNewsBtn');
+        const newsInputArea = document.getElementById('newsInputArea');
+
         const adminBanBtn = document.getElementById('adminBanBtn');
         const adminWarnBtn = document.getElementById('adminWarnBtn');
         const adminUnbanBtn = document.getElementById('adminUnbanBtn');
         const adminPermissionsBtn = document.getElementById('adminPermissionsBtn');
         const adminClearChatBtn = document.getElementById('adminClearChatBtn');
+
         const proofUserId = document.getElementById('proofUserId');
         const proofFile = document.getElementById('proofFile');
         const uploadProofBtn = document.getElementById('uploadProofBtn');
-        const proofsList = document.getElementById('proofsList');
-        const userListContainer = document.getElementById('userListContainer');
-        const userCount = document.getElementById('userCount');
-        const banCount = document.getElementById('banCount');
-        const warnCount = document.getElementById('warnCount');
 
         const punishModal = document.getElementById('punishModal');
         const modalTitle = document.getElementById('modalTitle');
@@ -1150,7 +1277,6 @@
         const modalUnit = document.getElementById('modalUnit');
         const modalReason = document.getElementById('modalReason');
         const modalConfirm = document.getElementById('modalConfirm');
-        const modalCancel = document.getElementById('modalCancel');
 
         const permissionsModal = document.getElementById('permissionsModal');
         const permUserId = document.getElementById('permUserId');
@@ -1161,7 +1287,6 @@
         const permPostNews = document.getElementById('permPostNews');
         const permViewUsers = document.getElementById('permViewUsers');
         const permSaveBtn = document.getElementById('permSaveBtn');
-        const permCancel = document.getElementById('permCancel');
 
         const bannedOverlay = document.getElementById('bannedOverlay');
         const banTimer = document.getElementById('banTimer');
@@ -1183,11 +1308,6 @@
 
         function getPermissions(userId) {
             return permissions[userId] || { answerQuestions: false, answerComplaints: false, postNews: false, viewUsers: false };
-        }
-
-        function setPermissions(userId, perms) {
-            permissions[userId] = perms;
-            saveAll();
         }
 
         function isAdmin() { 
@@ -1333,7 +1453,7 @@
                 let tag = '';
                 if (isAdminMsg) tag = `<span class="admin-tag" onclick="alert('ID: ${c.userId || ADMIN_ID}')">A</span>`;
                 else if (isHelperMsg) tag = `<span class="helper-tag">П</span>`;
-                return `<div class="msg ${isAdminMsg ? 'msg-admin' : (isHelperMsg ? 'msg-helper' : 'msg-user')}">
+                return `<div class="msg ${isAdminMsg ? 'msg-admin' : (isHelperMsg ? 'msg-helper' : '')}">
                     <span>${c.text}</span>
                     ${tag}
                     <span style="font-size:0.7rem; color:rgba(255,255,255,0.2); margin-left:auto;">${name}</span>
@@ -1355,7 +1475,7 @@
                 let tag = '';
                 if (isAdminMsg) tag = `<span class="admin-tag" onclick="alert('ID: ${q.userId || ADMIN_ID}')">A</span>`;
                 else if (isHelperMsg) tag = `<span class="helper-tag">П</span>`;
-                return `<div class="msg ${isAdminMsg ? 'msg-admin' : (isHelperMsg ? 'msg-helper' : 'msg-user')}">
+                return `<div class="msg ${isAdminMsg ? 'msg-admin' : (isHelperMsg ? 'msg-helper' : '')}">
                     <span>${q.text}</span>
                     ${tag}
                     <span style="font-size:0.7rem; color:rgba(255,255,255,0.2); margin-left:auto;">${name}</span>
@@ -1458,6 +1578,25 @@
         }
 
         // ===== ГЛОБАЛЬНЫЕ ФУНКЦИИ =====
+        window.toggleAnswer = function(element) {
+            const answer = element.querySelector('.faq-answer');
+            const question = element.querySelector('.faq-question');
+            const isOpen = answer.classList.contains('open');
+            
+            // Закрываем все
+            document.querySelectorAll('.faq-answer').forEach(el => el.classList.remove('open'));
+            document.querySelectorAll('.faq-question').forEach(el => el.classList.remove('active'));
+            
+            if (!isOpen) {
+                answer.classList.add('open');
+                question.classList.add('active');
+            }
+        };
+
+        window.closeModal = function(id) {
+            document.getElementById(id).classList.add('hidden');
+        };
+
         window.unbanUser = function(userId) {
             if (!isAdmin()) return;
             const targetUser = getUserById(userId);
@@ -1787,27 +1926,40 @@
             }
         });
 
-        // Переключение разделов
-        sectionBtns.forEach(btn => {
+        // ===== ОТКРЫТИЕ МОДАЛЬНЫХ ОКОН =====
+        document.querySelectorAll('[data-modal]').forEach(btn => {
             btn.addEventListener('click', () => {
-                const sec = btn.dataset.section;
-                document.querySelectorAll('.section-content').forEach(el => el.classList.add('hidden'));
-                sectionBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                if (sec === 'faq') faqContent.classList.remove('hidden');
-                else if (sec === 'complaint') complaintContent.classList.remove('hidden');
-                else if (sec === 'question') questionContent.classList.remove('hidden');
-                else if (sec === 'about') aboutContent.classList.remove('hidden');
-                else if (sec === 'news') newsContent.classList.remove('hidden');
-                else if (sec === 'profile') {
-                    profileContent.classList.remove('hidden');
-                    renderProfile();
+                const modalId = btn.dataset.modal;
+                const modalMap = {
+                    'faq': 'faqModal',
+                    'complaint': 'complaintModal',
+                    'question': 'questionModal',
+                    'about': 'aboutModal',
+                    'news': 'newsModal',
+                    'profile': 'profileModal'
+                };
+                const targetId = modalMap[modalId];
+                if (targetId) {
+                    // Обновляем данные перед открытием
+                    if (modalId === 'complaint') renderComplaints();
+                    if (modalId === 'question') renderQuestions();
+                    if (modalId === 'news') renderNews();
+                    if (modalId === 'profile') renderProfile();
+                    document.getElementById(targetId).classList.remove('hidden');
                 }
             });
         });
 
-        // Отправка жалобы
+        // Закрытие модальных окон по клику вне
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.add('hidden');
+                }
+            });
+        });
+
+        // ===== ОТПРАВКА СООБЩЕНИЙ =====
         sendComplaintBtn.addEventListener('click', () => {
             const text = complaintInput.value.trim();
             if (!text) return;
@@ -1827,7 +1979,6 @@
             complaintInput.value = '';
         });
 
-        // Отправка вопроса
         sendQuestionBtn.addEventListener('click', () => {
             const text = questionInput.value.trim();
             if (!text) return;
@@ -1847,7 +1998,6 @@
             questionInput.value = '';
         });
 
-        // Новости
         postNewsBtn.addEventListener('click', () => {
             if (!canPostNews()) {
                 alert('❌ У вас нет прав на публикацию новостей');
@@ -1861,7 +2011,7 @@
             newsInput.value = '';
         });
 
-        // Админ: бан
+        // ===== АДМИН-ФУНКЦИИ =====
         adminBanBtn.addEventListener('click', () => {
             if (!isAdmin()) return;
             modalTitle.textContent = '🔨 Бан пользователя';
@@ -1917,7 +2067,6 @@
             };
         });
 
-        // Админ: варн
         adminWarnBtn.addEventListener('click', () => {
             if (!isAdmin()) return;
             modalTitle.textContent = '⚠️ Выдача предупреждения';
@@ -1961,12 +2110,6 @@
             if (modalCallback) modalCallback();
         });
 
-        modalCancel.addEventListener('click', () => {
-            punishModal.classList.add('hidden');
-            modalCallback = null;
-        });
-
-        // Админ: снять наказание
         adminUnbanBtn.addEventListener('click', () => {
             if (!isAdmin()) return;
             const userId = prompt('Введите ID пользователя для снятия наказания:');
@@ -2004,7 +2147,6 @@
             }
         });
 
-        // Админ: управление правами
         adminPermissionsBtn.addEventListener('click', () => {
             if (!isAdmin()) return;
             permUserId.value = '';
@@ -2050,11 +2192,6 @@
             alert(`✅ Права сохранены для ${user.fio}`);
         });
 
-        permCancel.addEventListener('click', () => {
-            permissionsModal.classList.add('hidden');
-        });
-
-        // Очистка чатов
         adminClearChatBtn.addEventListener('click', () => {
             if (!isAdmin()) return;
             if (confirm('Очистить все чаты (жалобы и вопросы)?')) {
@@ -2067,7 +2204,6 @@
             }
         });
 
-        // Загрузка доказательств
         uploadProofBtn.addEventListener('click', () => {
             if (!isAdmin()) return;
             const userId = proofUserId.value.trim();
@@ -2137,8 +2273,8 @@
             updateUI();
         }
 
-        console.log('%c✦ Misha.Support Premium ✦', 'font-size: 20px; font-weight: bold; color: #c8a86e;');
-        console.log('%cДобро пожаловать в систему премиум-поддержки', 'color: rgba(255,255,255,0.4);');
+        console.log('%c✦ Misha.Support ✦', 'font-size: 20px; font-weight: bold; color: #c8a86e;');
+        console.log('%cДобро пожаловать в систему поддержки', 'color: rgba(255,255,255,0.4);');
     })();
     </script>
 </body>
